@@ -64,4 +64,6 @@ public class Thief extends AbstractPlayerCharacter {
   public String toString() {
     return "Thief{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
   }
+
+
 }
