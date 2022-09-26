@@ -11,11 +11,6 @@ public interface Item {
   String getName();
 
   /**
-   * Returns the Item's type.
-   */
-  String getType();
-
-  /**
    * Returns the Item´s weight.
    */
   int getWeight();

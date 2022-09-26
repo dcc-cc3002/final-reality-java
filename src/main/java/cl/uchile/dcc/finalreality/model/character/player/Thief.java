@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  * {@code Bow}s.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  * @version 2.0
  */
 public class Thief extends AbstractPlayerCharacter {
@@ -60,7 +60,6 @@ public class Thief extends AbstractPlayerCharacter {
         && maxHp == that.maxHp
         && defense == that.defense;
   }
-
   @Override
   public String toString() {
     return "Thief{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
