@@ -9,3 +9,6 @@ package cl.uchile.dcc.finalreality.model.weapon;
 public enum WeaponType {
   SWORD, AXE, KNIFE, STAFF, BOW
 }
+
+
+

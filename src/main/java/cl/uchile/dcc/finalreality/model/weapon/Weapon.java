@@ -70,4 +70,5 @@ public class Weapon {
     return "Weapon{name='%s', damage=%d, weight=%d, type=%s}"
         .formatted(name, damage, weight, type);
   }
+
 }
