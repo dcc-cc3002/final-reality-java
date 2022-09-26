@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  * An abstract class that holds the common behaviour of all the characters in the game.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  */
 public abstract class AbstractCharacter implements GameCharacter {
 

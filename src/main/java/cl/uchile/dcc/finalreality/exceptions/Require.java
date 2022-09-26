@@ -17,7 +17,7 @@ package cl.uchile.dcc.finalreality.exceptions;
  * instantiated.
  *
  * @author <a href="https://github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  */
 public final class Require {
 

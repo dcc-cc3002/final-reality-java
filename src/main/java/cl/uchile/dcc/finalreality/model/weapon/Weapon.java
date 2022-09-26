@@ -6,7 +6,7 @@ import java.util.Objects;
  * A class that holds all the information of a weapon.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  */
 public class Weapon {
 
