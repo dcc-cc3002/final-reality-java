@@ -1,11 +1,11 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 
-/** A class that holds the information of Weapons that have magic Damage such as Staffs.
+/** A class that holds the information of Weapons that have magic Damage such as Staff's.
  * In this case the only Weapon with this property is the Staff, the purpose of this abstract class is
  * to make the code extensible to future implementations.
  */
-public abstract class AbstractMagicWeapon extends AbstractWeapon{
+public abstract class AbstractMagicWeapon extends AbstractWeapon implements MagicWeapon{
   private final int magic_damage;
 
   /**

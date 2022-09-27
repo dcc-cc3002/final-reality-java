@@ -11,7 +11,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.DefaultWeapon;
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * <p>All player characters have a {@code name}, a maximum amount of <i>hit points</i>
  * ({@code maxHp}), a {@code defense} value, a queue of {@link GameCharacter}s that are
- * waiting for their turn ({@code turnsQueue}), and can equip a {@link DefaultWeapon}.
+ * waiting for their turn ({@code turnsQueue}), and can equip a {@link Weapon}.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Arturo Kullmer~
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {
 
-  private DefaultWeapon equippedDefaultWeapon = null;
+  private Weapon equippedWeapon = null;
 
   /**
    * Creates a new character.
@@ -50,12 +50,12 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  public void equip(DefaultWeapon defaultWeapon) {
-    this.equippedDefaultWeapon = defaultWeapon;
+  public void equip(Weapon weapon) {
+    this.equippedWeapon = weapon;
   }
 
   @Override
-  public DefaultWeapon getEquippedWeapon() {
-    return equippedDefaultWeapon;
+  public Weapon getEquippedWeapon() {
+    return equippedWeapon;
   }
 }
