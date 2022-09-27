@@ -21,10 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Arturo Kullmer~
  */
-public class WhiteMage extends AbstractPlayerCharacter {
-
-  private int currentMp;
-  private final int maxMp;
+public class WhiteMage extends AbstractMage {
 
   /**
    * Creates a new character.
@@ -37,13 +34,13 @@ public class WhiteMage extends AbstractPlayerCharacter {
    *     the character's defense
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
+   * @param maxMp
+   *     the character's max mp
    */
   protected WhiteMage(final @NotNull String name, final int maxHp, final int defense,
       int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
-    super(name, maxHp, defense, turnsQueue);
-    this.maxMp = maxMp;
-    this.currentMp = maxMp;
+    super(name, maxHp, defense, turnsQueue, maxMp);
   }
 
   @Override
@@ -55,7 +52,8 @@ public class WhiteMage extends AbstractPlayerCharacter {
       return false;
     }
     return hashCode() == that.hashCode()
-        && maxMp == that.maxMp
+        && this.getMaxMp() == that.getMaxMp()
+        && this.getCurrentMp() == that.getCurrentMp()
         && name.equals(that.name)
         && maxHp == that.maxHp
         && defense == that.defense;
@@ -63,35 +61,12 @@ public class WhiteMage extends AbstractPlayerCharacter {
 
   @Override
   public int hashCode() {
-    return Objects.hash(WhiteMage.class, name, maxHp, defense, maxMp);
+    return Objects.hash(WhiteMage.class, name, maxHp, defense, this.getMaxMp());
   }
 
   @Override
   public String toString() {
-    return "WhiteMage{maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(maxMp, maxHp, defense, name);
-  }
-
-  /**
-   * Returns the current MP of the character.
-   */
-  public int getCurrentMp() {
-    return currentMp;
-  }
-
-  /**
-   * Sets the current MP of the character to {@code newMp}.
-   */
-  public void setCurrentMp(final int newMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, newMp, "Current MP");
-    Require.statValueAtMost(maxMp, newMp, "Current MP");
-    this.currentMp = newMp;
-  }
-
-  /**
-   * Returns the max MP of the character.
-   */
-  public int getMaxMp() {
-    return maxMp;
+    return "WhiteMage{currentMP=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
+        .formatted(this.getCurrentMp(), this.getMaxMp(), maxHp, defense, name);
   }
 }
