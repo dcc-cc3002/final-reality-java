@@ -32,5 +32,3 @@ public class Staff extends AbstractMagicWeapon{
     return "Staff{name=%s, weight=%d, damage='%d', magic_damage='%d'}".formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagic_damage());
   }
 }
-
-}

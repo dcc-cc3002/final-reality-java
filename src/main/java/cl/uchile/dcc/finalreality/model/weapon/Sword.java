@@ -1,7 +1,5 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.Thief;
-
 import java.util.Objects;
 
 public class Sword extends AbstractWeapon{
