@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  * A {@link PlayerCharacter} that can equip {@code Staff}s and use <i>white magic</i>.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  */
 public class WhiteMage extends AbstractPlayerCharacter {
 
