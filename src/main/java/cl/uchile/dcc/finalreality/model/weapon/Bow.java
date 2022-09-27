@@ -2,7 +2,7 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
-public class Bow extends AbstractWeapon{
+public class Bow extends AbstractWeapon {
 
   public Bow(String name, int weight, int damage) {
     super(name, weight, damage);
@@ -26,8 +26,10 @@ public class Bow extends AbstractWeapon{
         && this.getWeight() == that.getWeight()
         && this.getDamage() == that.getDamage();
   }
+
   @Override
   public String toString() {
-    return "Bow{name=%s, weight=%d, damage='%d'}".formatted(this.getName(), this.getWeight(), this.getDamage());
+    return "Bow{name=%s, weight=%d, damage='%d'}"
+           .formatted(this.getName(), this.getWeight(), this.getDamage());
   }
 }

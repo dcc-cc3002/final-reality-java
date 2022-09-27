@@ -16,6 +16,7 @@ public abstract class AbstractItem implements Item {
    * @param weight
    *     the item's weight
    */
+
   protected AbstractItem(String name, int weight) {
     this.name = name;
     this.weight = weight;

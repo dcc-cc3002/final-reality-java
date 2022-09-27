@@ -21,8 +21,8 @@ public class Enemy extends AbstractCharacter {
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    */
-  public Enemy(@NotNull final String name, final int weight, int maxHp, int defense, final int attack,
-      @NotNull final BlockingQueue<GameCharacter> turnsQueue)
+  public Enemy(@NotNull final String name, final int weight, int maxHp, int defense,
+               final int attack, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(1, weight, "Weight");
@@ -67,6 +67,7 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public String toString() {
-    return "Enemy{maxHp=%d, defense=%d, name='%s', weight=%d, attack=%d}".formatted(maxHp, defense, name, weight, attack);
+    return "Enemy{maxHp=%d, defense=%d, name='%s', weight=%d, attack=%d}"
+           .formatted(maxHp, defense, name, weight, attack);
   }
 }

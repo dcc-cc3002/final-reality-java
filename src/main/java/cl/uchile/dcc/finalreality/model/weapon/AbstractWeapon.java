@@ -7,7 +7,7 @@ public abstract class AbstractWeapon extends AbstractItem implements Weapon {
   private final int damage;
 
   /**
-   * Create's a new Weapon
+   * Create's a new Weapon.
    *
    * @param name
    *     the item's name

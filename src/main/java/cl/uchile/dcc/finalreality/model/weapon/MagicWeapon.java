@@ -6,7 +6,7 @@ package cl.uchile.dcc.finalreality.model.weapon;
 public interface MagicWeapon {
 
   /**
-   * returns the MagicWeapon's magic_damage
+   * returns the MagicWeapon's magic_damage.
    */
   int getMagic_damage();
 }

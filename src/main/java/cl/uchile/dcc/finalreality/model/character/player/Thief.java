@@ -60,6 +60,7 @@ public class Thief extends AbstractPlayerCharacter {
         && maxHp == that.maxHp
         && defense == that.defense;
   }
+
   @Override
   public String toString() {
     return "Thief{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);

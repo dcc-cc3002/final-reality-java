@@ -2,7 +2,7 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
-public class Staff extends AbstractMagicWeapon{
+public class Staff extends AbstractMagicWeapon {
 
   public Staff(String name, int weight, int damage, int magic_damage) {
     super(name, weight, damage, magic_damage);
@@ -27,8 +27,10 @@ public class Staff extends AbstractMagicWeapon{
         && this.getDamage() == that.getDamage()
         && this.getMagic_damage() == that.getMagic_damage();
   }
+
   @Override
   public String toString() {
-    return "Staff{name=%s, weight=%d, damage='%d', magic_damage='%d'}".formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagic_damage());
+    return "Staff{name=%s, weight=%d, damage='%d', magic_damage='%d'}"
+           .formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagic_damage());
   }
 }
