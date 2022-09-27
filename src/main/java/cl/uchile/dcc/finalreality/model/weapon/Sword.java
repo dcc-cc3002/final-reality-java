@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * Sword is a {@link Weapon} than can be equipped by some PlayerCharacters.
+ */
 public class Sword extends AbstractWeapon {
 
   public Sword(String name, int weight, int damage) {

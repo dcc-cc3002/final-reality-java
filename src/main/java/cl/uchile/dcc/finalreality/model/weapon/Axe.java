@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * Axe is a {@link Weapon} than can be equipped by some PlayerCharacters.
+ */
 public class Axe extends AbstractWeapon {
   public Axe(String name, int weight, int damage) {
     super(name, weight, damage);

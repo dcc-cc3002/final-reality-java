@@ -9,7 +9,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
  */
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.*;
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 /**
  * A {@link GameCharacter} that can equip a weapon.

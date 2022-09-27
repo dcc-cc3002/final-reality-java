@@ -6,7 +6,7 @@ package cl.uchile.dcc.finalreality.model.weapon;
  * abstract class is to make the code extensible to future implementations.
  */
 public abstract class AbstractMagicWeapon extends AbstractWeapon implements MagicWeapon {
-  private final int magic_damage;
+  private final int magicDamage;
 
   /**
    * Create's a new MagicWeapon.
@@ -17,18 +17,18 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements Magi
    *     the MagicWeapon's weight
    * @param damage
    *     the MagicWeapon's damage (the normal damage, not the magic damage)
-   * @param magic_damage
+   * @param magicDamage
    *     the MagicWeapon's magic damage
    */
-  public AbstractMagicWeapon(String name, int weight, int damage, int magic_damage) {
+  public AbstractMagicWeapon(String name, int weight, int damage, int magicDamage) {
     super(name, weight, damage);
-    this.magic_damage = magic_damage;
+    this.magicDamage = magicDamage;
   }
 
   /**
    * Returns the magic_damage of this Weapon.
    */
-  public int getMagic_damage() {
-    return magic_damage;
+  public int getMagicDamage() {
+    return magicDamage;
   }
 }

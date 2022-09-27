@@ -2,10 +2,14 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * Staff is a {@link Weapon} more specifically a {@link MagicWeapon} than can be
+ * equipped by some PlayerCharacters.
+ */
 public class Staff extends AbstractMagicWeapon {
 
-  public Staff(String name, int weight, int damage, int magic_damage) {
-    super(name, weight, damage, magic_damage);
+  public Staff(String name, int weight, int damage, int magicDamage) {
+    super(name, weight, damage, magicDamage);
   }
 
   @Override
@@ -25,12 +29,12 @@ public class Staff extends AbstractMagicWeapon {
         && this.getName().equals(that.getName())
         && this.getWeight() == that.getWeight()
         && this.getDamage() == that.getDamage()
-        && this.getMagic_damage() == that.getMagic_damage();
+        && this.getMagicDamage() == that.getMagicDamage();
   }
 
   @Override
   public String toString() {
-    return "Staff{name=%s, weight=%d, damage='%d', magic_damage='%d'}"
-           .formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagic_damage());
+    return "Staff{name=%s, weight=%d, damage='%d', magicDamage='%d'}"
+           .formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagicDamage());
   }
 }

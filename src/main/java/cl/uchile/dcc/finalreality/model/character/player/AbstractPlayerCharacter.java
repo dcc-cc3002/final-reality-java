@@ -11,7 +11,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.*;
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 

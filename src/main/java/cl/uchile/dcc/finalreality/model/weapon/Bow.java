@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * Bow is a {@link Weapon} than can be equipped by some PlayerCharacters.
+ */
 public class Bow extends AbstractWeapon {
 
   public Bow(String name, int weight, int damage) {

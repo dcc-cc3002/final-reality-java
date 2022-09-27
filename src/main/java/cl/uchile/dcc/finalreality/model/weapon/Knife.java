@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * Knife is a {@link Weapon} than can be equipped by some PlayerCharacters.
+ */
 public class Knife extends AbstractWeapon {
 
   public Knife(String name, int weight, int damage) {
