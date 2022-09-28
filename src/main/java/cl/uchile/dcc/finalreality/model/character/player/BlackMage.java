@@ -38,10 +38,9 @@ public class BlackMage extends AbstractMageCharacter {
    * @param maxMp
    *     the character's max mp
    */
-  protected BlackMage(final @NotNull String name, final int maxHp, final int defense,
-                      final int maxMp,
-                      final @NotNull BlockingQueue<GameCharacter> turnsQueue)
-                               throws InvalidStatValueException {
+  public BlackMage(final @NotNull String name, final int maxHp, final int defense,
+                      final int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+                                throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue, maxMp);
   }
 
