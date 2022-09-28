@@ -7,6 +7,16 @@ import java.util.Objects;
  */
 public class Bow extends AbstractWeapon {
 
+  /**
+   * Creates a new Bow.
+   *
+   * @param name
+   *     the weapon's name
+   * @param weight
+   *     the weapon's weight
+   * @param damage
+   *     the weapon's damage
+   */
   public Bow(String name, int weight, int damage) {
     super(name, weight, damage);
   }

@@ -10,11 +10,11 @@ public abstract class AbstractWeapon extends AbstractItem implements Weapon {
    * Create's a new Weapon.
    *
    * @param name
-   *     the item's name
+   *     the weapon's name
    * @param weight
-   *     the item's weight
+   *     the weapon's weight
    * @param damage
-   *     the Weapon's damage
+   *     the weapon's damage
    */
   protected AbstractWeapon(String name, int weight, int damage) {
     super(name, weight);

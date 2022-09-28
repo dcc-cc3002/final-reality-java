@@ -4,10 +4,22 @@ import java.util.Objects;
 
 /**
  * Staff is a {@link Weapon} more specifically a {@link MagicWeapon} than can be
- * equipped by some PlayerCharacters.
+ * equipped by some PlayerCharacter's.
  */
 public class Staff extends AbstractMagicWeapon {
 
+  /**
+   * Creates a new Staff.
+   *
+   * @param name
+   *     the weapon's name
+   * @param weight
+   *     the weapon's weight
+   * @param damage
+   *     the weapon's damage
+   * @param magicDamage
+   *     the weapon's magic damage
+   */
   public Staff(String name, int weight, int damage, int magicDamage) {
     super(name, weight, damage, magicDamage);
   }

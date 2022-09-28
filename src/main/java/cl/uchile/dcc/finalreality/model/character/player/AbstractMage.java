@@ -30,7 +30,7 @@ public abstract class AbstractMage extends AbstractPlayerCharacter implements Ma
    *     the character's max mp
    */
 
-  public AbstractMage(final @NotNull String name, final int maxHp, final int defense,
+  protected AbstractMage(final @NotNull String name, final int maxHp, final int defense,
                       final @NotNull BlockingQueue<GameCharacter> turnsQueue, final int maxMp)
                       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);

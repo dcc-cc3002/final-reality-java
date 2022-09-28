@@ -1,8 +1,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 
-/** A class that holds the information of Weapons that have magic Damage such as Staff's.
- * In this case the only Weapon with this property is the Staff, the purpose of this
+/** A class that holds the information of a {@link Weapon} that have magic Damage such as Staff's.
+ * In this case the only weapon with this property is the Staff, the purpose of this
  * abstract class is to make the code extensible to future implementations.
  */
 public abstract class AbstractMagicWeapon extends AbstractWeapon implements MagicWeapon {
@@ -12,15 +12,15 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements Magi
    * Create's a new MagicWeapon.
    *
    * @param name
-   *     the MagicWeapon's name
+   *     the magic weapon's name
    * @param weight
-   *     the MagicWeapon's weight
+   *     the magic weapon's weight
    * @param damage
-   *     the MagicWeapon's damage (the normal damage, not the magic damage)
+   *     the magic weapon's damage (the normal damage, not the magic damage)
    * @param magicDamage
-   *     the MagicWeapon's magic damage
+   *     the magic weapon's magic damage
    */
-  public AbstractMagicWeapon(String name, int weight, int damage, int magicDamage) {
+  protected AbstractMagicWeapon(String name, int weight, int damage, int magicDamage) {
     super(name, weight, damage);
     this.magicDamage = magicDamage;
   }

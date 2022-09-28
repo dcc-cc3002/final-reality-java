@@ -6,6 +6,17 @@ import java.util.Objects;
  * Axe is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
 public class Axe extends AbstractWeapon {
+
+  /**
+   * Creates a new Axe.
+   *
+   * @param name
+   *     the weapon's name
+   * @param weight
+   *     the weapon's weight
+   * @param damage
+   *     the weapon's damage
+   */
   public Axe(String name, int weight, int damage) {
     super(name, weight, damage);
   }

@@ -7,6 +7,16 @@ import java.util.Objects;
  */
 public class Knife extends AbstractWeapon {
 
+  /**
+   * Creates a new Knife.
+   *
+   * @param name
+   *     the weapon's name
+   * @param weight
+   *     the weapon's weight
+   * @param damage
+   *     the weapon's damage
+   */
   public Knife(String name, int weight, int damage) {
     super(name, weight, damage);
   }
