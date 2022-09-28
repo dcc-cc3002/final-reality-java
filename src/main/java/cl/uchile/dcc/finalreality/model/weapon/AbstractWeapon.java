@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 /**
  * This is an abstract class that contains the common information of all Weapon's in the game.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
 public abstract class AbstractWeapon extends AbstractItem implements Weapon {
   private final int damage;

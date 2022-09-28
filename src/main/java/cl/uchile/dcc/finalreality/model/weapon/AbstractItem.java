@@ -3,6 +3,9 @@ package cl.uchile.dcc.finalreality.model.weapon;
 /**
  * This is a class that contains the information off an Item in the game.
  * Every item must have a name and a weight.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
 public abstract class AbstractItem implements Item {
   private final String name;
