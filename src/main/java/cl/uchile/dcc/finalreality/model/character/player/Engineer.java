@@ -44,12 +44,14 @@ public class Engineer extends AbstractPlayerCharacter {
 
   @Override
   public String toString() {
-    return "Engineer{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+    return "Engineer{maxHp=%d, currentHp=%d, defense=%d, name='%s'}"
+        .formatted(this.getMaxHp(), this.getCurrentHp(), this.getDefense(), this.getName());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Engineer.class, name, maxHp, defense);
+    return Objects.hash(Engineer.class, this.getName(),
+        this.getMaxHp(), this.getCurrentHp(), this.getDefense());
   }
 
   @Override
@@ -61,8 +63,9 @@ public class Engineer extends AbstractPlayerCharacter {
       return false;
     }
     return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense;
+        && this.getName().equals(that.getName())
+        && this.getMaxHp() == that.getMaxHp()
+        && this.getCurrentHp() == that.getCurrentHp()
+        && this.getDefense() == that.getDefense();
   }
 }

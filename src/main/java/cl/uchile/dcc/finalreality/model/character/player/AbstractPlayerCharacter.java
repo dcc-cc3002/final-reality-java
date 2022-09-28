@@ -58,4 +58,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   public Weapon getEquippedWeapon() {
     return equippedWeapon;
   }
+
+  public int getWeight() {
+    return getEquippedWeapon().getWeight();
+  }
 }

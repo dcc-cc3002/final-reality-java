@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Arturo Kullmer~
  */
 
-public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements MageCharacter {
+public abstract class AbstractMageCharacter extends
+    AbstractPlayerCharacter implements MageCharacter {
 
   private final int maxMp;
   private int currentMp;
@@ -34,8 +35,9 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
    */
 
   protected AbstractMageCharacter(final @NotNull String name, final int maxHp, final int defense,
-                                  final @NotNull BlockingQueue<GameCharacter> turnsQueue, final int maxMp)
-                      throws InvalidStatValueException {
+                                  final @NotNull BlockingQueue<GameCharacter> turnsQueue,
+                                  final int maxMp)
+                                  throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");
     this.maxMp = maxMp;

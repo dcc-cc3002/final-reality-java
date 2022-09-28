@@ -18,10 +18,10 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractCharacter implements GameCharacter {
 
   private int currentHp;
-  protected final int maxHp;
-  protected int defense;
+  private final int maxHp;
+  private int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
-  protected final String name;
+  private final String name;
   private ScheduledExecutorService scheduledExecutor;
 
   /**
@@ -50,18 +50,10 @@ public abstract class AbstractCharacter implements GameCharacter {
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter player) {
-      scheduledExecutor.schedule(
+    scheduledExecutor.schedule(
           /* command = */ this::addToQueue,
-          /* delay = */ player.getEquippedWeapon().getWeight() / 10,
+          /* delay = */ this.getWeight() / 10,
           /* unit = */ TimeUnit.SECONDS);
-    } else {
-      var enemy = (Enemy) this;
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ enemy.getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    }
   }
 
   /**
@@ -102,4 +94,9 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
   }
+
+  /**
+   * The responsability of the implementation of getWeight method will be passed to the subclasses.
+   */
+  public abstract int getWeight();
 }

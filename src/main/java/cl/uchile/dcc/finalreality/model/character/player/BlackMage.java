@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Arturo Kullmer~
  * @version 2.0
  */
-public class BlackMageCharacter extends AbstractMageCharacter {
+public class BlackMage extends AbstractMageCharacter {
 
   /**
    * Creates a new Black MageCharacter.
@@ -38,9 +38,10 @@ public class BlackMageCharacter extends AbstractMageCharacter {
    * @param maxMp
    *     the character's max mp
    */
-  protected BlackMageCharacter(final @NotNull String name, final int maxHp, final int defense,
-                               final int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
-      throws InvalidStatValueException {
+  protected BlackMage(final @NotNull String name, final int maxHp, final int defense,
+                      final int maxMp,
+                      final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+                               throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue, maxMp);
   }
 
@@ -50,26 +51,29 @@ public class BlackMageCharacter extends AbstractMageCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final BlackMageCharacter that)) {
+    if (!(o instanceof final BlackMage that)) {
       return false;
     }
     return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense
+        && this.getName().equals(that.getName())
+        && this.getMaxHp() == that.getMaxHp()
+        && this.getCurrentHp() == that.getCurrentHp()
+        && this.getDefense() == that.getDefense()
         && this.getMaxMp() == that.getMaxMp()
         && this.getCurrentMp() == that.getCurrentMp();
   }
 
   @Override
   public String toString() {
-    return "BlackMageCharacter{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(this.getCurrentMp(), this.getMaxMp(), maxHp, defense, name);
+    return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, currentHp=%d, defense=%d, name='%s'}"
+        .formatted(this.getCurrentMp(), this.getMaxMp(), this.getMaxHp(), this.getCurrentHp(),
+            this.getDefense(), this.getName());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(BlackMageCharacter.class, name, maxHp, defense, this.getMaxMp());
+    return Objects.hash(BlackMage.class, this.getName(), this.getMaxHp(),
+        this.getCurrentHp(), this.getDefense(), this.getMaxMp());
   }
   // endregion
 }

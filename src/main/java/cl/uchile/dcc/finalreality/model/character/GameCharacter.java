@@ -41,4 +41,11 @@ public interface GameCharacter {
    * Sets this character's current HP to {@code newHp}.
    */
   void setCurrentHp(int hp) throws InvalidStatValueException;
+
+  /**
+   * Return the weight of the Character at that current moment.
+   * Note that in the case of a {@code PlayerCharacter} his weight
+   * is determined by his equipped weapon.
+   */
+  int getWeight();
 }

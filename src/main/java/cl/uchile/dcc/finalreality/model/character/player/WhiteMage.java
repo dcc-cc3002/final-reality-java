@@ -15,12 +15,13 @@ import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A {@link PlayerCharacter} that can equip {@code Staff}s and use <i>white magic</i>.
+ * A white mage is a {@link PlayerCharacter} and also a {@link MageCharacter} that
+ * can equip {@code Staff}s and use <i>white magic</i>.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Arturo Kullmer~
  */
-public class WhiteMageCharacter extends AbstractMageCharacter {
+public class WhiteMage extends AbstractMageCharacter {
 
   /**
    * Creates a new character.
@@ -36,8 +37,8 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
    * @param maxMp
    *     the character's max mp
    */
-  protected WhiteMageCharacter(final @NotNull String name, final int maxHp, final int defense,
-                               int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+  protected WhiteMage(final @NotNull String name, final int maxHp, final int defense,
+                      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue, maxMp);
   }
@@ -47,25 +48,28 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final WhiteMageCharacter that)) {
+    if (!(o instanceof final WhiteMage that)) {
       return false;
     }
     return hashCode() == that.hashCode()
         && this.getMaxMp() == that.getMaxMp()
         && this.getCurrentMp() == that.getCurrentMp()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense;
+        && this.getName().equals(that.getName())
+        && this.getMaxHp() == that.getMaxHp()
+        && this.getCurrentHp() == that.getCurrentHp()
+        && this.getDefense() == that.getDefense();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(WhiteMageCharacter.class, name, maxHp, defense, this.getMaxMp());
+    return Objects.hash(WhiteMage.class, this.getName(), this.getMaxHp(),
+        this.getCurrentHp(), this.getDefense(), this.getMaxMp());
   }
 
   @Override
   public String toString() {
-    return "WhiteMageCharacter{currentMP=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(this.getCurrentMp(), this.getMaxMp(), maxHp, defense, name);
+    return "WhiteMage{currentMP=%d, maxMp=%d, maxHp=%d, currentHp=%d, defense=%d, name='%s'}"
+        .formatted(this.getCurrentMp(), this.getMaxMp(), this.getMaxHp(),
+            this.getCurrentHp(), this.getDefense(), this.getName());
   }
 }
