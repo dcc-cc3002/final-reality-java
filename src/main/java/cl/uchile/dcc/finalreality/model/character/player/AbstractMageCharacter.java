@@ -7,16 +7,19 @@ import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An abstract class that holds the common behaviour of all mages of the game.
+ * An abstract class that holds the common behaviour of all mages characters of the game.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
 
-public abstract class AbstractMage extends AbstractPlayerCharacter implements Mage {
+public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements MageCharacter {
 
   private final int maxMp;
   private int currentMp;
 
   /**
-   * Creates a new Mage character.
+   * Creates a new MageCharacter character.
    *
    * @param name
    *     the character's name
@@ -30,8 +33,8 @@ public abstract class AbstractMage extends AbstractPlayerCharacter implements Ma
    *     the character's max mp
    */
 
-  protected AbstractMage(final @NotNull String name, final int maxHp, final int defense,
-                      final @NotNull BlockingQueue<GameCharacter> turnsQueue, final int maxMp)
+  protected AbstractMageCharacter(final @NotNull String name, final int maxHp, final int defense,
+                                  final @NotNull BlockingQueue<GameCharacter> turnsQueue, final int maxMp)
                       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");

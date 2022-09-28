@@ -3,13 +3,16 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 
 /**
- * This represents a Mage character of the game. A Mage have spells and method's that
+ * This represents a mage character of the game. A MageCharacter have spells and method's that
  * common characters do not have.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
-public interface Mage extends PlayerCharacter {
+public interface MageCharacter extends PlayerCharacter {
 
   /**
-   * Returns the Mage's maximum value of MP.
+   * Returns the maximum value of MP.
    */
   public int getMaxMp();
 

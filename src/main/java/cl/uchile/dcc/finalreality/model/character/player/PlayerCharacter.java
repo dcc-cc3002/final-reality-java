@@ -13,6 +13,9 @@ import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 /**
  * A {@link GameCharacter} that can equip a weapon.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
 public interface PlayerCharacter extends GameCharacter {
   /**

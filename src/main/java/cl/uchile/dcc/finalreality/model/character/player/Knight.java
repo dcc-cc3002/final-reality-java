@@ -15,8 +15,11 @@ import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A {@link PlayerCharacter} that can equip {@code Sword}s,{@code Knife}s and
+ * Knight is a {@link PlayerCharacter} that can equip {@code Sword}s,{@code Knife}s and
  * {@code Axe}s.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Arturo Kullmer~
  */
 public class Knight extends AbstractPlayerCharacter {
 

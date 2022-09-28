@@ -9,7 +9,6 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -21,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Arturo Kullmer~
  */
-public class WhiteMage extends AbstractMage {
+public class WhiteMageCharacter extends AbstractMageCharacter {
 
   /**
    * Creates a new character.
@@ -37,8 +36,8 @@ public class WhiteMage extends AbstractMage {
    * @param maxMp
    *     the character's max mp
    */
-  protected WhiteMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+  protected WhiteMageCharacter(final @NotNull String name, final int maxHp, final int defense,
+                               int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue, maxMp);
   }
@@ -48,7 +47,7 @@ public class WhiteMage extends AbstractMage {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final WhiteMage that)) {
+    if (!(o instanceof final WhiteMageCharacter that)) {
       return false;
     }
     return hashCode() == that.hashCode()
@@ -61,12 +60,12 @@ public class WhiteMage extends AbstractMage {
 
   @Override
   public int hashCode() {
-    return Objects.hash(WhiteMage.class, name, maxHp, defense, this.getMaxMp());
+    return Objects.hash(WhiteMageCharacter.class, name, maxHp, defense, this.getMaxMp());
   }
 
   @Override
   public String toString() {
-    return "WhiteMage{currentMP=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
+    return "WhiteMageCharacter{currentMP=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
         .formatted(this.getCurrentMp(), this.getMaxMp(), maxHp, defense, name);
   }
 }
