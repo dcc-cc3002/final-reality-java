@@ -11,6 +11,8 @@ public abstract class AbstractWeapon extends AbstractItem implements Weapon {
 
   /**
    * Create's a new Weapon.
+   * Constructor is <b>protected</b> because it is only used by subclases,
+   * and it will be not instanciated.
    *
    * @param name
    *     the weapon's name

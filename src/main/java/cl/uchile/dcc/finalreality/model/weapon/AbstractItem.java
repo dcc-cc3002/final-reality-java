@@ -12,7 +12,8 @@ public abstract class AbstractItem implements Item {
   private final int weight;
   /**
    * Constructor that creates a new Item.
-   * It is protected because it will only be used by his subclasses.
+   * Constructor is <b>protected</b> because it is only used by subclases,
+   * and it will be not instanciated.
    *
    * @param name
    *     the item's name

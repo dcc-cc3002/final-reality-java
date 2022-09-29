@@ -21,6 +21,8 @@ public abstract class AbstractMageCharacter extends
 
   /**
    * Creates a new MageCharacter character.
+   * Constructor is <b>protected</b> because it is only used by subclases,
+   * and it will be not instanciated.
    *
    * @param name
    *     the character's name
