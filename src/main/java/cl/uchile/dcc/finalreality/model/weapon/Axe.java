@@ -42,7 +42,7 @@ public class Axe extends AbstractWeapon {
 
   @Override
   public String toString() {
-    return "Axe{name=%s, weight=%d, damage='%d'}"
+    return "Axe{name='%s', weight=%d, damage=%d}"
            .formatted(this.getName(), this.getWeight(), this.getDamage());
   }
 

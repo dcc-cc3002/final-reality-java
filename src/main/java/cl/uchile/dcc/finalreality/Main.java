@@ -110,9 +110,59 @@ public class Main {
     System.out.println("toString of methods for Weapons:");
     System.out.println(axe.toString());
     System.out.println(bow.toString());
-    System.out.println(knife.toString());
-    System.out.println(staff.toString());
-    System.out.println(sword.toString());
+    System.out.println("We will also test the getEquippedWeapon method of PlayerCharacter and "
+        + "use the toString to the Weapon that the PlayerCharacter is holding at that moment:");
+    System.out.println("BlackMage holing a Knife -> " + blackmage.getEquippedWeapon().toString());
+    System.out.println("WhiteMage holding a Staff -> " + whitemage.getEquippedWeapon().toString());
+    System.out.println("Knight holding a Sword -> " + knight.getEquippedWeapon().toString());
+    System.out.println("With the previus test we have tested also the equip method, "
+        + "because by default a PlayerCharacter isn't holding a Weapon and we just printed one."
+        + '\n');
+    System.out.println("Also we are going to test all the getters of a staff:");
+    System.out.println("Name of the Staff: " + staff.getName() + ", weight of the Staff: "
+            + staff.getWeight() + ", damage of the Staff: " + staff.getDamage()
+            + ", magic damage of the Staff: " + staff.getMagicDamage());
+
+    System.out.println('\n');
+    System.out.println("Now we will test the toString, getWeight and the functionality of the "
+        + "turns:");
+    System.out.println("When we print a character, getWeight should return the weight of the Weapon"
+        + " that the character is holding. In case of an enemy it will return his weight value.");
+    System.out.println("We wait 5 seconds to ensure that the characters finished waiting ..."
+        + '\n');
+
+    Thread.sleep(5000); // Waiting 5 seconds
+    while (!queue.isEmpty()) {
+      // Pops and prints the names of the characters of the queue to illustrate the turns order
+      System.out.println(queue.peek().toString() + '\n' + "The weight has a value of -> "
+          + queue.poll().getWeight() + '\n');
+    }
+
+    System.out.println("Note that with this we have tested the addToQueue method, because "
+        + "when we use the waitTurn method we are adding the GameCharacter to the "
+        + "Queue and we just printed all the characters using the queue." + '\n');
+
+    System.out.println("To finish with the testing we are going to test the getters and setters "
+        + "of a WhiteMage. A WhiteMage is a MageCharacter, PlayerCharacter and GameCharacter so "
+        + "with this test we are testing a lot of functions.");
+    System.out.println("Let's print the value of each parameter of a WhiteMage: " + '\n');
+    System.out.println("Whitemage: name -> " + whitemage.getName() + ", maxHp -> "
+        + whitemage.getMaxHp() + ", currentHp -> " + whitemage.getCurrentHp()
+        + ", maxMp -> " + whitemage.getMaxMp() + ", currentMp -> "
+        + whitemage.getCurrentMp() + ", defense -> " + whitemage.getDefense() + '\n');
+    System.out.println("Let's modify his current Mp and currentHp with getters:");
+    System.out.println("newHp = maxHp/2 and newMp = maxMp/3. Let's see these changes:");
+    whitemage.setCurrentHp(whitemage.getMaxHp() / 2);
+    whitemage.setCurrentMp(whitemage.getMaxMp() / 3);
+
+    System.out.println(whitemage.toString() + '\n');
+    System.out.println("Also we are going to print his equipped Weapon and weight of that Weapon.");
+    System.out.println("equipped Weapon -> " + whitemage.getEquippedWeapon().toString());
+    System.out.println("Weight of the equipped Weapon -> " + whitemage.getWeight() + '\n');
+
+    System.out.println("With this we finished with all the tests of the current project!");
+
+
 
 
   }

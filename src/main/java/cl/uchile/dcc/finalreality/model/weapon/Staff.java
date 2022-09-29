@@ -46,7 +46,7 @@ public class Staff extends AbstractMagicWeapon {
 
   @Override
   public String toString() {
-    return "Staff{name=%s, weight=%d, damage='%d', magicDamage='%d'}"
+    return "Staff{name='%s', weight=%d, damage=%d, magicDamage=%d}"
            .formatted(this.getName(), this.getWeight(), this.getDamage(), this.getMagicDamage());
   }
 }
