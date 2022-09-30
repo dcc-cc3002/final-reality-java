@@ -81,27 +81,68 @@ public class Main {
     System.out.println("Equals method of GameCharacters:");
     System.out.println("Are 2 Thiefs the same when all the parameters are the same? -> "
         + thief.equals(thief2));
+    Thief thief3 = new Thief("Mars", 12, 220, queue);
+    System.out.println("Are 2 Thiefs the same when all the parameters are diferent? -> "
+        + thief.equals(thief3) + '\n');
+
     System.out.println("Is a Engineer also a Thief? -> " + engineer.equals(thief2));
+    Engineer engineer3 = new Engineer("Steamer the Engineer", 120, 30, queue);
+    System.out.println("Is a Engineer also a Engineer with the same parameters? -> "
+        + engineer.equals(engineer3) + '\n');
+
     System.out.println("Are 2 Knights the same if some parameters are diferent? -> "
         + knight.equals(knight2));
-    System.out.println("Is a Engineer also a Thief? -> " + engineer.equals(thief2));
+    Knight knight3 = new Knight("Goultar the Knight", 5000, 300, queue);
+    System.out.println("Are 2 Knights the same if no parameters are diferent? -> "
+        + knight.equals(knight3) + '\n');
+
     System.out.println("Is a BlackMage the same to another BlackMage if the "
         + "current Hp is different?" + " -> " + blackmage.equals(blackmage2));
-    System.out.println("Are 2 WhiteMages the same when all the parameters are the same? -> "
-                        + whitemage.equals(whitemage2));
+    BlackMage blackmage3 = new BlackMage("Nox the BlackMage", 2000,
+        150, 200, queue);
+    System.out.println("Is a BlackMage the same to another BlackMage if all parameters are"
+        + " equal? -> " + blackmage2.equals(blackmage3) + '\n');
+
+    WhiteMage whitemage3 = new WhiteMage("Oropo the Eliotrop", 2000, 20, 700, queue);
+    System.out.println("Are 2 WhiteMages the same when some parameters are different? -> "
+                        + whitemage.equals(whitemage3));
+    System.out.println("Are 2 WhiteMages equals when all parameters are the same? -> "
+        + whitemage.equals(whitemage2) + '\n');
+
+    Enemy enemy2 = new Enemy("Comte Harebourg the Enemy", 25, 13000,
+        23, 400, queue);
+    System.out.println("Are 2 Enemys the same when their parametrs are equal? -> "
+        + enemy.equals(enemy2));
     System.out.println("Is an Enemy also a Thief? -> " + enemy.equals(thief) + '\n');
-    System.out.println("Equals method of Weapons:");
+
+    //------
+    System.out.println("Equals method of Weapons:" + '\n');
 
     Bow bow2 = new Bow("Miauvizor's Bow", 5, 50);
+    Bow bow3 = new Bow("Miauvizor's Bow", 5, 50);
     Staff staff2 = new Staff("Zoth Manitu's Staff", 3, 1, 70);
     Weapon sword2 = new Sword("Smiling Sword", 20, 60);
+    Staff staff3 = new Staff("Romboton", 6, 3, 400);
+    Knife knife2 = new Knife("Ilyzaelle's Dagger's", 2, 42);
 
     System.out.println("Is an Axe also a Bow? -> " + axe.equals(bow));
+    System.out.println("Is an Axe equals to itself? -> " + axe.equals(axe));
+
     System.out.println("Is a Bow equals to another Bow with different name? -> "
         + bow2.equals(bow));
+    System.out.println("Is a Bow equals to another Bow with the same parameters? -> "
+        + bow2.equals(bow3));
+
     System.out.println("Is a Knife also a Staff? -> " + knife.equals(staff));
-    System.out.println("Is an Staff the as another Staff with the same parameters? -> "
+    System.out.println("Is a Knife equals to another Knife with the same parameters? -> "
+        + knife.equals(knife2));
+
+    System.out.println("Is a Staff the same of another Staff with the same parameters? -> "
         + staff.equals(staff2));
+    System.out.println("Is a Staff the same of another Staff with different parameters? -> "
+        + staff.equals(staff3));
+
+    System.out.println("Is a Sword the equals to a Bow? -> " + sword.equals(bow));
     System.out.println("Is a Sword the same to a Sword with the same parameters"
         + " using polimorphism? -> " + sword.equals(sword2));
     System.out.println('\n');
