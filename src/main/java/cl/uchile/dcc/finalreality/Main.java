@@ -81,39 +81,54 @@ public class Main {
     System.out.println("Equals method of GameCharacters:");
     System.out.println("Are 2 Thiefs the same when all the parameters are the same? -> "
         + thief.equals(thief2));
+    System.out.println("HashCode test -> thief = "
+        + thief.hashCode() + ", thief2 = " + thief2.hashCode() + " therefore is thief1 = thief2? -> "
+        + (thief.hashCode()==thief2.hashCode()));
+
     Thief thief3 = new Thief("Mars", 12, 220, queue);
     System.out.println("Are 2 Thiefs the same when all the parameters are diferent? -> "
-        + thief.equals(thief3) + '\n');
+        + thief.equals(thief3));
+    System.out.println("Hashcode are equal? -> " + (thief.hashCode() == thief3.hashCode()) + '\n');
 
     System.out.println("Is a Engineer also a Thief? -> " + engineer.equals(thief2));
+    System.out.println("Hashcode are equal? -> " + (engineer.hashCode() == thief2.hashCode()));
     Engineer engineer3 = new Engineer("Steamer the Engineer", 120, 30, queue);
     System.out.println("Is a Engineer also a Engineer with the same parameters? -> "
-        + engineer.equals(engineer3) + '\n');
+        + engineer.equals(engineer3));
+    System.out.println("Hashcode are equal? -> " + (engineer.hashCode() == engineer3.hashCode()) + '\n');
 
     System.out.println("Are 2 Knights the same if some parameters are diferent? -> "
         + knight.equals(knight2));
+    System.out.println("Hashcode are equal? -> " + (knight.hashCode() == knight2.hashCode()));
     Knight knight3 = new Knight("Goultar the Knight", 5000, 300, queue);
     System.out.println("Are 2 Knights the same if no parameters are diferent? -> "
-        + knight.equals(knight3) + '\n');
+        + knight.equals(knight3));
+    System.out.println("Hashcode are equal? -> " + (knight.hashCode() == knight3.hashCode()) + '\n');
 
     System.out.println("Is a BlackMage the same to another BlackMage if the "
         + "current Hp is different?" + " -> " + blackmage.equals(blackmage2));
+    System.out.println("Hashcode are equal? -> " + (blackmage.hashCode() == blackmage2.hashCode()));
     BlackMage blackmage3 = new BlackMage("Nox the BlackMage", 2000,
         150, 200, queue);
     System.out.println("Is a BlackMage the same to another BlackMage if all parameters are"
-        + " equal? -> " + blackmage2.equals(blackmage3) + '\n');
+        + " equal? -> " + blackmage2.equals(blackmage3));
+    System.out.println("Hashcode are equal? -> " + (blackmage2.hashCode() == blackmage3.hashCode()) + '\n');
 
     WhiteMage whitemage3 = new WhiteMage("Oropo the Eliotrop", 2000, 20, 700, queue);
     System.out.println("Are 2 WhiteMages the same when some parameters are different? -> "
                         + whitemage.equals(whitemage3));
+    System.out.println("Hashcode are equal? -> " + (whitemage.hashCode() == whitemage3.hashCode()));
     System.out.println("Are 2 WhiteMages equals when all parameters are the same? -> "
-        + whitemage.equals(whitemage2) + '\n');
+        + whitemage.equals(whitemage2));
+    System.out.println("Hashcode are equal? -> " + (whitemage.hashCode() == whitemage2.hashCode()) + '\n');
 
     Enemy enemy2 = new Enemy("Comte Harebourg the Enemy", 25, 13000,
         23, 400, queue);
     System.out.println("Are 2 Enemys the same when their parametrs are equal? -> "
         + enemy.equals(enemy2));
-    System.out.println("Is an Enemy also a Thief? -> " + enemy.equals(thief) + '\n');
+    System.out.println("Hashcode are equal? -> " + (enemy.hashCode() == enemy2.hashCode()));
+    System.out.println("Is an Enemy also a Thief? -> " + enemy.equals(thief));
+    System.out.println("Hashcode are equal? -> " + (enemy.hashCode() == thief.hashCode()) + '\n');
 
     //------
     System.out.println("Equals method of Weapons:" + '\n');
@@ -126,25 +141,35 @@ public class Main {
     Knife knife2 = new Knife("Ilyzaelle's Dagger's", 2, 42);
 
     System.out.println("Is an Axe also a Bow? -> " + axe.equals(bow));
+    System.out.println("Hashcode are equal? -> " + (axe.hashCode() == bow.hashCode()));
     System.out.println("Is an Axe equals to itself? -> " + axe.equals(axe));
+    System.out.println("Hashcode are equal? -> " + (axe.hashCode() == axe.hashCode()));
 
     System.out.println("Is a Bow equals to another Bow with different name? -> "
         + bow2.equals(bow));
+    System.out.println("Hashcode are equal? -> " + (bow2.hashCode() == bow.hashCode()));
     System.out.println("Is a Bow equals to another Bow with the same parameters? -> "
         + bow2.equals(bow3));
+    System.out.println("Hashcode are equal? -> " + (bow2.hashCode() == bow3.hashCode()));
 
     System.out.println("Is a Knife also a Staff? -> " + knife.equals(staff));
+    System.out.println("Hashcode are equal? -> " + (knife.hashCode() == staff.hashCode()));
     System.out.println("Is a Knife equals to another Knife with the same parameters? -> "
         + knife.equals(knife2));
+    System.out.println("Hashcode are equal? -> " + (knife.hashCode() == knife2.hashCode()));
 
     System.out.println("Is a Staff the same of another Staff with the same parameters? -> "
         + staff.equals(staff2));
+    System.out.println("Hashcode are equal? -> " + (staff.hashCode() == staff2.hashCode()));
     System.out.println("Is a Staff the same of another Staff with different parameters? -> "
         + staff.equals(staff3));
+    System.out.println("Hashcode are equal? -> " + (staff.hashCode() == staff3.hashCode()));
 
     System.out.println("Is a Sword the equals to a Bow? -> " + sword.equals(bow));
+    System.out.println("Hashcode are equal? -> " + (sword.hashCode() == bow.hashCode()));
     System.out.println("Is a Sword the same to a Sword with the same parameters"
         + " using polimorphism? -> " + sword.equals(sword2));
+    System.out.println("Hashcode are equal? -> " + (sword.hashCode() == sword2.hashCode()));
     System.out.println('\n');
 
     System.out.println("Testing of toString method:" + '\n');
