@@ -142,6 +142,9 @@ public class Main {
         + "when we use the waitTurn method we are adding the GameCharacter to the "
         + "Queue and we just printed all the characters using the queue." + '\n');
 
+    System.out.println("Now we are going to test the getAttack method of an enemy. "
+        + "The attack of the defined enemy is -> " + enemy.getAttack() + '\n');
+
     System.out.println("To finish with the testing we are going to test the getters and setters "
         + "of a WhiteMage. A WhiteMage is a MageCharacter, PlayerCharacter and GameCharacter so "
         + "with this test we are testing a lot of functions.");
