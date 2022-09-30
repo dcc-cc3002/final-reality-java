@@ -34,7 +34,9 @@ because it cannot equip any weapons.
 
 We consider de group of Enemy's and PlayerCharacter as _GameCharacter_'s. Every _GameCharacter_ is cappable of entering
 to a battle, where they must wait they turn to attack. How frequently a _GameCharacter_ can act in a battle is determined
-by his weight and every time they attack, they must after wait for their turn. Note that there is no implementation of a battle system in this project jet.
+by his weight and every time they attack, they must after wait for their turn. Note that there is no implementation of a 
+battle system in this project jet.
+
 ---
 ### Tarea 1 - Cambios efectuados
 **This section will be written in Spanish to simplify the correction of this assignment**  
@@ -46,7 +48,7 @@ responsabilidad como clase, además de que tener una variable de tipo de arma es
 buena practica pues para generar nuevas armas se necesita ir a modificarlo para extender el codigo, además de que
 puede haber problemas en como se escribo el tipo del arma al instanciar la clase y otros problemas.  
 
-Para esto se hizo toda una jerarquizacion de clases. Primero hicieron 5 clases, una para cada una de las armas.
+Para esto se hizo toda una jerarquizacion de clases. Primero se hicieron 5 clases, una para cada una de las armas.
 Cada arma ahora sabe cuál es su tipo, pues están definidas como objetos tangibles como una espada, un arco, etc...
  Por esto se eliminó la variable type de Weapon. En el caso del Staff, esta extiende de una clase abstracta 
 AbstractMagicWeapon que implementa la interfaz MagicWeapon. Esto podria pensarse que es engorroso porque solo staff
