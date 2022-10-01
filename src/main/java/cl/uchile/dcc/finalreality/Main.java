@@ -82,8 +82,8 @@ public class Main {
     System.out.println("Are 2 Thiefs the same when all the parameters are the same? -> "
         + thief.equals(thief2));
     System.out.println("HashCode test -> thief = "
-        + thief.hashCode() + ", thief2 = " + thief2.hashCode() + " therefore is thief1 = thief2? -> "
-        + (thief.hashCode()==thief2.hashCode()));
+        + thief.hashCode() + ", thief2 = " + thief2.hashCode()
+        + " therefore is thief1 = thief2? -> " + (thief.hashCode() == thief2.hashCode()));
 
     Thief thief3 = new Thief("Mars", 12, 220, queue);
     System.out.println("Are 2 Thiefs the same when all the parameters are diferent? -> "
@@ -95,7 +95,8 @@ public class Main {
     Engineer engineer3 = new Engineer("Steamer the Engineer", 120, 30, queue);
     System.out.println("Is a Engineer also a Engineer with the same parameters? -> "
         + engineer.equals(engineer3));
-    System.out.println("Hashcode are equal? -> " + (engineer.hashCode() == engineer3.hashCode()) + '\n');
+    System.out.println("Hashcode are equal? -> "
+        + (engineer.hashCode() == engineer3.hashCode()) + '\n');
 
     System.out.println("Are 2 Knights the same if some parameters are diferent? -> "
         + knight.equals(knight2));
@@ -103,7 +104,8 @@ public class Main {
     Knight knight3 = new Knight("Goultar the Knight", 5000, 300, queue);
     System.out.println("Are 2 Knights the same if no parameters are diferent? -> "
         + knight.equals(knight3));
-    System.out.println("Hashcode are equal? -> " + (knight.hashCode() == knight3.hashCode()) + '\n');
+    System.out.println("Hashcode are equal? -> "
+        + (knight.hashCode() == knight3.hashCode()) + '\n');
 
     System.out.println("Is a BlackMage the same to another BlackMage if the "
         + "current Hp is different?" + " -> " + blackmage.equals(blackmage2));
@@ -112,7 +114,8 @@ public class Main {
         150, 200, queue);
     System.out.println("Is a BlackMage the same to another BlackMage if all parameters are"
         + " equal? -> " + blackmage2.equals(blackmage3));
-    System.out.println("Hashcode are equal? -> " + (blackmage2.hashCode() == blackmage3.hashCode()) + '\n');
+    System.out.println("Hashcode are equal? -> "
+        + (blackmage2.hashCode() == blackmage3.hashCode()) + '\n');
 
     WhiteMage whitemage3 = new WhiteMage("Oropo the Eliotrop", 2000, 20, 700, queue);
     System.out.println("Are 2 WhiteMages the same when some parameters are different? -> "
@@ -120,7 +123,8 @@ public class Main {
     System.out.println("Hashcode are equal? -> " + (whitemage.hashCode() == whitemage3.hashCode()));
     System.out.println("Are 2 WhiteMages equals when all parameters are the same? -> "
         + whitemage.equals(whitemage2));
-    System.out.println("Hashcode are equal? -> " + (whitemage.hashCode() == whitemage2.hashCode()) + '\n');
+    System.out.println("Hashcode are equal? -> "
+        + (whitemage.hashCode() == whitemage2.hashCode()) + '\n');
 
     Enemy enemy2 = new Enemy("Comte Harebourg the Enemy", 25, 13000,
         23, 400, queue);
