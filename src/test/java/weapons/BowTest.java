@@ -40,9 +40,9 @@ public class BowTest {
 
   @Test
   public void testToString() {
-    assertEquals("toString method does'nt work in the Axe class", "Bow{name='" + bow.getName() +
+    assertEquals("toString method does'nt work in the Bow class", "Bow{name='" + bow.getName() +
         "', weight=" + bow.getWeight() + ", damage=" + bow.getDamage() + "}", bow.toString());
-    assertNotEquals("toString method does'nt work in the Axe class", bow.toString(), bow3.toString());
+    assertNotEquals("toString method does'nt work in the Bow class", bow.toString(), bow3.toString());
   }
 
 }
