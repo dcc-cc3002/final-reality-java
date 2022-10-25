@@ -6,7 +6,10 @@ package cl.uchile.dcc.finalreality.model.weapon;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Arturo Kullmer~
  */
-public abstract class AbstractWeapon extends AbstractItem implements Weapon {
+public abstract class AbstractWeapon implements Weapon {
+
+  private final String name;
+  private final int weight;
   private final int damage;
 
   /**
@@ -22,11 +25,19 @@ public abstract class AbstractWeapon extends AbstractItem implements Weapon {
    *     the weapon's damage
    */
   protected AbstractWeapon(String name, int weight, int damage) {
-    super(name, weight);
+    this.name = name;
+    this.weight = weight;
     this.damage = damage;
   }
 
-  @Override
+  public String getName() {
+    return name;
+  }
+
+  public int getWeight() {
+    return weight;
+  }
+
   public int getDamage() {
     return damage;
   }
