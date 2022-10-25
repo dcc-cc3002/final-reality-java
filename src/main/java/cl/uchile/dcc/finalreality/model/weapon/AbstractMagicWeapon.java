@@ -1,6 +1,9 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.Require;
+
 /** A class that holds the information of a {@link Weapon} that have magic Damage such as Staff's.
  * In this case the only weapon with this property is the Staff, the purpose of this
  * abstract class is to make the code extensible to future implementations.
@@ -25,8 +28,10 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements Magi
    * @param magicDamage
    *     the magic weapon's magic damage
    */
-  protected AbstractMagicWeapon(String name, int weight, int damage, int magicDamage) {
+  protected AbstractMagicWeapon(String name, int weight, int damage, int magicDamage)
+      throws InvalidStatValueException {
     super(name, weight, damage);
+    Require.statValueAtLeast(1, magicDamage, "MagicDamage");
     this.magicDamage = magicDamage;
   }
 

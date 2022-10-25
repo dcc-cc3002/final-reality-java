@@ -1,5 +1,9 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.Require;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * This is an abstract class that contains the common information of all Weapon's in the game.
  *
@@ -24,7 +28,10 @@ public abstract class AbstractWeapon implements Weapon {
    * @param damage
    *     the weapon's damage
    */
-  protected AbstractWeapon(String name, int weight, int damage) {
+  protected AbstractWeapon(@NotNull String name, int weight, int damage)
+      throws InvalidStatValueException {
+    Require.statValueAtLeast(1, weight, "Weight");
+    Require.statValueAtLeast(1, damage, "Damage");
     this.name = name;
     this.weight = weight;
     this.damage = damage;
