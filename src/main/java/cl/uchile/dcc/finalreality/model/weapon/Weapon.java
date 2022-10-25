@@ -1,7 +1,5 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-
 /**
  * This represents a Weapon of the game. A Weapon is contained in the player's inventory.
  * A Weapon can be equipped only by a PlayerCharacter.
