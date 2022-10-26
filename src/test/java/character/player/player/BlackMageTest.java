@@ -1,4 +1,4 @@
-package character;
+package character.player.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
@@ -46,10 +46,10 @@ public class BlackMageTest {
 
   @Test
   public void testToString() {
-    assertEquals("toString method does'nt work in the Bow class", "BlackMage{currentMp=" + blackmage.getCurrentMp() +
+    assertEquals("toString method does'nt work in the BlackMage class", "BlackMage{currentMp=" + blackmage.getCurrentMp() +
         ", maxMp=" + blackmage.getMaxMp() + ", maxHp=" + blackmage.getMaxHp() + ", currentHp=" +
         blackmage.getCurrentHp() + ", defense=" + blackmage.getDefense() + ", name='" + blackmage.getName() +
         "'}", blackmage.toString());
-    assertNotEquals("toString method does'nt work in the Bow class", blackmage.toString(), blackmage3.toString());
+    assertNotEquals("toString method does'nt work in the BlackMage class", blackmage.toString(), blackmage3.toString());
   }
 }
