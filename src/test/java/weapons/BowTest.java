@@ -25,9 +25,9 @@ public class BowTest {
   @Test
   public void testEquals() {
     assertEquals("A Bow is not equals to itself", true, bow.equals(bow));
-    assertEquals("A Bow is not equals to another Axe with same parameters", true, bow.equals(bow2));
-    assertNotEquals("An Axe is equals to another bow with different parameters", true, bow.equals(bow3));
-    assertEquals("An Axe is the same as a Bow", false, axe.equals(bow));
+    assertEquals("A Bow is not equals to another bow with same parameters", true, bow.equals(bow2));
+    assertNotEquals("A Bow is equals to another bow with different parameters", true, bow.equals(bow3));
+    assertEquals("An Axe is the same as a Bow", false, bow.equals(axe));
 
   }
 
