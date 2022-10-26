@@ -9,7 +9,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import static org.junit.Assert.*;
 
 public class AbstractPlayerCharacterTest {
@@ -18,27 +18,30 @@ public class AbstractPlayerCharacterTest {
   PlayerCharacter thief;
   Weapon sword;
 
-  @BeforeAll
+  @Before
   public void setUp() throws InvalidStatValueException {
     BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
     whitemage = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
     knight = new Knight("Goultar the Knight", 5000, 300, queue);
-    thief = new Thief("Sram the Thief", 100, 40, queue);
     sword = new Sword("Smiling Sword", 20, 60);
   }
 
+  @DisplayName("In this test we are testing the equip method and getEquippedWeapon method simultanously")
   @Test
-  public void equipTest() throws NullPointerException {
-    assertThrows(NullPointerException.class, () -> knight.getEquippedWeapon());
+  public void equipTest() {
+    assertEquals("equipped Weapon should be null", null, knight.getEquippedWeapon());
     knight.equip(sword);
-    assertNotEquals("The equipped Weapon should be a Sword", sword, knight.getEquippedWeapon());
+    assertEquals("The equipped Weapon should be a Sword", sword, knight.getEquippedWeapon());
+    assertNotEquals("WhiteMage should not have a sword equipped",
+        sword, whitemage.getEquippedWeapon());
   }
 
   @Test
-  public void getCurrentMpTest() throws InvalidStatValueException {
-  }
-
-  @Test
-  public void setCurrentMpTest() throws InvalidStatValueException {
+  public void getWeightTest() {
+    assertEquals("The weight should be -1 when not having a Weapon equipped",
+        -1, whitemage.getWeight());
+    knight.equip(sword);
+    assertEquals("The weight of the Knight should be equals to the Sword's weight",
+        sword.getWeight(), knight.getWeight());
   }
 }

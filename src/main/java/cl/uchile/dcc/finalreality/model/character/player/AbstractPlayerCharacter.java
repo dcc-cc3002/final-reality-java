@@ -60,6 +60,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   public int getWeight() {
-    return getEquippedWeapon().getWeight();
+    try {
+      return getEquippedWeapon().getWeight();
+    }
+    catch(NullPointerException e) {
+      return -1;
+    }
   }
 }
