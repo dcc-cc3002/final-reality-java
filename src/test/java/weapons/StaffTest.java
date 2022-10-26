@@ -45,5 +45,4 @@ public class StaffTest {
         staff.getMagicDamage() + "}", staff.toString());
     assertNotEquals("toString method does'nt work in the Staff class", staff3.toString(), staff.toString());
   }
-
 }
