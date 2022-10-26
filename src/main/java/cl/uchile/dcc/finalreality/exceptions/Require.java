@@ -8,6 +8,9 @@
 
 package cl.uchile.dcc.finalreality.exceptions;
 
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import org.apache.commons.lang3.ObjectUtils;
+
 /**
  * Class containing a series of methods to check if a condition is met.
  * If the condition is not met, an exception is thrown.

@@ -234,9 +234,5 @@ public class Main {
     System.out.println("Weight of the equipped Weapon -> " + whitemage.getWeight() + '\n');
 
     System.out.println("With this we finished with all the tests of the current project!");
-
-
-
-
   }
 }
