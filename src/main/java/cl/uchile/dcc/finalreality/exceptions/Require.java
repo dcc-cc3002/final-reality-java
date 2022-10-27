@@ -79,7 +79,7 @@ public final class Require {
    *     If the {@code EquippedWeapon} is null.
    */
   public static void equippedWeaponNull(final Weapon equipped) throws InvalidStatValueException {
-    if(equipped == null){
+    if (equipped == null) {
       throw new InvalidStatValueException("EquippedWeapon should not be null");
     }
   }

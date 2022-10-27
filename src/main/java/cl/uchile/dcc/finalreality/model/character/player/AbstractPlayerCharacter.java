@@ -8,13 +8,14 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
+import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
+
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
-import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 
 /**
  * A class that holds all the information of a player-controlled character in the game.
