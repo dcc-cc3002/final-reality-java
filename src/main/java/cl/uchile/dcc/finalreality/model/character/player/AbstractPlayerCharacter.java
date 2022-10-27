@@ -14,6 +14,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
+import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 
 /**
  * A class that holds all the information of a player-controlled character in the game.
@@ -59,10 +60,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     return equippedWeapon;
   }
 
-  public int getWeight() {
-    if(equippedWeapon != null){
-      return getEquippedWeapon().getWeight();
-    }
-    return -1;
+  public int getWeight() throws InvalidStatValueException {
+    equippedWeaponNull(getEquippedWeapon());
+    return getEquippedWeapon().getWeight();
   }
 }

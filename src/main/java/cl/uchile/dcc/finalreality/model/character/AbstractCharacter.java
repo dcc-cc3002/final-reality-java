@@ -49,7 +49,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   }
 
   @Override
-  public void waitTurn() {
+  public void waitTurn() throws InvalidStatValueException {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     scheduledExecutor.schedule(
           /* command = */ this::addToQueue,
@@ -99,5 +99,5 @@ public abstract class AbstractCharacter implements GameCharacter {
   /**
    * The responsability of the implementation of getWeight method will be passed to the subclasses.
    */
-  public abstract int getWeight();
+  public abstract int getWeight() throws InvalidStatValueException;
 }

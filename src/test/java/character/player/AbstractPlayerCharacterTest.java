@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 public class AbstractPlayerCharacterTest {
   PlayerCharacter whitemage;
   PlayerCharacter knight;
-  PlayerCharacter thief;
   Weapon sword;
   BlockingQueue<GameCharacter> queue;
 
@@ -30,7 +29,7 @@ public class AbstractPlayerCharacterTest {
   @DisplayName("In this test we are testing the equip method and getEquippedWeapon method simultanously")
   @Test
   public void equipTest() {
-    assertEquals("equipped Weapon should be null", null, knight.getEquippedWeapon());
+    assertNull("equipped Weapon should be null", knight.getEquippedWeapon());
     knight.equip(sword);
     assertEquals("The equipped Weapon should be a Sword", sword, knight.getEquippedWeapon());
     assertNotEquals("WhiteMage should not have a sword equipped",
@@ -38,9 +37,8 @@ public class AbstractPlayerCharacterTest {
   }
 
   @Test
-  public void getWeightTest() {
-    assertEquals("The weight should be -1 when not having a Weapon equipped",
-        -1, whitemage.getWeight());
+  public void getWeightTest() throws InvalidStatValueException {
+    assertThrows(InvalidStatValueException.class, () -> whitemage.getWeight());
     knight.equip(sword);
     assertEquals("The weight of the Knight should be equals to the Sword's weight",
         sword.getWeight(), knight.getWeight());

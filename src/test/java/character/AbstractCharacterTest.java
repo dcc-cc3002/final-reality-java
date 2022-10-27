@@ -30,8 +30,8 @@ public class AbstractCharacterTest {
     engineer = new Engineer("Steamer the Engineer", 120, 30, queue);
     whitemage = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
     thief = new Thief("Sram the Thief", 100, 40, queue);
-    axe = new Axe("Cil's Axe", 10, 36);
-    bow = new Bow("Buhorado's Plume", 5, 50);
+    axe = new Axe("Cil's Axe", 18, 36);
+    bow = new Bow("Buhorado's Plume", 2, 50);
   }
 
   @Test
@@ -74,17 +74,16 @@ public class AbstractCharacterTest {
     assertNotEquals("The defense should be different", whitemage.getDefense(), enemy.getDefense());
   }
   @Test
-  public void waitTurn_addToQueue_Test() throws InterruptedException {
+  public void waitTurn_addToQueue_Test() throws InterruptedException, InvalidStatValueException {
     assertTrue("The queue should be empty", queue.isEmpty());
-    thief.waitTurn();
+    assertThrows(InvalidStatValueException.class, () -> thief.waitTurn());
     assertTrue("The queue should still be empty", queue.isEmpty());
     engineer.equip(axe);
     engineer.waitTurn();
-    Thread.sleep(10);
-    assertFalse("The queue should not be empty", queue.isEmpty());
     thief.equip(bow);
     thief.waitTurn();
-    Thread.sleep(10);
+    Thread.sleep(2500);
+    assertFalse("The queue should not be empty", queue.isEmpty());
     assertEquals("The thief should be exiting the queue", thief, queue.poll());
     assertEquals("The engineer should be exiting the queue", engineer, queue.poll());
     assertTrue("The queue should be empty", queue.isEmpty());

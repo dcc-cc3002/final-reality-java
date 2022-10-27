@@ -15,7 +15,7 @@ public interface GameCharacter {
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
    * seconds before adding the character to the queue.
    */
-  void waitTurn();
+  void waitTurn() throws InvalidStatValueException;
 
   /**
    * Returns this character's name.
@@ -47,5 +47,5 @@ public interface GameCharacter {
    * Note that in the case of a {@code PlayerCharacter} his weight
    * is determined by his equipped weapon.
    */
-  int getWeight();
+  int getWeight() throws InvalidStatValueException;
 }
