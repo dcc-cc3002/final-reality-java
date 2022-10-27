@@ -10,6 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +43,10 @@ public class BlackMage extends AbstractMageCharacter {
                       final int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
                                 throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue, maxMp);
+  }
+
+  public void equip(Weapon weapon) {
+    weapon.equipToBlackMage(this);
   }
 
   // region : UTILITY METHODS

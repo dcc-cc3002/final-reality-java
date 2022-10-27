@@ -20,7 +20,7 @@ import cl.uchile.dcc.finalreality.model.weapon.Weapon;
  */
 public interface PlayerCharacter extends GameCharacter {
   /**
-   * Equips a weapon to the character.
+   * Equips a weapon to a character when it is allowed.
    */
   void equip(Weapon weapon);
 
