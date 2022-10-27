@@ -14,10 +14,11 @@ import static org.junit.Assert.*;
 public class AbstractMageCharacterTest {
   MageCharacter whitemage;
   MageCharacter blackmage;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     whitemage = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
     blackmage = new BlackMage("Nox the BlackMage", 2000, 150, 200, queue);
   }

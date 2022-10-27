@@ -17,10 +17,11 @@ public class WhiteMageTest {
     PlayerCharacter whitemage2;
     WhiteMage whitemage3;
     Knight knight;
+  BlockingQueue<GameCharacter> queue;
 
-    @Before
+  @Before
     public void setUp() throws InvalidStatValueException {
-      BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+      queue = new LinkedBlockingQueue<>();
       whitemage = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
       whitemage2 = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
       whitemage3 = new WhiteMage("Yiruz the Eliotrop", 4200, 20, 600, queue);

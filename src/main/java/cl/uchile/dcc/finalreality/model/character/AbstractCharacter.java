@@ -2,7 +2,6 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,7 +18,7 @@ public abstract class AbstractCharacter implements GameCharacter {
 
   private int currentHp;
   private final int maxHp;
-  private int defense;
+  private final int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
   private final String name;
   private ScheduledExecutorService scheduledExecutor;

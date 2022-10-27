@@ -14,10 +14,11 @@ public class EnemyTest {
   GameCharacter enemy2;
   Enemy enemy3;
   GameCharacter engineer;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     enemy = new Enemy("Comte Harebourg the Enemy", 25, 13000, 23, 400, queue);
     enemy2 = new Enemy("Comte Harebourg the Enemy", 25, 13000, 23, 400, queue);
     enemy3 = new Enemy("Ganondorf", 35, 5000, 20, 300, queue);

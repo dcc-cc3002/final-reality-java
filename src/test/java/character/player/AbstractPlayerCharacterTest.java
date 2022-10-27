@@ -17,10 +17,11 @@ public class AbstractPlayerCharacterTest {
   PlayerCharacter knight;
   PlayerCharacter thief;
   Weapon sword;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     whitemage = new WhiteMage("Yugo the WhiteMage", 1000, 60, 500, queue);
     knight = new Knight("Goultar the Knight", 5000, 300, queue);
     sword = new Sword("Smiling Sword", 20, 60);

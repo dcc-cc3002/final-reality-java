@@ -17,10 +17,11 @@ public class ThiefTest {
   PlayerCharacter thief2;
   Thief thief3;
   Knight knight;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     thief = new Thief("Sram the Thief", 100, 40, queue);
     thief2 = new Thief("Sram the Thief", 100, 40, queue);
     thief3 = new Thief("Mars", 12, 220, queue);

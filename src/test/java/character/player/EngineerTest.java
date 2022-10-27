@@ -17,10 +17,11 @@ public class EngineerTest {
   PlayerCharacter engineer2;
   Engineer engineer3;
   Knight knight;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     engineer = new Engineer("Steamer the Engineer", 120, 30, queue);
     engineer2 = new Engineer("Steamer the Engineer", 120, 30, queue);
     engineer3 = new Engineer("Merkator", 13000, 32, queue);

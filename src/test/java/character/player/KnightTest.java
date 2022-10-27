@@ -17,10 +17,11 @@ public class KnightTest {
   PlayerCharacter knight2;
   Knight knight3;
   WhiteMage whitemage;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
+    queue = new LinkedBlockingQueue<>();
     knight = new Knight("Goultar the Knight", 5000, 300, queue);
     knight2 = new Knight("Goultar the Knight", 5000, 300, queue);
     knight3 = new Knight("King Arthur", 20000, 300, queue);
