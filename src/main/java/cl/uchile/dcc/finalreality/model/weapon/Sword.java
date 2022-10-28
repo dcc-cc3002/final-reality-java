@@ -1,11 +1,15 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByKnight;
+import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByThief;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Sword is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
-public class Sword extends AbstractWeapon {
+public class Sword extends AbstractWeapon implements EquippableByKnight, EquippableByThief {
 
   /**
    * Creates a new Sword.
@@ -19,6 +23,14 @@ public class Sword extends AbstractWeapon {
    */
   public Sword(String name, int weight, int damage) {
     super(name, weight, damage);
+  }
+
+  public void equipToKnight(@NotNull PlayerCharacter character) {
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToThief(@NotNull PlayerCharacter character) {
+    character.setEquippedWeapon(this);
   }
 
   @Override

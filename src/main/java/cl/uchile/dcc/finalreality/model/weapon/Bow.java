@@ -1,11 +1,15 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByEngineer;
+import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByThief;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Bow is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
-public class Bow extends AbstractWeapon {
+public class Bow extends AbstractWeapon implements EquippableByThief, EquippableByEngineer {
 
   /**
    * Creates a new Bow.
@@ -19,6 +23,14 @@ public class Bow extends AbstractWeapon {
    */
   public Bow(String name, int weight, int damage) {
     super(name, weight, damage);
+  }
+
+  public void equipToThief(@NotNull PlayerCharacter character) {
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToEngineer(@NotNull PlayerCharacter character) {
+    character.setEquippedWeapon(this);
   }
 
   @Override
