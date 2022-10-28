@@ -13,9 +13,9 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.Assert.*;
 
 public class AbstractPlayerCharacterTest {
-  PlayerCharacter whitemage;
-  PlayerCharacter knight;
-  Weapon sword;
+  WhiteMage whitemage;
+  Knight knight;
+  Sword sword;
   BlockingQueue<GameCharacter> queue;
 
   @Before

@@ -1,8 +1,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByKnight;
-import cl.uchile.dcc.finalreality.model.weapon.ConditionInterfaces.EquippableByThief;
+import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByKnight;
+import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByThief;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
