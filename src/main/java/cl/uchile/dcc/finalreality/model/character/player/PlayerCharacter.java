@@ -20,6 +20,11 @@ import cl.uchile.dcc.finalreality.model.weapon.Weapon;
  */
 public interface PlayerCharacter extends GameCharacter {
   /**
+   * Equips the received Weapon to the PlayerCharacter.
+   */
+  void equip(Weapon weapon);
+
+  /**
    * Return this character's equipped weapon.
    */
   Weapon getEquippedWeapon();
@@ -28,9 +33,4 @@ public interface PlayerCharacter extends GameCharacter {
    * Return the character's equipped weapon weight.
    */
   int getWeight() throws InvalidStatValueException;
-
-  /**
-   * Sets the equipped Weapon of the PlayerCharacter to {@code equippedWeapon}.
-   */
-  void setEquippedWeapon(Weapon equippedWeapon);
 }

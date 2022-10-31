@@ -51,12 +51,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     super(name, maxHp, defense, turnsQueue);
   }
 
-  // public abstract void equip(Weapon weapon);
-
-  public void setEquippedWeapon(Weapon equippedWeapon) {
-    this.equippedWeapon = equippedWeapon;
-  }
-
+  public abstract void equip(Weapon weapon);
+  
   @Override
   public Weapon getEquippedWeapon() {
     return equippedWeapon;
