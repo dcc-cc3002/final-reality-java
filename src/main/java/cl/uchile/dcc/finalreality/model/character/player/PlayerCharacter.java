@@ -9,6 +9,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
  */
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
@@ -22,7 +23,7 @@ public interface PlayerCharacter extends GameCharacter {
   /**
    * Equips the received Weapon to the PlayerCharacter.
    */
-  void equip(Weapon weapon);
+  void equip(Weapon weapon) throws InvalidWeaponTypeException;
 
   /**
    * Return this character's equipped weapon.

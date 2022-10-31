@@ -9,6 +9,7 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class BlackMage extends AbstractMageCharacter {
     super(name, maxHp, defense, turnsQueue, maxMp);
   }
 
-  public void equip(Weapon weapon) {
+  public void equip(Weapon weapon) throws InvalidWeaponTypeException {
     this.equippedWeapon = weapon.equipToBlackMage(this);
   }
 

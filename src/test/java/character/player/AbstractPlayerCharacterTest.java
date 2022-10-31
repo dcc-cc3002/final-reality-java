@@ -1,6 +1,7 @@
 package character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.*;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
@@ -28,7 +29,7 @@ public class AbstractPlayerCharacterTest {
 
   @DisplayName("In this test we are testing the equip method and getEquippedWeapon method simultanously")
   @Test
-  public void equipTest() {
+  public void equipTest() throws InvalidWeaponTypeException {
     assertNull("equipped Weapon should be null", knight.getEquippedWeapon());
     knight.equip(sword);
     assertEquals("The equipped Weapon should be a Sword", sword, knight.getEquippedWeapon());
@@ -37,7 +38,7 @@ public class AbstractPlayerCharacterTest {
   }
 
   @Test
-  public void getWeightTest() throws InvalidStatValueException {
+  public void getWeightTest() throws InvalidStatValueException, InvalidWeaponTypeException {
     assertThrows(InvalidStatValueException.class, () -> whitemage.getWeight());
     knight.equip(sword);
     assertEquals("The weight of the Knight should be equals to the Sword's weight",

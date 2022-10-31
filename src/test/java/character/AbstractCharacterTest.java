@@ -1,6 +1,7 @@
 package character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
@@ -74,7 +75,7 @@ public class AbstractCharacterTest {
     assertNotEquals("The defense should be different", whitemage.getDefense(), enemy.getDefense());
   }
   @Test
-  public void waitTurn_addToQueue_Test() throws InterruptedException, InvalidStatValueException {
+  public void waitTurn_addToQueue_Test() throws InterruptedException, InvalidStatValueException, InvalidWeaponTypeException {
     assertTrue("The queue should be empty", queue.isEmpty());
     assertThrows(InvalidStatValueException.class, () -> thief.waitTurn());
     assertTrue("The queue should still be empty", queue.isEmpty());

@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
@@ -35,7 +36,7 @@ public interface Weapon {
    * @param blackmage
    *     The BlackMage to be equipped with a Weapon.
    */
-  Weapon equipToBlackMage(@NotNull BlackMage blackmage);
+  Weapon equipToBlackMage(@NotNull BlackMage blackmage) throws InvalidWeaponTypeException;
 
   /**
    * Returns the Weapon to be equipped by an Engineer when it is possible.
@@ -44,7 +45,7 @@ public interface Weapon {
    * @param engineer
    *     The Engineer to be equipped with a Weapon.
    */
-  Weapon equipToEngineer(@NotNull Engineer engineer);
+  Weapon equipToEngineer(@NotNull Engineer engineer) throws InvalidWeaponTypeException;
 
   /**
    * Returns the Weapon to be equipped by a Knight when it is possible.
@@ -53,7 +54,7 @@ public interface Weapon {
    * @param knight
    *     The Knight to be equipped with a Weapon.
    */
-  Weapon equipToKnight(@NotNull Knight knight);
+  Weapon equipToKnight(@NotNull Knight knight) throws InvalidWeaponTypeException;
 
   /**
    * Returns the Weapon to be equipped by a Thief when it is possible.
@@ -62,7 +63,7 @@ public interface Weapon {
    * @param thief
    *     The Thief to be equipped with a Weapon.
    */
-  Weapon equipToThief(@NotNull Thief thief);
+  Weapon equipToThief(@NotNull Thief thief) throws InvalidWeaponTypeException;
 
   /**
    * Returns the Weapon to be equipped by a WhiteMage when it is possible.
@@ -71,5 +72,5 @@ public interface Weapon {
    * @param whitemage
    *     The WhiteMage to be equipped with a Weapon.
    */
-  Weapon equipToWhiteMage(@NotNull WhiteMage whitemage);
+  Weapon equipToWhiteMage(@NotNull WhiteMage whitemage) throws InvalidWeaponTypeException;
 }

@@ -9,6 +9,7 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.Objects;
@@ -42,7 +43,7 @@ public class Knight extends AbstractPlayerCharacter {
     super(name, maxHp, defense, turnsQueue);
   }
 
-  public void equip(Weapon weapon) {
+  public void equip(Weapon weapon) throws InvalidWeaponTypeException {
     this.equippedWeapon = weapon.equipToKnight(this);
   }
 

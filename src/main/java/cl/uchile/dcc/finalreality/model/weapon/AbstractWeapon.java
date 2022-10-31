@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
@@ -49,23 +50,23 @@ public abstract class AbstractWeapon implements Weapon {
     return damage;
   }
 
-  public Weapon equipToBlackMage(@NotNull BlackMage blackmage) {
-    return this;
+  public Weapon equipToBlackMage(@NotNull BlackMage blackmage) throws InvalidWeaponTypeException {
+    throw new InvalidWeaponTypeException("A BlackMage can't equip this Weapon");
   }
 
-  public Weapon equipToEngineer(@NotNull Engineer engineer) {
-    return this;
+  public Weapon equipToEngineer(@NotNull Engineer engineer) throws InvalidWeaponTypeException {
+    throw new InvalidWeaponTypeException("An Engineer can't equip this Weapon");
   }
 
-  public Weapon equipToKnight(@NotNull Knight knight) {
-    return this;
+  public Weapon equipToKnight(@NotNull Knight knight) throws InvalidWeaponTypeException {
+    throw new InvalidWeaponTypeException("A Knight can't equip this Weapon");
   }
 
-  public Weapon equipToThief(@NotNull Thief thief) {
-    return this;
+  public Weapon equipToThief(@NotNull Thief thief) throws InvalidWeaponTypeException {
+    throw new InvalidWeaponTypeException("A Thief can't equip this Weapon");
   }
 
-  public Weapon equipToWhiteMage(@NotNull WhiteMage whiteMage) {
-    return this;
+  public Weapon equipToWhiteMage(@NotNull WhiteMage whiteMage) throws InvalidWeaponTypeException {
+    throw new InvalidWeaponTypeException("A WhiteMage can't equip this Weapon");
   }
 }

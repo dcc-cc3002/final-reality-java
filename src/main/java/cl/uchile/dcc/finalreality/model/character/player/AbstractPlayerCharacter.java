@@ -11,6 +11,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
@@ -51,7 +52,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     super(name, maxHp, defense, turnsQueue);
   }
 
-  public abstract void equip(Weapon weapon);
+  public abstract void equip(Weapon weapon) throws InvalidWeaponTypeException;
   
   @Override
   public Weapon getEquippedWeapon() {
