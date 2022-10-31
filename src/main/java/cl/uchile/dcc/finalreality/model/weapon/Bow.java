@@ -1,15 +1,14 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByEngineer;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByThief;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Bow is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
-public class Bow extends AbstractWeapon implements EquippableByThief, EquippableByEngineer {
+public class Bow extends AbstractWeapon {
 
   /**
    * Creates a new Bow.
@@ -25,12 +24,14 @@ public class Bow extends AbstractWeapon implements EquippableByThief, Equippable
     super(name, weight, damage);
   }
 
-  public void equipToThief(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToThief(@NotNull Thief thief) {
+    return this;
   }
 
-  public void equipToEngineer(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToEngineer(@NotNull Engineer engineer) {
+    return this;
   }
 
   @Override

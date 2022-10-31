@@ -1,8 +1,7 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByBlackMage;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByWhiteMage;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,8 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * Staff is a {@link Weapon} more specifically a {@link MagicWeapon} than can be
  * equipped by some PlayerCharacter's.
  */
-public class Staff extends AbstractMagicWeapon implements
-    EquippableByBlackMage, EquippableByWhiteMage {
+public class Staff extends AbstractMagicWeapon {
 
   /**
    * Creates a new Staff.
@@ -29,12 +27,14 @@ public class Staff extends AbstractMagicWeapon implements
     super(name, weight, damage, magicDamage);
   }
 
-  public void equipToWhiteMage(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToWhiteMage(@NotNull WhiteMage whitemage) {
+    return this;
   }
 
-  public void equipToBlackMage(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToBlackMage(@NotNull BlackMage blackmage) {
+    return this;
   }
 
   @Override

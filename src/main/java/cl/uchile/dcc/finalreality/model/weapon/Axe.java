@@ -1,15 +1,14 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByEngineer;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByKnight;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Axe is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
-public class Axe extends AbstractWeapon implements EquippableByEngineer, EquippableByKnight {
+public class Axe extends AbstractWeapon {
 
   /**
    * Creates a new Axe.
@@ -25,12 +24,14 @@ public class Axe extends AbstractWeapon implements EquippableByEngineer, Equippa
     super(name, weight, damage);
   }
 
-  public void equipToKnight(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToKnight(@NotNull Knight knight) {
+    return this;
   }
 
-  public void equipToEngineer(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToEngineer(@NotNull Engineer engineer) {
+    return this;
   }
 
   @Override

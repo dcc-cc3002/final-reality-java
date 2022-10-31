@@ -1,15 +1,14 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByBlackMage;
-import cl.uchile.dcc.finalreality.model.weapon.interfaces.EquippableByThief;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Knife is a {@link Weapon} than can be equipped by some PlayerCharacters.
  */
-public class Knife extends AbstractWeapon implements EquippableByThief, EquippableByBlackMage {
+public class Knife extends AbstractWeapon {
 
   /**
    * Creates a new Knife.
@@ -25,12 +24,14 @@ public class Knife extends AbstractWeapon implements EquippableByThief, Equippab
     super(name, weight, damage);
   }
 
-  public void equipToThief(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToThief(@NotNull Thief thief) {
+    return this;
   }
 
-  public void equipToBlackMage(@NotNull PlayerCharacter character) {
-    character.setEquippedWeapon(this);
+  @Override
+  public Weapon equipToBlackMage(@NotNull BlackMage blackmage) {
+    return this;
   }
 
   @Override

@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.model.character.player.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,5 +43,25 @@ public abstract class AbstractWeapon implements Weapon {
 
   public int getDamage() {
     return damage;
+  }
+
+  public Weapon equipToBlackMage(@NotNull BlackMage blackmage) {
+    return this;
+  }
+
+  public Weapon equipToEngineer(@NotNull Engineer engineer) {
+    return this;
+  }
+
+  public Weapon equipToKnight(@NotNull Knight knight) {
+    return this;
+  }
+
+  public Weapon equipToThief(@NotNull Thief thief) {
+    return this;
+  }
+
+  public Weapon equipToWhiteMage(@NotNull WhiteMage whiteMage) {
+    return this;
   }
 }
