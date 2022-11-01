@@ -1,22 +1,29 @@
 package character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 
 public class ThiefTest {
   Thief thief;
   PlayerCharacter thief2;
   Thief thief3;
   Knight knight;
+  Axe axe;
+  Bow bow;
+  Knife knife;
+  Staff staff;
+  Sword sword;
   BlockingQueue<GameCharacter> queue;
 
   @Before
@@ -26,6 +33,24 @@ public class ThiefTest {
     thief2 = new Thief("Sram the Thief", 100, 40, queue);
     thief3 = new Thief("Mars", 12, 220, queue);
     knight = new Knight("Goultar the Knight", 5000, 300, queue);
+    axe = new Axe("Cil's Axe", 10, 36);
+    bow = new Bow("Miauvizor's Bow", 5, 50);
+    knife = new Knife("Zeyko's Dagger's", 5, 42);
+    staff = new Staff("Romboton", 6, 3, 400);
+    sword = new Sword("Smiling Sword", 20, 60);
+  }
+
+  @Test
+  public void equipTest() throws InvalidWeaponTypeException {
+    assertNull(thief.getEquippedWeapon());
+    thief.equip(knife);
+    assertEquals("The Thief should have a knife equipped", knife, thief.getEquippedWeapon());
+    thief.equip(bow);
+    assertEquals("The Thief should have a bow equipped", bow, thief.getEquippedWeapon());
+    thief.equip(sword);
+    assertThrows(InvalidWeaponTypeException.class, () -> thief.equip(axe));
+    assertThrows(InvalidWeaponTypeException.class, () -> thief.equip(staff));
+    assertEquals("The Thief should have a sword equipped", sword, thief.getEquippedWeapon());
   }
 
   @Test

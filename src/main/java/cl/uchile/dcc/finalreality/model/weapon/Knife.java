@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,11 @@ public class Knife extends AbstractWeapon {
 
   @Override
   public Weapon equipToBlackMage(@NotNull BlackMage blackmage) {
+    return this;
+  }
+
+  @Override
+  public Weapon equipToKnight(@NotNull Knight knight) {
     return this;
   }
 

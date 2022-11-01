@@ -27,9 +27,8 @@ public class AbstractPlayerCharacterTest {
     sword = new Sword("Smiling Sword", 20, 60);
   }
 
-  @DisplayName("In this test we are testing the equip method and getEquippedWeapon method simultanously")
   @Test
-  public void equipTest() throws InvalidWeaponTypeException {
+  public void getEquipTest() throws InvalidWeaponTypeException {
     assertNull("equipped Weapon should be null", knight.getEquippedWeapon());
     knight.equip(sword);
     assertEquals("The equipped Weapon should be a Sword", sword, knight.getEquippedWeapon());

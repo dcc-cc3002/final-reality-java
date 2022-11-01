@@ -1,8 +1,14 @@
 package weapons;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import cl.uchile.dcc.finalreality.model.weapon.Bow;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -13,13 +19,29 @@ public class SwordTest {
   Weapon sword2;
   Sword sword3;
   Bow bow;
+  Knight knight;
+  Thief thief;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
-  public void setUp() {
+  public void setUp() throws InvalidStatValueException {
     sword = new Sword("Smiling Sword", 20, 60);
     sword2 = new Sword("Smiling Sword", 20, 60);
     sword3 = new Sword("Excalibur", 20, 100);
     bow = new Bow("Miauvizor's Bow", 5, 50);
+    queue = new LinkedBlockingQueue<>();
+    knight = new Knight("Goultar the Knight", 5000, 300, queue);
+    thief = new Thief("Sram the Thief", 100, 40, queue);
+  }
+
+  @Test
+  public void equipToThiefTest() {
+    assertEquals("The returned Weapon should be a Sword", sword, sword.equipToThief(thief));
+  }
+
+  @Test
+  public void equipToKnightTest() {
+    assertEquals("The returned Weapon should be a Sword", sword, sword.equipToKnight(knight));
   }
 
   @Test

@@ -1,8 +1,15 @@
 package weapons;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.weapon.Bow;
 import cl.uchile.dcc.finalreality.model.weapon.Knife;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -13,13 +20,36 @@ public class KnifeTest {
   Weapon knife2;
   Knife knife3;
   Bow bow;
+  Knight knight;
+  Thief thief;
+  BlackMage blackmage;
+  BlockingQueue<GameCharacter> queue;
 
   @Before
-  public void setUp() {
+  public void setUp() throws InvalidStatValueException {
     knife = new Knife("Zeyko's Dagger's", 5, 42);
     knife2 = new Knife("Zeyko's Dagger's", 5, 42);
     knife3 = new Knife("Ilyzaelle's Dagger's", 2, 42);
     bow = new Bow("Miauvizor's Bow", 5, 50);
+    queue = new LinkedBlockingQueue<>();
+    knight = new Knight("Goultar the Knight", 5000, 300, queue);
+    thief = new Thief("Sram the Thief", 100, 40, queue);
+    blackmage = new BlackMage("Nox the BlackMage", 2000, 150, 200, queue);
+  }
+
+  @Test
+  public void equipToThiefTest() {
+    assertEquals("The returned Weapon should be a Knife", knife, knife.equipToThief(thief));
+  }
+
+  @Test
+  public void equipToKnightTest() {
+    assertEquals("The returned Weapon should be a Knife", knife, knife.equipToKnight(knight));
+  }
+
+  @Test
+  public void equipToBlackMageTest() {
+    assertEquals("The returned Weapon should be a Knife", knife, knife.equipToBlackMage(blackmage));
   }
 
   @Test
