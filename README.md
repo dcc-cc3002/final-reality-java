@@ -23,13 +23,13 @@ In this project you can create instances of 5 type of specific class of a Charac
 Those characters are the ones you as the user can use.
 We classify these characters as _PlayerCharacters_ and every single one of them have a Hp value, defense
 and a name. In the case of a Black Mage's and White Mage's they also have a Mp value. Every _PlayerCharacter_
-can also equip a _Weapon_.  
+can also equip ceartain Weapons.  
 
 The user can also instanciate _Weapon_'s. There are 5 types of Weapons; Axe's, Sword's, Knives, Bow's and Staff's.
 Every _Weapon_ have a name, a weight and an attack value, and in the case of a Staff it also has a magic damage value.  
 
 There also exists Enemy's. An enemy is very similar to a _PlayerCharacter_, but this time the user shouldn't
-control it. An Enemy have a name, defense, Hp, weight and an attack value. It differizates from _PlayerCharacter_'s
+control it. An Enemy have a name, defense, Hp, weight and an attack value. It differentiates from _PlayerCharacter_'s
 because it cannot equip any weapons.  
 
 We consider de group of Enemy's and PlayerCharacter as _GameCharacter_'s. Every _GameCharacter_ is cappable of entering
@@ -38,75 +38,32 @@ by his weight and every time they attack, they must after wait for their turn. N
 battle system in this project jet.
 
 ---
-### Tarea 1 - Cambios efectuados
+### Tarea 2 - Cambios efectuados
 **This section will be written in Spanish to simplify the correction of this assignment.**  
 
-Las primeras modificaciones y las más grandes fueron acerca de la implementacion de _Weapon_. Inicialmente,
- existia una unica clase _Weapon_ que manejaba los valores asignados a este de peso, ataque, nombre y tipo. Donde 
-el tipo se sacaba de una enumeracion definida. Esto lo encontre bastante mal diseñado pues _Weapon_ tenía toda la
-responsabilidad como clase, además de que tener una variable de tipo de arma es extraño y la enumeracion no es 
-buena practica pues para generar nuevas armas se necesita ir a modificarlo para extender el codigo, además de que
-puede haber problemas en como se escribo el tipo del arma al instanciar la clase y otros problemas.  
+Respecto a la entrega de la tarea 1, se eliminó la clase abstracta con su interfaz Item, esto debido a 
+que su existencia no tiene relevancia en el projecto actualmente. También se modificó el metodo getWeight()
+de la clase AbstractPlayerCharacter para que ahora arroge una excepcion en caso de que un PlayerCharacter 
+use este metodo sin tener un arma equipada.
 
-Para esto se hizo toda una jerarquizacion de clases. Primero se hicieron 5 clases, una para cada una de las armas.
-Cada arma ahora sabe cuál es su tipo, pues están definidas como objetos tangibles como una espada, un arco, etc...
- Por esto se eliminó la variable type de _Weapon_. En el caso del _Staff_, esta extiende de una clase abstracta 
-_AbstractMagicWeapon_ que implementa la interfaz _MagicWeapon_. Esto podria pensarse que es engorroso porque solo staff
- debe contener el parametro magicDamage, sin embargo, en caso de que se quiera extender el codigo y agregar más armas con
- daño magico ahora sería muy simple, pues solo deberian heredar de tal clase abstracta y heredaran el comportamiento 
-que deben tener las armas magias.  
+Ahora, para la tarea 2 se pidió hacer testing. Para elló se creó el paquete test y se crearon tests para
+absolutamente todas las funcionalidades de la tarea 1. No hay más que comentar respecto a eso.  
 
-Luego, todas las armas junto con la clase abstracta _AbstractMagicWeapon_ heredan de otra clase abstracta _AbstractWeapon_.
- Esto es para agrupar el comportamiento comun que tienen todas las armas y obligar a que cada arma tenga el comportamiento 
-esperado. Además de implemento la interfaz _Weapon_ a tal clase abstracta para poder utilizar como tipo a _Weapon_ y también de 
-firmar un contrato de que metodos debe tener _Weapon_.  
+Luego, respecto a implementar las restricciones de equipar armas a ciertos personajes. Para solucionar este
+problema se hizó que cada personaje haga un double dispatch al momento de equipar un arma. Esto mediante 
+la implementacion de metodos **EquipTo[Personaje]** en cada arma. Cada arma implementa metodos EquipTo para los 
+personajes que pueden equipar tal arma y para los personajes que no pueden equiparse tal arma AbstractWeapon
+se encarga de tirar una excepcion. Como AbstractWeapon es una clase abstracta tiene sentido que no pueda equiparse 
+a ningun personaje y además si en un futuro se crea una nueva arma, entonces tal arma solo debera precuparse de 
+implementar los metodos EquipTo para los personajes que pueden equipar esa arma. 
+También, de esta manera se evita la utilizacion de _instanceof_ y se siguen las buenas prácticas enseñadas
+en el curso.  
 
-Por último, _AbstractWeapon_ hereda de _AbstractItem_ que a su vez implementa la interfaz _Item_. Este diseño puede ser 
-innecesario de momento, pues actualmente los unicos objetos son _Weapons_ segun el enunciado. Pero en caso de que se
- quieran implementar nuevos objetos, como es el caso de pociones, armamento o consumibles en general (elementos muy comunes en juegos RPG),
-esta implementacion permite tener centralizado el comportamiento de un objeto y hace facil la 
-extension del codigo a futuro. De esta manera se consideró que un _Item_ simplemente tiene un nombre y un peso.  
+Cabe notar además que el metodo equip ahora es abstracto en _AbstractPlayerCharacter_ para que cada personaje 
+en particular se encargue de enviar el mensaje adecuado a las armas y realizar el double dispatch de manera 
+exitosa. Asi también nos aseguramos que si en el futuro se implementa un nuevo personaje, entonces estará obligado a 
+implementar tal metodo y se cumple y mantiene el principio de Liskov.  
 
-Por último respecto a las armas, la interfaz _MagicWeapon_ extiende de _Weapon_ y este a su vez extiende de _Item_. 
-Esto se hizó simplemente con la idea de refozar la idea de que "Una arma magica es a su vez un arma" o también que 
-"Un arma es a su vez un objeto". Igualmente, cada subclase de las clases que implementan estas interfaces están heredando 
-los metodos de tal interfaz porque necesariamente el padre debe de haber implementado ese metodo, o bien haber dejado 
-la responsabilidad a los hijos de realizar tal implementacion. Respecto a las redundancias que esto puede generar, 
-notese que cada clase abstracta e interfaz tiene metodos diferentes por lo que no existiran problemas por colisiones 
-por el problema del "diamante" (el cual seria que haya colisiones de un metodo que se llame igual y tenga misma firma).  
-
-Se agregaron metodos equals, hashcode y toString a todas las armas también.
-
-En este sentido, la idea general del diseño del proyecto, es dejar que los objetos tangibles como armas o personajes 
-sean clases concretas, mientras que abstracciones o calificaciones de estos objetos son clases abstractas para 
-evitar que se instancien cosas como "un arma" o "un personaje del juego" los cuales no es algo concreto sino más 
-bien una abstraccion de lo que sería una espada o un mago.  
-
-#### Respecto a characters:  
-
-En primer lugar, se abstrajo el comportamiento común en ambos magos en una clase abstraca _AbstractMageCharacter_ y
- una interfaz _MageCharacter_ que obliga a implementar setters y getter s para el Mp. De esta manera se generaliza el 
-comportamiento de estos personajes y se centraliza en tal clase abstracta, lo cual también permite extender el 
-codigo a futuro.  
-
-Luego, también se consideró que 2 instancias de una clase deben tener currentHp y currentMp iguales para considerarse 
-como lo mismo en el metodo equals. Asi que se agregó tal condicion a todos los equals donde correspondia.  
-
-Se modificó _Enemy_ para que ahora tenga también el parametro ataque, pues por enunciado este debiese estar definido. 
-También se creó un getter para tal metodo y se modificó equals, hashcode y toString para que lo incluya.  
-
-El metodo waitTurn() se modificó también. Esto debido a que era dificilmente extendible y usaba instanceof lo cual
- no es bueno. Para ello se implementó el metodo getWeight() general para todos los _GameCharacters_. El problema era 
-que _AbstractGameCharacter_ no podía saber como implementar tal metodo, por lo que se declaró abstracto y se le dejó 
-tal responsabilidad a sus subclases. En el caso de enemy, este ya tiene un getter para obtener tal valor, sin embargo, 
-en el caso de un _AbstractPlayerCharacter_ no tienen un peso. Para esto se implementó getWeight() como simplemente 
-obtener el peso del arma que tienen equipada. 
-De esta manera ahora se puede generalizar el comportamiento y evitar el uso de instanceof, haciendo más extendible el codigo 
-y dejando a las subclases la responsabilidad de saber cuál es su propio peso.  
-
-Estas fueron las modificaciones más importantes, también existieron otras menores en la visibilidad de parametros, 
-como por ejemplo que los constructores de clases abstractas están protected pues solo serían llamadas por sus subclases. 
-También muchos parametros tanto de armas como de personajes se declararón final, pues no tendria mucho sentido modificar 
-sus valores.  
+También se hizo testing de todos los metodos nuevos implementados.
 
 Para terminar, solo queria decirle a quien esté leyendo esto que tenga un buen dia <3
