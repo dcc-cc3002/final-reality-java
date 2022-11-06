@@ -43,7 +43,7 @@ battle system in this project jet.
 
 Respecto a la entrega de la tarea 1, se eliminó la clase abstracta con su interfaz Item, esto debido a 
 que su existencia no tiene relevancia en el projecto actualmente. También se modificó el metodo getWeight()
-de la clase AbstractPlayerCharacter para que ahora arroge una excepcion en caso de que un PlayerCharacter 
+de la clase AbstractPlayerCharacter para que ahora arroje una excepcion en caso de que un PlayerCharacter 
 use este metodo sin tener un arma equipada.
 
 Ahora, para la tarea 2 se pidió hacer testing. Para elló se creó el paquete test y se crearon tests para
