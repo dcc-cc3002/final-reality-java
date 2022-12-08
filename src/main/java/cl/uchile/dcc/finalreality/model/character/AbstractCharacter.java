@@ -2,6 +2,8 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.model.Subscriber;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,6 +24,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   protected final BlockingQueue<GameCharacter> turnsQueue;
   private final String name;
   private ScheduledExecutorService scheduledExecutor;
+  private ArrayList<Subscriber> subscribers;
 
   /**
    * Creates a new character.
@@ -94,6 +97,18 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtLeast(0, hp, "Current HP");
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
+  }
+
+  @Override
+  public void subscribe(Subscriber s) {
+    subscribers.add(s);
+  }
+
+  @Override
+  public void notifySubscribers() {
+    for(Subscriber s : subscribers) {
+      s.update();
+    }
   }
 
   /**

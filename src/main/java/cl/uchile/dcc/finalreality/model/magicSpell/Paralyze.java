@@ -5,11 +5,19 @@ import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.CompositeEff
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.Effect;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.ParalyzeEffect;
 
-public class Paralyze {
+public class Paralyze implements Spell{
   private final Effect spell;
 
+  /**
+   * Creates the Paralyze spell with the necesary effects.
+   */
   public Paralyze() {
     Effect[] arr = {new ParalyzeEffect()};
     this.spell = new CompositeEffect(arr);
+  }
+
+  @Override
+  public Effect getSpell() {
+    return spell;
   }
 }

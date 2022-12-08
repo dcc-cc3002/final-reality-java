@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.model.Subscriber;
 
 /**
  * This represents a character from the game.
@@ -48,4 +49,14 @@ public interface GameCharacter {
    * is determined by his equipped weapon.
    */
   int getWeight() throws InvalidStatValueException;
+
+  /**
+   * Add the recivied subscriber to the Suscriber list.
+   */
+  void subscribe(Subscriber s);
+
+  /**
+   * Notify all the subscriber about a change in this class.
+   */
+  void notifySubscribers();
 }

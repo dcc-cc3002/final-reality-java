@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,6 +19,7 @@ public abstract class AbstractMageCharacter extends
 
   private final int maxMp;
   private int currentMp;
+  private Spell spell = null;
 
   /**
    * Creates a new MageCharacter character.
@@ -67,5 +69,14 @@ public abstract class AbstractMageCharacter extends
     Require.statValueAtLeast(0, newMp, "Current Mp");
     Require.statValueAtMost(maxMp, newMp, "Current Mp");
     this.currentMp = newMp;
+  }
+
+  @Override
+  public Spell getEquippedSpell() {
+    return spell;
+  }
+
+  public void setSpell(Spell s) {
+    this.spell = s;
   }
 }
