@@ -12,6 +12,5 @@ public class GameController {
   private ArrayList<Enemy> enemies;
 
   public GameController() {
-
   }
 }

@@ -16,12 +16,6 @@ public class CompositeEffect implements Effect {
     this.effects = effects;
   }
 
-  /**
-   * @param self
-   *     the mage character that is applying the effect.
-   * @param target
-   *     the character that is going to get the effect applied.
-   */
   @Override
   public void apply(MageCharacter self, GameCharacter target) throws InvalidStatValueException {
     for(Effect effect : effects) {
