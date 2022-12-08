@@ -1,7 +1,8 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.Subscriber;
+import cl.uchile.dcc.finalreality.Subscriber;
+import cl.uchile.dcc.finalreality.model.adverseEffects.AdverseEffect;
 import java.util.ArrayList;
 
 /**
@@ -58,6 +59,10 @@ public interface GameCharacter {
    */
   int getAttack() throws InvalidStatValueException;
 
+  /**
+   * Sets the AdverseEffect to the specified.
+   */
+  void setAdverseEffect(AdverseEffect ae);
   /**
    * Add the recivied subscriber to the Suscriber list.
    */

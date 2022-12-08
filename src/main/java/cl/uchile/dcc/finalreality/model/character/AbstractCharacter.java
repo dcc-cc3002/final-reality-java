@@ -2,7 +2,9 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.Subscriber;
+import cl.uchile.dcc.finalreality.Subscriber;
+import cl.uchile.dcc.finalreality.model.adverseEffects.AdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverseEffects.NullAdverseEffect;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -25,6 +27,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   private final String name;
   private ScheduledExecutorService scheduledExecutor;
   private ArrayList<Subscriber> subscribers;
+  private AdverseEffect adverseEffect;
 
   /**
    * Creates a new character.
@@ -49,6 +52,7 @@ public abstract class AbstractCharacter implements GameCharacter {
     this.defense = defense;
     this.turnsQueue = turnsQueue;
     this.name = name;
+    this.adverseEffect = new NullAdverseEffect();
   }
 
   @Override
@@ -114,8 +118,11 @@ public abstract class AbstractCharacter implements GameCharacter {
     for(Subscriber s : subscribers) {
       s.updateDeath(this);
     }
+  }
 
-
+  @Override
+  public void setAdverseEffect(AdverseEffect ae) {
+    this.adverseEffect = ae;
   }
 
   /**

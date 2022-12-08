@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.model;
+package cl.uchile.dcc.finalreality;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
@@ -6,7 +6,6 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.*;
 import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
-import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.Effect;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
@@ -16,9 +15,6 @@ public class GameController implements Subscriber {
   private BlockingQueue<GameCharacter> turnsQueue;
   private ArrayList<PlayerCharacter> playerCharacters;
   private ArrayList<Enemy> enemies;
-  private ArrayList<GameCharacter> paralyzedList;
-  private ArrayList<GameCharacter> poisonList;
-  private ArrayList<GameCharacter> burnedList;
 
   public GameController() {
     /**
@@ -137,68 +133,8 @@ public class GameController implements Subscriber {
     return new Enemy(name, weight, hp, defense, attack, turnsQueue);
   }
 
-  /**
-   * Getter for ParalyzedListt
-   */
-  public ArrayList<GameCharacter> getParalyzedList() {
-    return paralyzedList;
-  }
-
-  /**
-   * Getter for PoisonListt
-   */
-  public ArrayList<GameCharacter> getPoisonList() {
-    return poisonList;
-  }
-
-  /**
-   * Getter for BurnedListt
-   */
-  public ArrayList<GameCharacter> getBurnedList() {
-    return burnedList;
-  }
-
   @Override
   public void updateDeath(GameCharacter c) {
     turnsQueue.remove(c);
-  }
-
-  /**
-   * Add the recivied GameCharacter to the list of paralyzed Characters
-   */
-  @Override
-  public void addParalyzed(GameCharacter c) {
-    for(GameCharacter character : paralyzedList){
-      if(character.equals(c) == true) {
-        return;
-      }
-    }
-    paralyzedList.add(c);
-  }
-
-  /**
-   * Add the recivied GameCharacter to the list of poisoned Characters
-   */
-  @Override
-  public void addPoison(GameCharacter c) {
-    for(GameCharacter character : poisonList){
-      if(character.equals(c) == true) {
-        return;
-      }
-    }
-    poisonList.add(c);
-  }
-
-  /**
-   * Add the recivied GameCharacter to the list of burned Characters
-   */
-  @Override
-  public void addBurned(GameCharacter c) {
-    for(GameCharacter character : burnedList){
-      if(character.equals(c) == true) {
-        return;
-      }
-    }
-    burnedList.add(c);
   }
 }
