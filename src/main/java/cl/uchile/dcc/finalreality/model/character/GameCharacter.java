@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.Subscriber;
+import java.util.ArrayList;
 
 /**
  * This represents a character from the game.
@@ -51,6 +52,13 @@ public interface GameCharacter {
   int getWeight() throws InvalidStatValueException;
 
   /**
+   * Return the attack of the Character at that current moment.
+   * Note that in the case of a {@code PlayerCharacter} his attack
+   * is determined by his equipped weapon.
+   */
+  int getAttack() throws InvalidStatValueException;
+
+  /**
    * Add the recivied subscriber to the Suscriber list.
    */
   void subscribe(Subscriber s);
@@ -58,5 +66,10 @@ public interface GameCharacter {
   /**
    * Notify all the subscriber about a change in this class.
    */
-  void notifySubscribers();
+  void notifySubscribersDeath();
+
+  /**
+   * Getter for array with subscribers
+   */
+  ArrayList<Subscriber> getSubscribers();
 }

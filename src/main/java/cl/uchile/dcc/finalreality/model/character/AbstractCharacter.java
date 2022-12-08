@@ -105,14 +105,26 @@ public abstract class AbstractCharacter implements GameCharacter {
   }
 
   @Override
-  public void notifySubscribers() {
+  public ArrayList<Subscriber> getSubscribers() {
+    return subscribers;
+  }
+
+  @Override
+  public void notifySubscribersDeath() {
     for(Subscriber s : subscribers) {
-      s.update();
+      s.updateDeath(this);
     }
+
+
   }
 
   /**
    * The responsability of the implementation of getWeight method will be passed to the subclasses.
    */
   public abstract int getWeight() throws InvalidStatValueException;
+
+  /**
+   * The responsability of the implementation of getAttack method will be passed to the subclasses.
+   */
+  public abstract int getAttack() throws InvalidStatValueException;
 }

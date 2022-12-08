@@ -9,10 +9,16 @@ public class ReduceHpWithMdEffect implements Effect {
 
   @Override
   public void apply(MageCharacter self, GameCharacter target) throws InvalidStatValueException {
-    int damage = ((MagicWeapon)self.getEquippedWeapon()).getMagicDamage();
-    int defense = target.getDefense();
-    if (defense < damage) {
-      target.setCurrentHp(target.getCurrentHp() - (damage - defense));
+    try {
+      int damage = ((MagicWeapon)self.getEquippedWeapon()).getMagicDamage();
+      int defense = target.getDefense();
+      if (defense < damage) {
+        target.setCurrentHp(target.getCurrentHp() - (damage - defense));
+      }
+    }
+    catch (InvalidStatValueException e) {
+      target.setCurrentHp(0);
+      target.notifySubscribersDeath();
     }
   }
 }

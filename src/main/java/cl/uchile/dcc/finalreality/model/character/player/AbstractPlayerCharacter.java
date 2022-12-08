@@ -63,4 +63,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     equippedWeaponNull(getEquippedWeapon());
     return getEquippedWeapon().getWeight();
   }
+
+  public int getAttack() throws InvalidStatValueException {
+    equippedWeaponNull(getEquippedWeapon());
+    return getEquippedWeapon().getDamage();
+  }
 }
