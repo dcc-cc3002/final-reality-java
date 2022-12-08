@@ -26,7 +26,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   protected final BlockingQueue<GameCharacter> turnsQueue;
   private final String name;
   private ScheduledExecutorService scheduledExecutor;
-  private ArrayList<Subscriber> subscribers;
+  private ArrayList<Subscriber> subscribers = new ArrayList<>();
   private AdverseEffect adverseEffect;
 
   /**
@@ -114,16 +114,16 @@ public abstract class AbstractCharacter implements GameCharacter {
   }
 
   @Override
-  public void notifySubscribersDeath() {
-    for(Subscriber s : subscribers) {
-      s.updateDeath(this);
-    }
-  }
-
-  @Override
   public void setAdverseEffect(AdverseEffect ae) {
     this.adverseEffect = ae;
   }
+
+  @Override
+  public AdverseEffect getAdverseEffect() {
+    return adverseEffect;
+  }
+
+  public abstract void notifySubscribersDeath();
 
   /**
    * The responsability of the implementation of getWeight method will be passed to the subclasses.

@@ -1,6 +1,8 @@
 package character;
 
+import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
@@ -15,14 +17,16 @@ public class EnemyTest {
   Enemy enemy3;
   GameCharacter engineer;
   BlockingQueue<GameCharacter> queue;
+  GameController gameController;
 
   @Before
-  public void setUp() throws InvalidStatValueException {
+  public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
     queue = new LinkedBlockingQueue<>();
     enemy = new Enemy("Comte Harebourg the Enemy", 25, 13000, 23, 400, queue);
     enemy2 = new Enemy("Comte Harebourg the Enemy", 25, 13000, 23, 400, queue);
     enemy3 = new Enemy("Ganondorf", 35, 5000, 20, 300, queue);
     engineer = new Engineer("Steamer the Engineer", 120, 30, queue);
+    gameController = new GameController();
   }
 
   @Test
@@ -61,5 +65,15 @@ public class EnemyTest {
         ", name='" + enemy.getName() + "', weight=" + enemy.getWeight() + ", attack=" +
         enemy.getAttack() + "}", enemy.toString());
     assertNotEquals("toString method does not work in the Enemy class", enemy.toString(), enemy3.toString());
+  }
+
+  @Test
+  public void notifySubscribersDeathTest() {
+    Enemy e = gameController.getEnemies().get(0);
+    assertTrue("The enemy should be in the queue", gameController.getTurnsQueue().contains(e));
+    assertTrue("The enemy should be in the queue", gameController.getEnemies().contains(e));
+    e.notifySubscribersDeath();
+    assertFalse("The enemy should not be in the queue", gameController.getTurnsQueue().contains(e));
+    assertFalse("The enemy should not be in the queue", gameController.getEnemies().contains(e));
   }
 }

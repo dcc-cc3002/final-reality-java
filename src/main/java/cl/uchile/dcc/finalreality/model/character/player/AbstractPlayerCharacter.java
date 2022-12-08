@@ -10,6 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
@@ -53,7 +54,14 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   public abstract void equip(Weapon weapon) throws InvalidWeaponTypeException;
-  
+
+  @Override
+  public void notifySubscribersDeath() {
+    for(Subscriber s : this.getSubscribers()) {
+      s.updateDeathOfPlayerCharacter(this);
+    }
+  }
+
   @Override
   public Weapon getEquippedWeapon() {
     return equippedWeapon;

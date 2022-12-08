@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import java.util.Objects;
@@ -28,6 +29,13 @@ public class Enemy extends AbstractCharacter {
     Require.statValueAtLeast(1, weight, "Weight");
     this.weight = weight;
     this.attack = attack;
+  }
+
+  @Override
+  public void notifySubscribersDeath() {
+    for(Subscriber s : this.getSubscribers()) {
+      s.updateDeathOfEnemy(this);
+    }
   }
 
   /**

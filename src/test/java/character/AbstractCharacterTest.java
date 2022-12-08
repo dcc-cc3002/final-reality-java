@@ -1,7 +1,11 @@
 package character;
 
+import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.model.adverseEffects.AdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverseEffects.NullAdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverseEffects.ParalyzeAdverseEffect;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
@@ -23,9 +27,11 @@ public class AbstractCharacterTest {
   BlockingQueue<GameCharacter> queue;
   Axe axe;
   Bow bow;
+  AdverseEffect adverseEffect;
+  GameController gameController;
 
   @Before
-  public void setUp() throws InvalidStatValueException {
+  public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
     queue = new LinkedBlockingQueue<>();
     enemy = new Enemy("Comte Harebourg the Enemy", 25, 13000, 23, 400, queue);
     engineer = new Engineer("Steamer the Engineer", 120, 30, queue);
@@ -33,6 +39,9 @@ public class AbstractCharacterTest {
     thief = new Thief("Sram the Thief", 100, 40, queue);
     axe = new Axe("Cil's Axe", 18, 36);
     bow = new Bow("Buhorado's Plume", 2, 50);
+    adverseEffect = new NullAdverseEffect();
+    whitemage.setAdverseEffect(adverseEffect);
+    gameController = new GameController();
   }
 
   @Test
@@ -88,7 +97,32 @@ public class AbstractCharacterTest {
     assertEquals("The thief should be exiting the queue", thief, queue.poll());
     assertEquals("The engineer should be exiting the queue", engineer, queue.poll());
     assertTrue("The queue should be empty", queue.isEmpty());
+  }
 
+  @Test
+  public void getAdverseEffectTest() {
+    assertEquals("The AdverseEffect does not equals to the expected value", whitemage.getAdverseEffect(), adverseEffect);
+    AdverseEffect paralyzed = new ParalyzeAdverseEffect();
+    whitemage.setAdverseEffect(paralyzed);
+    assertNotEquals("The AdverseEffect should be different", whitemage.getAdverseEffect(), adverseEffect);
+    assertEquals("The AdverseEffect does not equals to the expected value", whitemage.getAdverseEffect(), paralyzed);
+  }
 
+  @Test
+  public void setAdverseEffectTest() {
+    AdverseEffect paralyzed = new ParalyzeAdverseEffect();
+    whitemage.setAdverseEffect(paralyzed);
+    assertEquals("The AdverseEffect does not equals to the expected value", whitemage.getAdverseEffect(), paralyzed);
+    assertNotEquals("The AdverseEffect should be different", whitemage.getAdverseEffect(), adverseEffect);
+    whitemage.setAdverseEffect(adverseEffect);
+    assertNotEquals("The AdverseEffect should be different", whitemage.getAdverseEffect(), paralyzed);
+  }
+
+  @Test
+  public void subscribeAndGetSubscribersTest() {
+    assertTrue("There should be no subscriber", engineer.getSubscribers().isEmpty());
+    engineer.subscribe(gameController);
+    assertFalse("There should be a subscriber", engineer.getSubscribers().isEmpty());
+    assertEquals("The subscribers must be only gameController", gameController, engineer.getSubscribers().get(0));
   }
 }

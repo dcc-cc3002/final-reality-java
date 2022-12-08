@@ -5,27 +5,27 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.*;
+import cl.uchile.dcc.finalreality.model.magicSpell.Heal;
 import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.magicSpell.Thunder;
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 public class GameController implements Subscriber {
-  private BlockingQueue<GameCharacter> turnsQueue;
-  private ArrayList<PlayerCharacter> playerCharacters;
-  private ArrayList<Enemy> enemies;
+  private BlockingQueue<GameCharacter> turnsQueue = new LinkedBlockingQueue<>();
+  private ArrayList<PlayerCharacter> playerCharacters = new ArrayList<>();
+  private ArrayList<Enemy> enemies = new ArrayList<>();
 
-  public GameController() {
-    /**
-     * init {
-     *     for (i in 1..10) {
-     *         // TODO: Add enemies to the game
-     *         // TODO: Add players to the game
-     *         // TODO: Add characters to the turns queue
-     *     }
-     * }
-     */
+  public GameController() throws InvalidStatValueException, InvalidWeaponTypeException {
+    createKnight("Goultar the Knight", 50, 10);
+    createEngineer("Goultar the Knight", 50, 8);
+    createWhiteMage("Yugo the WhiteMage", 60, 8, 100);
+    createThief("Sram the Thief", 40, 30);
+    createEnemy("Comte Harebourg the Enemy", 20, 80, 0, 30);
+    createEnemy("Arturo", 10, 60, 10, 20);
   }
 
   /**
@@ -83,65 +83,106 @@ public class GameController implements Subscriber {
   /**
    * Creates a new Knight with the specified parameters.
    */
-  public Knight createKnight(String name, int hp, int defense, Weapon w)
+  public void createKnight(String name, int hp, int defense)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Knight k = new Knight(name, hp, defense, turnsQueue);
-    k.equip(w);
-    return k;
+    k.equip(new Sword("Smiling Sword", 20, 40));
+    turnsQueue.add(k);
+    playerCharacters.add(k);
+    k.subscribe(this);
   }
 
   /**
    * Creates a new Engineer with the specified parameters.
    */
-  public Engineer createEngineer(String name, int hp, int defense, Weapon w)
+  public void createEngineer(String name, int hp, int defense)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Engineer e = new Engineer(name, hp, defense, turnsQueue);
-    e.equip(w);
-    return e;
+    e.equip(new Axe("Cil's Axe", 10, 30));
+    turnsQueue.add(e);
+    playerCharacters.add(e);
+    e.subscribe(this);
   }
 
   /**
    * Creates a new Thief with the specified parameters.
    */
-  public Thief createThief(String name, int hp, int defense, Weapon w)
+  public void createThief(String name, int hp, int defense)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Thief t = new Thief(name, hp, defense, turnsQueue);
-    t.equip(w);
-    return t;
+    t.equip(new Knife("Zeyko's Dagger's", 5, 25));
+    turnsQueue.add(t);
+    playerCharacters.add(t);
+    t.subscribe(this);
   }
 
   /**
    * Creates a new BlackMage with the specified parameters.
    */
-  public BlackMage createBlackMage(String name, int hp, int defense, int mp, Weapon w, Spell s)
+  public void createBlackMage(String name, int hp, int defense, int mp)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     BlackMage b = new BlackMage(name, hp, defense, mp, turnsQueue);
-    b.equip(w);
-    b.equipSpell(s);
-    return b;
+    b.equip(new Staff("Romboton", 10, 5, 60));
+    b.equipSpell(new Thunder());
+    turnsQueue.add(b);
+    playerCharacters.add(b);
+    b.subscribe(this);
   }
 
   /**
    * Creates a new WhiteMage with the specified parameters.
    */
-  public WhiteMage createWhiteMage(String name, int hp, int defense, int mp, Weapon w, Spell s)
+  public void createWhiteMage(String name, int hp, int defense, int mp)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     WhiteMage whitemage = new WhiteMage(name, hp, defense, mp, turnsQueue);
-    whitemage.equip(w);
-    whitemage.equipSpell(s);
-    return whitemage;
+    whitemage.equip(new Staff("Romboton", 10, 5, 60));
+    whitemage.equipSpell(new Heal());
+    turnsQueue.add(whitemage);
+    playerCharacters.add(whitemage);
+    whitemage.subscribe(this);
   }
 
   /**
    * Creates a new Enemy with the specified parameters.
    */
-  public Enemy createEnemy(String name, int weight, int hp, int defense, int attack)
+  public void createEnemy(String name, int weight, int hp, int defense, int attack)
       throws InvalidStatValueException {
-    return new Enemy(name, weight, hp, defense, attack, turnsQueue);
+    Enemy e =  new Enemy(name, weight, hp, defense, attack, turnsQueue);
+    turnsQueue.add(e);
+    enemies.add(e);
+    e.subscribe(this);
+  }
+
+  /**
+   * Getter for the turnsQueue.
+   */
+  public BlockingQueue<GameCharacter> getTurnsQueue() {
+    return turnsQueue;
+  }
+
+  /**
+   * Getter for the list of alive playerCharacters
+   */
+  public ArrayList<PlayerCharacter> getPlayerCharacters() {
+    return playerCharacters;
+  }
+
+  /**
+   * Getter for the alive enemies
+   */
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
   }
 
   @Override
-  public void updateDeath(GameCharacter c) {
+  public void updateDeathOfPlayerCharacter(GameCharacter c) {
     turnsQueue.remove(c);
+    playerCharacters.remove(c);
+  }
+
+  @Override
+  public void updateDeathOfEnemy(GameCharacter c) {
+    turnsQueue.remove(c);
+    enemies.remove(c);
   }
 }

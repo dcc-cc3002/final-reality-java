@@ -63,13 +63,19 @@ public interface GameCharacter {
    * Sets the AdverseEffect to the specified.
    */
   void setAdverseEffect(AdverseEffect ae);
+
+  /**
+   * Gets the current AdverseEffect of the GameCharacter.
+   */
+  AdverseEffect getAdverseEffect();
+
   /**
    * Add the recivied subscriber to the Suscriber list.
    */
   void subscribe(Subscriber s);
 
   /**
-   * Notify all the subscriber about a change in this class.
+   * Notify all the subscriber about that the current class died.
    */
   void notifySubscribersDeath();
 

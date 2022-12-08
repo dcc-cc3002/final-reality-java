@@ -62,4 +62,10 @@ public class AbstractWeaponTest {
     assertTrue(sword.getDamage() == bow.getDamage(), "The Weapon's attack is not the same");
     assertFalse(staff.getDamage() == knife.getDamage(), "The Weapon's attacks match when it should'nt");
   }
+  @Test
+  public void getMagicDamageTest() {
+    assertTrue(sword.getMagicDamage() == bow.getMagicDamage(), "The Weapon's magic attack is not the same");
+    assertFalse(staff.getMagicDamage() == knife.getMagicDamage(), "The Weapon's magic attacks match when it should'nt");
+    assertTrue(sword.getMagicDamage() == 0, "The Weapon's magic attack should be 0");
+  }
 }
