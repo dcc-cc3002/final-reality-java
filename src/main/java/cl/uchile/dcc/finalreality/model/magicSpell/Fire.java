@@ -5,24 +5,14 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.*;
 
-public class Fire implements Spell {
-  private final Effect spell;
+public class Fire extends AbstractSpell {
 
   /**
    * Creates the Fire spell with the necesary effects.
    */
   public Fire() {
+    super(15);
     Effect[] arr = {new ReduceHpWithMdEffect(), new Random20ToBurned()};
     this.spell = new CompositeEffect(arr);
-  }
-
-  @Override
-  public Effect getSpell() {
-    return spell;
-  }
-
-  @Override
-  public void apply(MageCharacter self, GameCharacter target) throws InvalidStatValueException {
-    spell.apply(self, target);
   }
 }

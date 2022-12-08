@@ -14,6 +14,15 @@ public interface Spell {
 
   /**
    * Apply the Effect of the spell to the target.
+   * @param self
+   *     the Mage using the Spell.
+   * @param target
+   *     the GameCharacter that is being affected by the Spell.
    */
   void apply(MageCharacter self, GameCharacter target) throws InvalidStatValueException;
+
+  /**
+   * Getter for the cost of the Spell.
+   */
+  int getCost();
 }
