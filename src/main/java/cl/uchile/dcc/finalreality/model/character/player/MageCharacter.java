@@ -35,5 +35,5 @@ public interface MageCharacter extends PlayerCharacter {
   /**
    * Equips the recivied spell
    */
-  void setSpell(Spell s);
+  void equipSpell(Spell s);
 }

@@ -8,5 +8,6 @@ public interface MagicWeapon extends Weapon {
   /**
    * returns the MagicWeapon's magic_damage.
    */
+  @Override
   int getMagicDamage();
 }

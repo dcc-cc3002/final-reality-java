@@ -50,6 +50,10 @@ public abstract class AbstractWeapon implements Weapon {
     return damage;
   }
 
+  public int getMagicDamage() {
+    return 0;
+  }
+
   public Weapon equipToBlackMage(@NotNull BlackMage blackmage) throws InvalidWeaponTypeException {
     throw new InvalidWeaponTypeException("A BlackMage can't equip this Weapon");
   }

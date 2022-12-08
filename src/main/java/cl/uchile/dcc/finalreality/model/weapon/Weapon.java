@@ -30,6 +30,11 @@ public interface Weapon {
   int getWeight();
 
   /**
+   * Returns the Weapons magicDamage, when it is not a magicWeapon it returns a default value of 0.
+   */
+  int getMagicDamage();
+
+  /**
    * Returns the Weapon to be equipped by a BlackMage when it is possible.
    * In case that a BlackMage cannot equip a specific Weapon, it throws an Exception.
    *

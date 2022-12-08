@@ -33,15 +33,20 @@ public class GameController implements Subscriber {
    */
   public void attack(@NotNull GameCharacter attacker, @NotNull GameCharacter target)
       throws InvalidStatValueException {
-    int attackVal = attacker.getAttack();
-    int health = target.getCurrentHp();
-    if ((health - attackVal) <= 0) {
+    try {
+      int attackVal = target.getAttack();
+      int defenseVal = target.getDefense();
+      if(defenseVal < attackVal){
+        target.setCurrentHp(target.getCurrentHp() - (attackVal - defenseVal));
+      }
+    }
+    catch (InvalidStatValueException e) {
+      target.setCurrentHp(0);
       target.notifySubscribersDeath();
     }
-    else {
-     target.setCurrentHp(health - attackVal);
+    finally {
+      waitTurn(attacker);
     }
-    waitTurn(attacker);
   }
 
   /**
@@ -108,20 +113,22 @@ public class GameController implements Subscriber {
   /**
    * Creates a new BlackMage with the specified parameters.
    */
-  public BlackMage createBlackMage(String name, int hp, int defense, int mp, Weapon w)
+  public BlackMage createBlackMage(String name, int hp, int defense, int mp, Weapon w, Spell s)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     BlackMage b = new BlackMage(name, hp, defense, mp, turnsQueue);
     b.equip(w);
+    b.equipSpell(s);
     return b;
   }
 
   /**
    * Creates a new WhiteMage with the specified parameters.
    */
-  public WhiteMage createWhiteMage(String name, int hp, int defense, int mp, Weapon w)
+  public WhiteMage createWhiteMage(String name, int hp, int defense, int mp, Weapon w, Spell s)
       throws InvalidStatValueException, InvalidWeaponTypeException {
     WhiteMage whitemage = new WhiteMage(name, hp, defense, mp, turnsQueue);
     whitemage.equip(w);
+    whitemage.equipSpell(s);
     return whitemage;
   }
 

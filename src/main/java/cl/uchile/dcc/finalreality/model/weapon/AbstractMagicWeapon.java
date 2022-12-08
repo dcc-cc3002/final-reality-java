@@ -32,6 +32,7 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements Magi
   /**
    * Returns the magic_damage of this Weapon.
    */
+  @Override
   public int getMagicDamage() {
     return magicDamage;
   }
