@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.model.magicSpell;
+package cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
@@ -7,10 +7,6 @@ import cl.uchile.dcc.finalreality.model.weapon.MagicWeapon;
 
 public class ReduceHpWithMdEffect implements Effect {
 
-  /**
-   * @param self
-   * @param target
-   */
   @Override
   public void apply(MageCharacter self, GameCharacter target) throws InvalidStatValueException {
     int damage = ((MagicWeapon)self.getEquippedWeapon()).getMagicDamage();

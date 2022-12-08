@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.model.magicSpell;
+package cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
