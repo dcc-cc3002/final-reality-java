@@ -3,11 +3,12 @@ package cl.uchile.dcc.finalreality.model.adverse.effects;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
+/**
+ * We are using a Null-Object Pattern to represent when a character does not have an
+ * Adverse effect. This Adverseeffect does nothing.
+ */
 public class NullAdverseEffect implements AdverseEffect {
 
-  /**
-   * We are using a Null-Object Pattern to represent when a character does not have an effect.
-   */
   @Override
   public void applyEffect(GameCharacter c) {
     // Do Nothing, Null-Object Pattern

@@ -4,11 +4,14 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 
+/**
+ * This interface represents an effect that can be used by a MageCharacter and affect
+ * a GameCharacter.
+ */
 public interface Effect {
 
   /**
-   * This interface represents an effect that can be used by a MageCharacter and affect
-   * a GameCharacter.
+   * Applies the effect to the target.
    *
    * @param self
    *     character using the spell with this effect.

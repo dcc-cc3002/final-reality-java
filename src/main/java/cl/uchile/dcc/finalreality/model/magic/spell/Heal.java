@@ -5,6 +5,9 @@ import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Heal30Effect;
 import java.util.Objects;
 
+/**
+ * This class represents the Heal Spell. It heals the target a 30% of his maximum Hp.
+ */
 public class Heal extends AbstractSpell {
 
   /**

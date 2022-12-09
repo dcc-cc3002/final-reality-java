@@ -7,16 +7,20 @@ import cl.uchile.dcc.finalreality.model.magic.spell.Heal;
 import cl.uchile.dcc.finalreality.model.magic.spell.Thunder;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GameControllerTest {
   GameController gameController;
+  private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
   @Before
   public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
     gameController = new GameController();
+    System.setOut(new PrintStream(outputStreamCaptor));
   }
 
   @Test
@@ -79,6 +83,26 @@ public class GameControllerTest {
     assertFalse("The whiteMage should not be in the turnsQueue",  gameController.getTurnsQueue().contains(whiteMage));
     assertFalse("The whiteMage should not be in this queue",  gameController.getPlayerCharacters().contains(whiteMage));
     assertEquals("The whiteMage should have 0 Hp", 0, whiteMage.getCurrentHp());
+  }
+
+  @Test
+  public void playerWinTest() {
+    while (!(gameController.getEnemies().isEmpty())){
+      assertFalse("The player did not jet win", gameController.playerWin());
+      gameController.getEnemies().remove(0);
+    }
+    assertTrue("The player should have won", gameController.playerWin());
+    assertEquals("The Player have won the battle!", outputStreamCaptor.toString().trim());
+  }
+
+  @Test
+  public void enemyWinTest() {
+    while (!(gameController.getPlayerCharacters().isEmpty())){
+      assertFalse("The enemies did not jet win", gameController.enemyWin());
+      gameController.getPlayerCharacters().remove(0);
+    }
+    assertTrue("The enemies should have won", gameController.enemyWin());
+    assertEquals("The Enemies have won the battle :c", outputStreamCaptor.toString().trim());
   }
 
   @Test

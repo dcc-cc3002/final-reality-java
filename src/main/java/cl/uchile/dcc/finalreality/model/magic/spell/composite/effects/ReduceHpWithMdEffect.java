@@ -5,6 +5,10 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import java.util.Objects;
 
+/**
+ * This effect damages the target with the value of magicDamage of the Weapon equipped by
+ * the caster. When a Weapon does not have magicDamage it does nothing.
+ */
 public class ReduceHpWithMdEffect implements Effect {
 
   @Override

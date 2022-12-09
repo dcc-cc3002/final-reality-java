@@ -5,6 +5,9 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import java.util.Objects;
 
+/**
+ * This effect gives the target the Paralyze AdverseEffect.
+ */
 public class ParalyzeEffect implements Effect {
   @Override
   public void apply(MageCharacter self, GameCharacter target) {

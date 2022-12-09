@@ -4,6 +4,10 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
+/**
+ * This AdverseEffect represents Poison. It damages the poisoned GameCharacter at the beginning
+ * of every single one of his turns.
+ */
 public class PoisonAdverseEffect implements AdverseEffect {
 
   private int poisonDamage;

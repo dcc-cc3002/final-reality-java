@@ -6,6 +6,10 @@ import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Random30To
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.ReduceHpWithMdEffect;
 import java.util.Objects;
 
+/**
+ * This class represent the Thunder Spell. This spell hits the target with magicDamage
+ * and have a 30% chance to paralyze it.
+ */
 public class Thunder extends AbstractSpell {
 
   /**

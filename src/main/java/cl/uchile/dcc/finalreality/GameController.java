@@ -23,11 +23,20 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class represents the controller of a battle in the game. It has states depending on
+ * the turns of the characters and also haves a list of alive PlayerCharacter, another list
+ * of alive enemies and a queue to make the turns work.
+ */
 public class GameController implements Subscriber {
   private BlockingQueue<GameCharacter> turnsQueue = new LinkedBlockingQueue<>();
   private ArrayList<PlayerCharacter> playerCharacters = new ArrayList<>();
   private ArrayList<Enemy> enemies = new ArrayList<>();
 
+  /**
+   * This constructor will create default characters to do a battle, this can change
+   * in the future.
+   */
   public GameController() throws InvalidStatValueException, InvalidWeaponTypeException {
     createKnight("Goultar the Knight", 50, 10);
     createEngineer("Goultar the Knight", 50, 8);
@@ -63,10 +72,10 @@ public class GameController implements Subscriber {
     try {
       attacker.getEquippedSpell().apply(attacker, target);
       waitTurn(attacker);
-    } catch( InvalidStatValueException e) {
-      System.out.println("Not sufficient Mp, the Spell costs " +
-          attacker.getEquippedSpell().getCost() + " and the attacker have " +
-          attacker.getCurrentMp());
+    } catch (InvalidStatValueException e) {
+      System.out.println("Not sufficient Mp, the Spell costs "
+          + attacker.getEquippedSpell().getCost() + " and the attacker have "
+          + attacker.getCurrentMp());
     }
   }
 
@@ -80,15 +89,21 @@ public class GameController implements Subscriber {
   /**
    * Handle the player winning the fight.
    */
-  public void onPlayerWin() {
-
+  public boolean playerWin() {
+    if (enemies.isEmpty()) {
+      System.out.println("The Player have won the battle!");
+    }
+    return enemies.isEmpty();
   }
 
   /**
    * Handle the enemy winning the fight.
    */
-  public void onEnemyWin() {
-
+  public boolean enemyWin() {
+    if (playerCharacters.isEmpty()) {
+      System.out.println("The Enemies have won the battle :c");
+    }
+    return playerCharacters.isEmpty();
   }
 
   /**

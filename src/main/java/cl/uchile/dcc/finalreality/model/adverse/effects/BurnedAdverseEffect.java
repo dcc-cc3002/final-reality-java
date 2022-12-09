@@ -4,6 +4,10 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
+/**
+ * This represents the burn adverse effect.
+ * It damages a GameCharacter at the beginning of his turn.
+ */
 public class BurnedAdverseEffect implements AdverseEffect {
   int burnedDamage;
 

@@ -5,6 +5,10 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
 
+/**
+ * This represents a Spell of the game. A MageCharacter can equip a Spell and use it to
+ * affect any GameCharacters when it has the sufficient currentMp.
+ */
 public interface Spell {
 
   /**

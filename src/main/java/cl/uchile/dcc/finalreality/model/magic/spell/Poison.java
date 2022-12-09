@@ -5,6 +5,9 @@ import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.PoisonEffect;
 import java.util.Objects;
 
+/**
+ * This Spell gives the target the Poison AdverseEffect. It costs 40 Mp.
+ */
 public class Poison extends AbstractSpell {
 
   /**

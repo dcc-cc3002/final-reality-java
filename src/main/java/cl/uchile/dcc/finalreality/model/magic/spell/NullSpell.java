@@ -2,6 +2,9 @@ package cl.uchile.dcc.finalreality.model.magic.spell;
 
 import java.util.Objects;
 
+/**
+ * We are using a Null-Object Pattern to represent when a Spell does nothing.
+ */
 public class NullSpell extends AbstractSpell {
 
   /**

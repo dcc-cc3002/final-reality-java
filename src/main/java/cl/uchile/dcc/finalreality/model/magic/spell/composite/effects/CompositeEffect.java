@@ -5,11 +5,15 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import java.util.Arrays;
 
+/**
+ * This represents the Composite class of the Composite pattern.
+ * It contains a list of actual effects of the game.
+ */
 public class CompositeEffect implements Effect {
   private final Effect[] effects;
 
   /**
-   * This represents the Composite class of the Composite pattern.
+   * This class have a lists of effects.
    *
    * @param effects
    *     A list of effects that are used by a spell.

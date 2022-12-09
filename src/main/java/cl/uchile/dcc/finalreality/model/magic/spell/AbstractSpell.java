@@ -6,12 +6,22 @@ import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.NullEffect;
 
+/**
+ * This Class represents a Spell of the game that can be equipped and used by Mages.
+ */
 public class AbstractSpell implements Spell {
 
   protected Effect spell = new NullEffect();
   private final int cost;
 
-  public AbstractSpell(int cost) {
+  /**
+   * Creates a new Spell that haves an Effect and a cost.
+   *
+   * @param cost
+   *     The cost in Mp of the Spell
+   */
+
+  protected AbstractSpell(int cost) {
     this.cost = cost;
   }
 

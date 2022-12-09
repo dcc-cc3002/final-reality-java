@@ -5,6 +5,11 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class represents the Paralyze AdverseEffect.
+ * This effect prevents a character of doing anything when it is his turn.
+ * It only lasts 1 turn.
+ */
 public class ParalyzeAdverseEffect implements AdverseEffect {
 
   /**

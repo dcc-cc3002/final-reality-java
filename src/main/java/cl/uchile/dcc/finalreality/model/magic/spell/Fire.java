@@ -6,6 +6,10 @@ import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Random20To
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.ReduceHpWithMdEffect;
 import java.util.Objects;
 
+/**
+ * This class represent the Fire Spell. This spell hits the target with magicDamage
+ * and have a 20% chance to burn it.
+ */
 public class Fire extends AbstractSpell {
 
   /**

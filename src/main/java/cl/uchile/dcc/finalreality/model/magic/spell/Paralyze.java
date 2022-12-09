@@ -5,6 +5,10 @@ import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.ParalyzeEffect;
 import java.util.Objects;
 
+/**
+ * This class represents the Paralyze spell. It gives de Paralyze AdverseEffect to the target
+ * and have a cost of 25 Mp.
+ */
 public class Paralyze extends AbstractSpell {
 
   /**
