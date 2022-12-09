@@ -2,6 +2,8 @@ package cl.uchile.dcc.finalreality;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.Idle;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
@@ -12,7 +14,6 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.model.magic.spell.Heal;
-import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
 import cl.uchile.dcc.finalreality.model.magic.spell.Thunder;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
 import cl.uchile.dcc.finalreality.model.weapon.Knife;
@@ -32,6 +33,7 @@ public class GameController implements Subscriber {
   private BlockingQueue<GameCharacter> turnsQueue = new LinkedBlockingQueue<>();
   private ArrayList<PlayerCharacter> playerCharacters = new ArrayList<>();
   private ArrayList<Enemy> enemies = new ArrayList<>();
+  private GameState currentState;
 
   /**
    * This constructor will create default characters to do a battle, this can change
@@ -44,6 +46,7 @@ public class GameController implements Subscriber {
     createThief("Sram the Thief", 40, 30);
     createEnemy("Comte Harebourg the Enemy", 20, 80, 0, 30);
     createEnemy("Arturo", 10, 60, 10, 20);
+    this.setCurrentState(new Idle());
   }
 
   /**
@@ -198,6 +201,21 @@ public class GameController implements Subscriber {
    */
   public ArrayList<Enemy> getEnemies() {
     return enemies;
+  }
+
+  /**
+   * Getter for the currentState
+   */
+  public GameState getCurrentState() {
+    return currentState;
+  }
+
+  /**
+   * Setter for the currentState, it also changes the context of the recived State.
+   */
+  public void setCurrentState(GameState currentState) {
+    this.currentState = currentState;
+    currentState.setContext(this);
   }
 
   @Override
