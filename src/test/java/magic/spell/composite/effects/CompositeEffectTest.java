@@ -7,7 +7,6 @@ import cl.uchile.dcc.finalreality.model.adverse.effects.ParalyzeAdverseEffect;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.*;
-import cl.uchile.dcc.finalreality.model.magic.spell.compositeEffects.*;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

@@ -59,11 +59,15 @@ public class GameController implements Subscriber {
   /**
    * The recivied GameCharacter {@code attacker} uses a Spell on the GameCharacter {@code target}.
    */
-  public void useMagic(@NotNull MageCharacter attacker, @NotNull GameCharacter target)
-      throws InvalidStatValueException {
-    Spell magicSpell = attacker.getEquippedSpell();
-    magicSpell.apply(attacker, target);
-    waitTurn(attacker);
+  public void useMagic(@NotNull MageCharacter attacker, @NotNull GameCharacter target) {
+    try {
+      attacker.getEquippedSpell().apply(attacker, target);
+      waitTurn(attacker);
+    } catch( InvalidStatValueException e) {
+      System.out.println("Not sufficient Mp, the Spell costs " +
+          attacker.getEquippedSpell().getCost() + " and the attacker have " +
+          attacker.getCurrentMp());
+    }
   }
 
   /**
