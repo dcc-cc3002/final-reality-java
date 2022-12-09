@@ -13,7 +13,7 @@ public class BurnedAdverseEffect implements AdverseEffect {
    *     The damage that is going to get applied to a GameCharacter when is burned.
    */
   public BurnedAdverseEffect(int burnDamage) {
-    this.burnedDamage = burnedDamage;
+    this.burnedDamage = burnDamage;
   }
 
   /**

@@ -2,7 +2,6 @@ package cl.uchile.dcc.finalreality.model.adverseEffects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import java.util.Objects;
 
 public class PoisonAdverseEffect implements AdverseEffect {
@@ -37,10 +36,6 @@ public class PoisonAdverseEffect implements AdverseEffect {
    */
   public int getPoisonDamage() {
     return poisonDamage;
-  }
-
-  public void setPoisonDamage(int poisonDamage) {
-    this.poisonDamage = poisonDamage;
   }
 
   @Override
