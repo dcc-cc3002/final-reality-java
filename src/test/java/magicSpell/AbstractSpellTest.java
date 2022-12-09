@@ -27,8 +27,7 @@ public class AbstractSpellTest {
 
   @Test
   public void testGetSpell() {
-    Effect[] arr = {new Heal30Effect()};
-    Effect eff = new CompositeEffect(arr);
+    Effect eff = new Heal().getSpell();
     assertEquals("The effect should be the same", eff, heal.getSpell());
     Effect[] arr2 = {new NullEffect()};
     eff = new CompositeEffect(arr2);

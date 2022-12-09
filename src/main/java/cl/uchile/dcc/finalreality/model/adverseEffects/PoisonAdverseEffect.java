@@ -2,10 +2,12 @@ package cl.uchile.dcc.finalreality.model.adverseEffects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import java.util.Objects;
 
 public class PoisonAdverseEffect implements AdverseEffect {
 
-  int poisonDamage;
+  private int poisonDamage;
 
   /**
    * Creates a Poison effect with the specific damage by poison.
@@ -28,5 +30,33 @@ public class PoisonAdverseEffect implements AdverseEffect {
     else {
       c.setCurrentHp(c.getCurrentHp() - poisonDamage);
     }
+  }
+
+  /**
+   * Getter for the Poison damage.
+   */
+  public int getPoisonDamage() {
+    return poisonDamage;
+  }
+
+  public void setPoisonDamage(int poisonDamage) {
+    this.poisonDamage = poisonDamage;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(PoisonAdverseEffect.class, this.poisonDamage);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof final PoisonAdverseEffect that)) {
+      return false;
+    }
+    return hashCode() == that.hashCode()
+        && poisonDamage == that.getPoisonDamage();
   }
 }
