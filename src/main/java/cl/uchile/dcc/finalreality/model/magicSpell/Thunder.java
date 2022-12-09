@@ -1,10 +1,7 @@
 package cl.uchile.dcc.finalreality.model.magicSpell;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.*;
-import java.util.Random;
+import java.util.Objects;
 
 public class Thunder extends AbstractSpell {
 
@@ -15,5 +12,21 @@ public class Thunder extends AbstractSpell {
     super(15);
     Effect[] arr = {new ReduceHpWithMdEffect(), new Random30ToParalyze()};
     this.spell = new CompositeEffect(arr);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(Thunder.class);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof final Thunder that)) {
+      return false;
+    }
+    return hashCode() == that.hashCode();
   }
 }

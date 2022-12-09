@@ -6,6 +6,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.Effect;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.Heal30Effect;
+import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.NullEffect;
 import cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects.ReduceHpWithMdEffect;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import java.util.concurrent.BlockingQueue;
@@ -13,10 +14,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ReduceHpWithMdEffectTest {
   WhiteMage whiteMage;
   Effect self;
+  Effect self2;
+  Effect self3;
 
   @Before
   public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
@@ -24,6 +28,8 @@ public class ReduceHpWithMdEffectTest {
     whiteMage = new WhiteMage("TestKnight", 30, 2, 100, queue);
     whiteMage.equip(new Staff("TestStaff", 5, 5, 12));
     self = new ReduceHpWithMdEffect();
+    self2 = new ReduceHpWithMdEffect();
+    self3 = new NullEffect();
   }
   @Test
   public void applyTest() throws InvalidStatValueException {
@@ -32,5 +38,24 @@ public class ReduceHpWithMdEffectTest {
     assertEquals("The Hp should be 20", 20, whiteMage.getCurrentHp());
     self.apply(whiteMage, whiteMage);
     assertEquals("The Hp should be 10", 10, whiteMage.getCurrentHp());
+    self.apply(whiteMage, whiteMage);
+    assertEquals("The Hp should be 0", 0, whiteMage.getCurrentHp());
+    self.apply(whiteMage, whiteMage);
+    assertEquals("The Hp should be 0", 0, whiteMage.getCurrentHp());
+  }
+
+  @Test
+  public void testEquals() {
+    assertEquals("A Knight is not equals to itself", true, self.equals(self));
+    assertEquals("A Knight is not equals to another Knight with same parameters",
+        true, self.equals(self2));
+    assertEquals("A Knight is the same as a WhiteMage", false, self.equals(self3));
+  }
+
+  @Test
+  public void testHashCode() {
+    assertEquals("Two equals Knights does not have the same hashCode",
+        self.hashCode(), self2.hashCode());
+    assertNotEquals("Two different Knights have the same Hashcode", self.hashCode(), self3.hashCode());
   }
 }

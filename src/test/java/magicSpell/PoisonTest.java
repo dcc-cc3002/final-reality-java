@@ -1,23 +1,23 @@
 package magicSpell;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.magicSpell.Fire;
 import cl.uchile.dcc.finalreality.model.magicSpell.NullSpell;
+import cl.uchile.dcc.finalreality.model.magicSpell.Poison;
 import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class FireTest {
+public class PoisonTest {
   Spell self;
   Spell self2;
   Spell self3;
 
   @Before
   public void setUp() throws InvalidStatValueException {
-    self = new Fire();
-    self2 = new Fire();
+    self = new Poison();
+    self2 = new Poison();
     self3 = new NullSpell();
   }
 

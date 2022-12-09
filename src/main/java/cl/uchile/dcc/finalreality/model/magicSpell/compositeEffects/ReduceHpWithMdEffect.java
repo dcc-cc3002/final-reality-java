@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
+import java.util.Objects;
 
 public class ReduceHpWithMdEffect implements Effect {
 
@@ -19,5 +20,21 @@ public class ReduceHpWithMdEffect implements Effect {
       target.setCurrentHp(0);
       target.notifySubscribersDeath();
     }
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(ReduceHpWithMdEffect.class);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof final ReduceHpWithMdEffect that)) {
+      return false;
+    }
+    return hashCode() == that.hashCode();
   }
 }

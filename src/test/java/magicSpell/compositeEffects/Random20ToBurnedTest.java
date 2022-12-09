@@ -14,10 +14,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class Random20ToBurnedTest {
   WhiteMage whiteMage;
   Random20ToBurned self;
+  Effect self2;
+  Effect self3;
   int seed;
   Random rng;
 
@@ -27,6 +30,8 @@ public class Random20ToBurnedTest {
     whiteMage = new WhiteMage("TestKnight", 30, 10, 100, queue);
     whiteMage.equip(new Staff("TestStaff", 5, 5, 30));
     self = new Random20ToBurned();
+    self2 = new Random20ToBurned();
+    self3 = new NullEffect();
     seed = 128342;
     rng = new Random(seed);
   }
@@ -52,5 +57,20 @@ public class Random20ToBurnedTest {
   public void setGetRandomTest() {
     self.setRandom(rng);
     assertEquals(new Random(128342).nextDouble(), self.getRandom().nextDouble(), 0.001);
+  }
+
+  @Test
+  public void testEquals() {
+    assertEquals("A Knight is not equals to itself", true, self.equals(self));
+    assertEquals("A Knight is not equals to another Knight with same parameters",
+        true, self.equals(self2));
+    assertEquals("A Knight is the same as a WhiteMage", false, self.equals(self3));
+  }
+
+  @Test
+  public void testHashCode() {
+    assertEquals("Two equals Knights does not have the same hashCode",
+        self.hashCode(), self2.hashCode());
+    assertNotEquals("Two different Knights have the same Hashcode", self.hashCode(), self3.hashCode());
   }
 }

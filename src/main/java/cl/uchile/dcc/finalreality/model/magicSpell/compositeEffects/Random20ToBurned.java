@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.magicSpell.compositeEffects;
 import cl.uchile.dcc.finalreality.model.adverseEffects.BurnedAdverseEffect;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
+import java.util.Objects;
 import java.util.Random;
 
 public class Random20ToBurned implements Effect {
@@ -33,5 +34,21 @@ public class Random20ToBurned implements Effect {
       target.setAdverseEffect(new BurnedAdverseEffect(
           self.getEquippedWeapon().getMagicDamage()/2));
     }
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(Random20ToBurned.class);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof final Random20ToBurned that)) {
+      return false;
+    }
+    return hashCode() == that.hashCode();
   }
 }
