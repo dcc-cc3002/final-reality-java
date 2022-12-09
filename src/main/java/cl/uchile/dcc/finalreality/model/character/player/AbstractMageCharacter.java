@@ -3,8 +3,8 @@ package cl.uchile.dcc.finalreality.model.character.player;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.magicSpell.NullSpell;
-import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
+import cl.uchile.dcc.finalreality.model.magic.spell.NullSpell;
+import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 

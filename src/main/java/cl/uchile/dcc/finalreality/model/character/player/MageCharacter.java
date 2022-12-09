@@ -1,7 +1,7 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
+import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
 
 /**
  * This represents a mage character of the game. A MageCharacter have spells and method's that
@@ -28,12 +28,12 @@ public interface MageCharacter extends PlayerCharacter {
   int getCurrentMp();
 
   /**
-   * Returns the equipped Spell
+   * Returns the equipped Spell.
    */
   Spell getEquippedSpell();
 
   /**
-   * Equips the recivied spell
+   * Equips the recived spell.
    */
   void equipSpell(Spell s);
 }

@@ -57,7 +57,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   @Override
   public void notifySubscribersDeath() {
-    for(Subscriber s : this.getSubscribers()) {
+    for (Subscriber s : this.getSubscribers()) {
       s.updateDeathOfPlayerCharacter(this);
     }
   }

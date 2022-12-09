@@ -4,11 +4,20 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.character.player.*;
-import cl.uchile.dcc.finalreality.model.magicSpell.Heal;
-import cl.uchile.dcc.finalreality.model.magicSpell.Spell;
-import cl.uchile.dcc.finalreality.model.magicSpell.Thunder;
-import cl.uchile.dcc.finalreality.model.weapon.*;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
+import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
+import cl.uchile.dcc.finalreality.model.magic.spell.Heal;
+import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
+import cl.uchile.dcc.finalreality.model.magic.spell.Thunder;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -36,15 +45,13 @@ public class GameController implements Subscriber {
     try {
       int attackVal = target.getAttack();
       int defenseVal = target.getDefense();
-      if(defenseVal < attackVal){
+      if (defenseVal < attackVal) {
         target.setCurrentHp(target.getCurrentHp() - (attackVal - defenseVal));
       }
-    }
-    catch (InvalidStatValueException e) {
+    } catch (InvalidStatValueException e) {
       target.setCurrentHp(0);
       target.notifySubscribersDeath();
-    }
-    finally {
+    } finally {
       waitTurn(attacker);
     }
   }
@@ -161,14 +168,14 @@ public class GameController implements Subscriber {
   }
 
   /**
-   * Getter for the list of alive playerCharacters
+   * Getter for the list of alive playerCharacters.
    */
   public ArrayList<PlayerCharacter> getPlayerCharacters() {
     return playerCharacters;
   }
 
   /**
-   * Getter for the alive enemies
+   * Getter for the alive enemies.
    */
   public ArrayList<Enemy> getEnemies() {
     return enemies;

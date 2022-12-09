@@ -1,10 +1,10 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.Subscriber;
-import cl.uchile.dcc.finalreality.model.adverseEffects.AdverseEffect;
-import cl.uchile.dcc.finalreality.model.adverseEffects.NullAdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverse.effects.NullAdverseEffect;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;

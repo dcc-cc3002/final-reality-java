@@ -1,8 +1,8 @@
 package cl.uchile.dcc.finalreality.model.character;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.Subscriber;
-import cl.uchile.dcc.finalreality.model.adverseEffects.AdverseEffect;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import java.util.ArrayList;
 
 /**
@@ -80,7 +80,7 @@ public interface GameCharacter {
   void notifySubscribersDeath();
 
   /**
-   * Getter for array with subscribers
+   * Getter for array with subscribers.
    */
   ArrayList<Subscriber> getSubscribers();
 }
