@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import java.util.ArrayList;
 
@@ -83,4 +84,13 @@ public interface GameCharacter {
    * Getter for array with subscribers.
    */
   ArrayList<Subscriber> getSubscribers();
+
+  /**
+   * It begins the turn of the GameCharacter.
+   * Begining a turn means that a GameCharacter now is allowed to do certain actions.
+   *
+   * @param s
+   * The state from where this method is called.
+   */
+  void beginTurn(GameState s);
 }

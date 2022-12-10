@@ -2,6 +2,8 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.MageCharacterTurn;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.NullSpell;
 import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
@@ -20,7 +22,7 @@ public abstract class AbstractMageCharacter extends
 
   private final int maxMp;
   private int currentMp;
-  private Spell spell = null;
+  private Spell spell;
 
   /**
    * Creates a new MageCharacter character.
@@ -78,7 +80,13 @@ public abstract class AbstractMageCharacter extends
     return spell;
   }
 
+  @Override
   public void equipSpell(Spell s) {
     this.spell = s;
+  }
+
+  @Override
+  public void beginTurn(GameState s) {
+    s.changeState(new MageCharacterTurn(this));
   }
 }

@@ -13,6 +13,9 @@ import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.PlayerCharacterTurn;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
@@ -75,5 +78,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   public int getAttack() throws InvalidStatValueException {
     equippedWeaponNull(getEquippedWeapon());
     return getEquippedWeapon().getDamage();
+  }
+
+  @Override
+  public void beginTurn(GameState s) {
+    s.changeState(new PlayerCharacterTurn(this));
   }
 }

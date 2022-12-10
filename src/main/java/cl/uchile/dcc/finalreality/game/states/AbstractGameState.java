@@ -12,7 +12,12 @@ import org.jetbrains.annotations.NotNull;
  * a subclass.
  */
 public class AbstractGameState implements GameState {
-  private GameController context;
+  protected GameController context;
+
+  @Override
+  public void changeState(GameState s) {
+    context.setCurrentState(s);
+  }
 
   @Override
   public void setContext(GameController context) {
@@ -20,22 +25,27 @@ public class AbstractGameState implements GameState {
   }
 
   @Override
-  public void attackTransition(GameCharacter target) throws InvalidStateTransitionException {
+  public void attack(GameCharacter target) throws InvalidStateTransitionException {
     throw new InvalidStateTransitionException("Cannot attack in the current GameState");
   }
 
   @Override
-  public void equipWeaponTransition(Weapon w) throws InvalidStateTransitionException {
+  public void equipWeapon(Weapon w) throws InvalidStateTransitionException {
     throw new InvalidStateTransitionException("Cannot equip a Weapon in the current GameState");
   }
 
   @Override
-  public void useSpellTransition(GameCharacter target) throws InvalidStateTransitionException {
+  public void useSpell(GameCharacter target) throws InvalidStateTransitionException {
     throw new InvalidStateTransitionException("Cannot use a Spell in the current GameState");
   }
 
   @Override
-  public void equipSpellTransition(Spell s) throws InvalidStateTransitionException {
+  public void equipSpell(Spell s) throws InvalidStateTransitionException {
     throw new InvalidStateTransitionException("Cannot equip a Spell in the current GameState");
+  }
+
+  @Override
+  public void nextTurn() throws InvalidStateTransitionException, InterruptedException {
+    throw new InvalidStateTransitionException("Cannot go to the next turn in the current GameState");
   }
 }

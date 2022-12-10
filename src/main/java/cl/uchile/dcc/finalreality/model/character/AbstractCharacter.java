@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import cl.uchile.dcc.finalreality.model.adverse.effects.NullAdverseEffect;
 import java.util.ArrayList;
@@ -134,4 +135,9 @@ public abstract class AbstractCharacter implements GameCharacter {
    * The responsability of the implementation of getAttack method will be passed to the subclasses.
    */
   public abstract int getAttack() throws InvalidStatValueException;
+
+  /**
+   * The responsabilty of the implementation of begining a turn will be inherited.
+   */
+  public abstract void beginTurn(GameState s);
 }
