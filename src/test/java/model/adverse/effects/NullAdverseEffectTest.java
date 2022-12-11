@@ -1,6 +1,11 @@
 package model.adverse.effects;
 
+import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.Idle;
+import cl.uchile.dcc.finalreality.game.states.MageCharacterTurn;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import cl.uchile.dcc.finalreality.model.adverse.effects.NullAdverseEffect;
 import cl.uchile.dcc.finalreality.model.adverse.effects.ParalyzeAdverseEffect;
@@ -18,20 +23,23 @@ public class NullAdverseEffectTest {
   AdverseEffect self;
   AdverseEffect self2;
   AdverseEffect self3;
+  GameState gameState;
 
   @Before
-  public void setUp() throws InvalidStatValueException {
+  public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
     BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
     whiteMage = new WhiteMage("TestChar", 30, 10, 100, queue);
     self = new NullAdverseEffect();
     self2 = new NullAdverseEffect();
     self3 = new ParalyzeAdverseEffect();
+    gameState = new MageCharacterTurn(whiteMage);
   }
 
   @Test
   public void applyEffectTest() throws InvalidStatValueException {
     assertEquals("The Hp should be 30", 30, whiteMage.getCurrentHp());
-    self.applyEffect(whiteMage);
+    self.applyEffect(whiteMage, gameState);
+    assertEquals("The Hp should be 30", 30, whiteMage.getCurrentHp());
   }
 
   @Test

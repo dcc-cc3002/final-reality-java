@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.adverse.effects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 
 /**
@@ -9,7 +10,8 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
  */
 public interface AdverseEffect {
   /**
-   * Applies the effect of that specific state.
+   * Applies the effect of that specific state. It añsp recives the current GameState where
+   * the method is called.
    */
-  void applyEffect(GameCharacter c) throws InvalidStatValueException;
+  void applyEffect(GameCharacter c, GameState s) throws InvalidStatValueException;
 }

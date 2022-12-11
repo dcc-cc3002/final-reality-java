@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.EndState;
 import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.game.states.Idle;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
@@ -77,7 +78,7 @@ public class GameController implements Subscriber {
       waitTurn(attacker);
     } catch (InvalidStatValueException e) {
       System.out.println("Not sufficient Mp, the Spell costs "
-          + attacker.getEquippedSpell().getCost() + " and the attacker have "
+          + attacker.getEquippedSpell().getCost() + " and the caster have "
           + attacker.getCurrentMp());
     }
   }
@@ -94,6 +95,7 @@ public class GameController implements Subscriber {
    */
   public boolean playerWin() {
     if (enemies.isEmpty()) {
+      setCurrentState(new EndState());
       System.out.println("The Player have won the battle!");
     }
     return enemies.isEmpty();
@@ -104,6 +106,7 @@ public class GameController implements Subscriber {
    */
   public boolean enemyWin() {
     if (playerCharacters.isEmpty()) {
+      setCurrentState(new EndState());
       System.out.println("The Enemies have won the battle :c");
     }
     return playerCharacters.isEmpty();
@@ -222,11 +225,13 @@ public class GameController implements Subscriber {
   public void updateDeathOfPlayerCharacter(GameCharacter c) {
     turnsQueue.remove(c);
     playerCharacters.remove(c);
+    enemyWin();
   }
 
   @Override
   public void updateDeathOfEnemy(GameCharacter c) {
     turnsQueue.remove(c);
     enemies.remove(c);
+    playerWin();
   }
 }

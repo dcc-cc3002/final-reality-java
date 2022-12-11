@@ -1,7 +1,11 @@
 package model.adverse.effects;
 
+import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.Idle;
+import cl.uchile.dcc.finalreality.game.states.MageCharacterTurn;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import cl.uchile.dcc.finalreality.model.adverse.effects.ParalyzeAdverseEffect;
 import cl.uchile.dcc.finalreality.model.adverse.effects.PoisonAdverseEffect;
@@ -20,6 +24,9 @@ public class PoisonAdverseEffectTest {
   AdverseEffect self;
   AdverseEffect self2;
   AdverseEffect self3;
+  GameController gameController;
+  GameState gameState;
+  GameState gameState2;
 
   @Before
   public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
@@ -29,17 +36,25 @@ public class PoisonAdverseEffectTest {
     self = new PoisonAdverseEffect(whiteMage.getEquippedWeapon().getMagicDamage()/3);
     self2 = new PoisonAdverseEffect(10);
     self3 = new ParalyzeAdverseEffect();
+    gameState = new MageCharacterTurn(whiteMage);
+    gameState2 = new Idle();
+    gameController = new GameController();
   }
 
   @Test
   public void applyEffectTest() throws InvalidStatValueException {
+    gameController.setCurrentState(gameState);
+    assertEquals("The Gamestate should be in the mages turn", gameState, gameController.getCurrentState());
     assertEquals("The Hp should be 30", 30, whiteMage.getCurrentHp());
-    self.applyEffect(whiteMage);
+    self.applyEffect(whiteMage, gameState);
     assertEquals("The Hp should be 20", 20, whiteMage.getCurrentHp());
-    self.applyEffect(whiteMage);
+    assertEquals("The Gamestate should be in the mages turn", gameState, gameController.getCurrentState());
+    self.applyEffect(whiteMage, gameState);
     assertEquals("The Hp should be 10", 10, whiteMage.getCurrentHp());
-    self.applyEffect(whiteMage);
+    assertEquals("The Gamestate should be in the mages turn", gameState, gameController.getCurrentState());
+    self.applyEffect(whiteMage, gameState);
     assertEquals("The Hp should be 0", 0, whiteMage.getCurrentHp());
+    assertEquals("The Gamestate should be in the Idle", gameState2, gameController.getCurrentState());
   }
 
   @Test

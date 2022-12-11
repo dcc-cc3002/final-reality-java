@@ -12,6 +12,7 @@ import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
 
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
 import cl.uchile.dcc.finalreality.game.states.GameState;
@@ -81,7 +82,14 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  public void beginTurn(GameState s) {
-    s.changeState(new PlayerCharacterTurn(this));
+  public void beginTurn(GameState s) throws InvalidStatValueException,
+      InvalidStateTransitionException, InterruptedException {
+    if (s.getContext().getPlayerCharacters().contains(this)) {
+      s.changeState(new PlayerCharacterTurn(this));
+      this.getAdverseEffect().applyEffect(this, s);
+    }
+    else {
+      s.nextTurn();
+    }
   }
 }

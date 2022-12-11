@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
 import java.util.ArrayList;
@@ -92,5 +93,5 @@ public interface GameCharacter {
    * @param s
    * The state from where this method is called.
    */
-  void beginTurn(GameState s);
+  void beginTurn(GameState s) throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException;
 }

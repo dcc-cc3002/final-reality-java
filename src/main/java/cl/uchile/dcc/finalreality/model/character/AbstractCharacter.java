@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
@@ -139,5 +140,6 @@ public abstract class AbstractCharacter implements GameCharacter {
   /**
    * The responsabilty of the implementation of begining a turn will be inherited.
    */
-  public abstract void beginTurn(GameState s);
+  public abstract void beginTurn(GameState s) throws InvalidStatValueException,
+      InvalidStateTransitionException, InterruptedException;
 }

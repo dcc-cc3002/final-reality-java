@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
 import cl.uchile.dcc.finalreality.game.states.GameState;
@@ -55,8 +56,14 @@ public class Enemy extends AbstractCharacter {
   }
 
   @Override
-  public void beginTurn(GameState s) {
-    s.changeState(new EnemyTurn(this));
+  public void beginTurn(GameState s) throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException {
+    if (s.getContext().getEnemies().contains(this)) {
+      s.changeState(new EnemyTurn(this));
+      this.getAdverseEffect().applyEffect(this, s);
+    }
+    else {
+      s.nextTurn();
+    }
   }
 
   @Override

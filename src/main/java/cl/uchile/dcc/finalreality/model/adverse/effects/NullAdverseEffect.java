@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.adverse.effects;
 
+import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 public class NullAdverseEffect implements AdverseEffect {
 
   @Override
-  public void applyEffect(GameCharacter c) {
+  public void applyEffect(GameCharacter c, GameState s) {
     // Do Nothing, Null-Object Pattern
   }
 

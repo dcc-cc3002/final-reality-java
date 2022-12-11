@@ -1,6 +1,8 @@
 package cl.uchile.dcc.finalreality.model.adverse.effects;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.Idle;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
@@ -26,10 +28,11 @@ public class PoisonAdverseEffect implements AdverseEffect {
    * Applies the effect of a Character being Poisoned.
    */
   @Override
-  public void applyEffect(GameCharacter c) throws InvalidStatValueException {
+  public void applyEffect(GameCharacter c, GameState s) throws InvalidStatValueException {
     if (c.getCurrentHp() - poisonDamage <= 0) {
       c.setCurrentHp(0);
       c.notifySubscribersDeath();
+      s.changeState(new Idle());
     } else {
       c.setCurrentHp(c.getCurrentHp() - poisonDamage);
     }
