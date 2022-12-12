@@ -78,7 +78,7 @@ public class GameController implements Subscriber {
       waitTurn(attacker);
     } catch (InvalidStatValueException e) {
       System.out.println("Not sufficient Mp, the Spell costs "
-          + attacker.getEquippedSpell().getCost() + " and the caster have "
+          + attacker.getEquippedSpell().getCost() + " Mp and the caster have "
           + attacker.getCurrentMp());
     }
   }
@@ -119,7 +119,7 @@ public class GameController implements Subscriber {
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Knight k = new Knight(name, hp, defense, turnsQueue);
     k.equip(new Sword("Smiling Sword", 20, 40));
-    turnsQueue.add(k);
+    waitTurn(k);
     playerCharacters.add(k);
     k.subscribe(this);
   }
@@ -131,7 +131,7 @@ public class GameController implements Subscriber {
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Engineer e = new Engineer(name, hp, defense, turnsQueue);
     e.equip(new Axe("Cil's Axe", 10, 30));
-    turnsQueue.add(e);
+    waitTurn(e);
     playerCharacters.add(e);
     e.subscribe(this);
   }
@@ -143,7 +143,7 @@ public class GameController implements Subscriber {
       throws InvalidStatValueException, InvalidWeaponTypeException {
     Thief t = new Thief(name, hp, defense, turnsQueue);
     t.equip(new Knife("Zeyko's Dagger's", 5, 25));
-    turnsQueue.add(t);
+    waitTurn(t);
     playerCharacters.add(t);
     t.subscribe(this);
   }
@@ -156,7 +156,7 @@ public class GameController implements Subscriber {
     BlackMage b = new BlackMage(name, hp, defense, mp, turnsQueue);
     b.equip(new Staff("Romboton", 10, 5, 60));
     b.equipSpell(new Thunder());
-    turnsQueue.add(b);
+    waitTurn(b);
     playerCharacters.add(b);
     b.subscribe(this);
   }
@@ -169,7 +169,7 @@ public class GameController implements Subscriber {
     WhiteMage whitemage = new WhiteMage(name, hp, defense, mp, turnsQueue);
     whitemage.equip(new Staff("Romboton", 10, 5, 60));
     whitemage.equipSpell(new Heal());
-    turnsQueue.add(whitemage);
+    waitTurn(whitemage);
     playerCharacters.add(whitemage);
     whitemage.subscribe(this);
   }
@@ -180,7 +180,7 @@ public class GameController implements Subscriber {
   public void createEnemy(String name, int weight, int hp, int defense, int attack)
       throws InvalidStatValueException {
     Enemy e =  new Enemy(name, weight, hp, defense, attack, turnsQueue);
-    turnsQueue.add(e);
+    waitTurn(e);
     enemies.add(e);
     e.subscribe(this);
   }
@@ -216,7 +216,7 @@ public class GameController implements Subscriber {
   /**
    * Setter for the currentState, it also changes the context of the recived State.
    */
-  public void setCurrentState(GameState currentState) {
+  public void setCurrentState(@NotNull GameState currentState) {
     this.currentState = currentState;
     currentState.setContext(this);
   }

@@ -2,7 +2,12 @@ package model.character;
 
 import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.Idle;
+import cl.uchile.dcc.finalreality.model.adverse.effects.PoisonAdverseEffect;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
@@ -68,12 +73,29 @@ public class EnemyTest {
   }
 
   @Test
-  public void notifySubscribersDeathTest() {
+  public void notifySubscribersDeathTest() throws InterruptedException {
     Enemy e = gameController.getEnemies().get(0);
+    Thread.sleep(2100);
     assertTrue("The enemy should be in the queue", gameController.getTurnsQueue().contains(e));
     assertTrue("The enemy should be in the queue", gameController.getEnemies().contains(e));
     e.notifySubscribersDeath();
     assertFalse("The enemy should not be in the queue", gameController.getTurnsQueue().contains(e));
     assertFalse("The enemy should not be in the queue", gameController.getEnemies().contains(e));
+  }
+
+  @Test
+  public void beginTurnTest() throws InvalidStateTransitionException, InvalidStatValueException, InterruptedException {
+    gameController.getEnemies().add(enemy);
+    enemy.subscribe(gameController);
+    enemy.setAdverseEffect(new PoisonAdverseEffect(100));
+    assertEquals("The Enemy should not have recived poison damage", 13000, enemy.getCurrentHp());
+    assertEquals("The GameState should be Idle", new Idle(), gameController.getCurrentState());
+    enemy.beginTurn(gameController.getCurrentState());
+    assertEquals("The GameState should be EnemyTurn", new EnemyTurn(enemy), gameController.getCurrentState());
+    assertEquals("The Enemy should have recived poison damage", 12900, enemy.getCurrentHp());
+    enemy.notifySubscribersDeath();
+    gameController.setCurrentState(new Idle());
+    enemy.beginTurn(gameController.getCurrentState());
+    assertNotEquals("The next turn should not be this enemy", new EnemyTurn(enemy), gameController.getCurrentState());
   }
 }

@@ -2,7 +2,13 @@ package model.character.player;
 
 import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
+import cl.uchile.dcc.finalreality.game.states.Idle;
+import cl.uchile.dcc.finalreality.game.states.PlayerCharacterTurn;
+import cl.uchile.dcc.finalreality.model.adverse.effects.BurnedAdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverse.effects.PoisonAdverseEffect;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
@@ -55,12 +61,29 @@ public class AbstractPlayerCharacterTest {
   }
 
   @Test
-  public void notifySubscribersDeathTest() {
+  public void notifySubscribersDeathTest() throws InterruptedException {
     PlayerCharacter p = gameController.getPlayerCharacters().get(0);
+    Thread.sleep(2100);
     assertTrue("The player should be in the queue", gameController.getTurnsQueue().contains(p));
     assertTrue("The player should be in the queue", gameController.getPlayerCharacters().contains(p));
     p.notifySubscribersDeath();
     assertFalse("The player should not be in the queue", gameController.getTurnsQueue().contains(p));
     assertFalse("The player should not be in the queue", gameController.getPlayerCharacters().contains(p));
+  }
+
+  @Test
+  public void beginTurnTest() throws InvalidStateTransitionException, InvalidStatValueException, InterruptedException {
+    gameController.getPlayerCharacters().add(knight);
+    knight.subscribe(gameController);
+    knight.setAdverseEffect(new BurnedAdverseEffect(100));
+    assertEquals("The Player should not have recived poison damage", 5000, knight.getCurrentHp());
+    assertEquals("The GameState should be Idle", new Idle(), gameController.getCurrentState());
+    knight.beginTurn(gameController.getCurrentState());
+    assertEquals("The GameState should be PlayerCharacterTurn", new PlayerCharacterTurn(knight), gameController.getCurrentState());
+    assertEquals("The Player should have recived poison damage", 4900, knight.getCurrentHp());
+    knight.notifySubscribersDeath();
+    gameController.setCurrentState(new Idle());
+    knight.beginTurn(gameController.getCurrentState());
+    assertNotEquals("The next turn should not be the turn of this whitemage", new PlayerCharacterTurn(knight), gameController.getCurrentState());
   }
 }

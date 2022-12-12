@@ -1,6 +1,7 @@
 import cl.uchile.dcc.finalreality.GameController;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.*;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.*;
 import cl.uchile.dcc.finalreality.model.magic.spell.Heal;
@@ -78,6 +79,7 @@ public class GameControllerTest {
     assertFalse("The whiteMage should not be in the turnsQueue",  gameController.getTurnsQueue().contains(whiteMage));
     gameController.useMagic(whiteMage, blackMage);
     Thread.sleep(1100);
+    assertEquals("Not sufficient Mp, the Spell costs 15 Mp and the caster have 5", outputStreamCaptor.toString().trim());
     assertFalse("The whiteMage should not be in the turnsQueue",  gameController.getTurnsQueue().contains(whiteMage));
     gameController.useMagic(blackMage, whiteMage);
     assertFalse("The whiteMage should not be in the turnsQueue",  gameController.getTurnsQueue().contains(whiteMage));
@@ -89,9 +91,11 @@ public class GameControllerTest {
   public void playerWinTest() {
     while (!(gameController.getEnemies().isEmpty())){
       assertFalse("The player did not jet win", gameController.playerWin());
+      assertEquals("The game state should be in Idle", new Idle(), gameController.getCurrentState());
       gameController.getEnemies().remove(0);
     }
     assertTrue("The player should have won", gameController.playerWin());
+    assertEquals("The game state should be in EndState", new EndState(), gameController.getCurrentState());
     assertEquals("The Player have won the battle!", outputStreamCaptor.toString().trim());
   }
 
@@ -99,15 +103,18 @@ public class GameControllerTest {
   public void enemyWinTest() {
     while (!(gameController.getPlayerCharacters().isEmpty())){
       assertFalse("The enemies did not jet win", gameController.enemyWin());
+      assertEquals("The game state should be in Idle", new Idle(), gameController.getCurrentState());
       gameController.getPlayerCharacters().remove(0);
     }
     assertTrue("The enemies should have won", gameController.enemyWin());
+    assertEquals("The game state should be in EndState", new EndState(), gameController.getCurrentState());
     assertEquals("The Enemies have won the battle :c", outputStreamCaptor.toString().trim());
   }
 
   @Test
-  public void createThiefTest() throws InvalidStatValueException, InvalidWeaponTypeException {
+  public void createThiefTest() throws InvalidStatValueException, InvalidWeaponTypeException, InterruptedException {
     gameController.createThief("Sram the Thief", 100, 40);
+    Thread.sleep(1100);
     assertTrue("Sram the Thief should be in the queue", gameController.
         getTurnsQueue().contains(new Thief("Sram the Thief", 100,
             40, gameController.getTurnsQueue())));
@@ -117,8 +124,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void createEngineerTest() throws InvalidStatValueException, InvalidWeaponTypeException {
+  public void createEngineerTest() throws InvalidStatValueException, InvalidWeaponTypeException, InterruptedException {
     gameController.createEngineer("Steamer the Engineer", 120, 30);
+    Thread.sleep(1100);
     assertTrue("Steamer the Engineer should be in the queue", gameController.
         getTurnsQueue().contains(new Engineer("Steamer the Engineer", 120,
             30, gameController.getTurnsQueue())));
@@ -128,8 +136,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void createKnightTest() throws InvalidStatValueException, InvalidWeaponTypeException {
+  public void createKnightTest() throws InvalidStatValueException, InvalidWeaponTypeException, InterruptedException {
     gameController.createKnight("Goultar the Knight", 5000, 300);
+    Thread.sleep(2100);
     assertTrue("Goultar the Knight should be in the queue", gameController.
         getTurnsQueue().contains(new Knight("Goultar the Knight", 5000,
             300, gameController.getTurnsQueue())));
@@ -139,8 +148,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void createBlackMageTest() throws InvalidStatValueException, InvalidWeaponTypeException {
+  public void createBlackMageTest() throws InvalidStatValueException, InvalidWeaponTypeException, InterruptedException {
     gameController.createBlackMage("Nox the BlackMage", 2000, 150, 200);
+    Thread.sleep(1100);
     assertTrue("Nox the BlackMage should be in the queue", gameController.
         getTurnsQueue().contains(new BlackMage("Nox the BlackMage", 2000,
             150, 200, gameController.getTurnsQueue())));
@@ -150,8 +160,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void createTWhiteMageTest() throws InvalidStatValueException, InvalidWeaponTypeException {
+  public void createTWhiteMageTest() throws InvalidStatValueException, InvalidWeaponTypeException, InterruptedException {
     gameController.createWhiteMage("Yugo the WhiteMage", 1000, 60, 500);
+    Thread.sleep(1100);
     assertTrue("Yugo the WhiteMage should be in the queue", gameController.
         getTurnsQueue().contains(new WhiteMage("Yugo the WhiteMage", 1000,
             60, 500, gameController.getTurnsQueue())));
@@ -161,8 +172,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void createEnemyTest() throws InvalidStatValueException{
+  public void createEnemyTest() throws InvalidStatValueException, InterruptedException {
     gameController.createEnemy("Shigaraki", 6, 200, 400, 1000);
+    Thread.sleep(2100);
     assertTrue("Shigaraki should be in the queue", gameController.
         getTurnsQueue().contains(new Enemy("Shigaraki", 6,
             200, 400, 1000, gameController.getTurnsQueue())));
@@ -191,8 +203,9 @@ public class GameControllerTest {
   }
 
   @Test
-  public void getTurnQueueTest() throws InvalidStatValueException {
+  public void getTurnQueueTest() throws InvalidStatValueException, InterruptedException {
     PlayerCharacter playerCharacter = gameController.getPlayerCharacters().get(0);
+    Thread.sleep(2100);
     Enemy enemy = gameController.getEnemies().get(0);
     assertTrue("The enemy should be in the queue", gameController.getTurnsQueue().contains(enemy));
     assertTrue("The playerCharacter should be in the queue", gameController.getTurnsQueue().contains(playerCharacter));
@@ -201,22 +214,55 @@ public class GameControllerTest {
   }
 
   @Test
-  public void updateDeathOfPlayerTest() {
+  public void getCurrentStateTest() throws InvalidStatValueException {
+    assertEquals("The game state should be in Idle", new Idle(), gameController.getCurrentState());
+    gameController.setCurrentState(new EndState());
+    assertEquals("The game state should be in EndState", new EndState(), gameController.getCurrentState());
+    gameController.setCurrentState(new PlayerCharacterTurn(new Engineer("Test", 10, 10, gameController.getTurnsQueue())));
+    assertNotEquals("The game state should be in PlayerCharacterTurn", new EndState(), gameController.getCurrentState());
+  }
+
+  @Test
+  public void setCurrentStateTest() throws InvalidStatValueException {
+    GameState s = gameController.getCurrentState();
+    assertEquals("The game state should be an Idle", new Idle(), s);
+    assertEquals("The state should have the correct instance of GameController", gameController, s.getContext());
+    assertNotEquals("The state should have different instance of GameController", gameController, new Idle().getContext());
+    gameController.setCurrentState(new EndState());
+    assertEquals("The game state should be in EndState", new EndState(), gameController.getCurrentState());
+    gameController.setCurrentState(new PlayerCharacterTurn(new Engineer("Test", 10, 10, gameController.getTurnsQueue())));
+    assertNotEquals("The game state should be in PlayerCharacterTurn", new EndState(), gameController.getCurrentState());
+  }
+
+  @Test
+  public void updateDeathOfPlayerTest() throws InterruptedException {
     PlayerCharacter playerCharacter = gameController.getPlayerCharacters().get(0);
+    Thread.sleep(2100);
     assertTrue("The playerCharacter should be in the queue", gameController.getTurnsQueue().contains(playerCharacter));
     assertTrue("The playerCharacter should be in the queue", gameController.getPlayerCharacters().contains(playerCharacter));
     gameController.updateDeathOfPlayerCharacter(playerCharacter);
     assertFalse("The playerCharacter should not be in the queue", gameController.getTurnsQueue().contains(playerCharacter));
     assertFalse("The playerCharacter should not be in the queue", gameController.getPlayerCharacters().contains(playerCharacter));
+    while (!(gameController.getPlayerCharacters().isEmpty())) {
+      assertEquals("The GameController should be in Idle State", new Idle(), gameController.getCurrentState());
+      gameController.updateDeathOfPlayerCharacter(gameController.getPlayerCharacters().get(0));
+    }
+    assertEquals("The GameController should be in EndState", new EndState(), gameController.getCurrentState());
   }
 
   @Test
-  public void updateDeathOfEnemyTest() {
+  public void updateDeathOfEnemyTest() throws InterruptedException {
     Enemy enemy = gameController.getEnemies().get(0);
+    Thread.sleep(2100);
     assertTrue("The Enemy should be in the queue", gameController.getTurnsQueue().contains(enemy));
     assertTrue("The Enemy should be in the queue", gameController.getEnemies().contains(enemy));
     gameController.updateDeathOfEnemy(enemy);
     assertFalse("The Enemy should not be in the queue", gameController.getTurnsQueue().contains(enemy));
     assertFalse("The Enemy should not be in the queue", gameController.getEnemies().contains(enemy));
+    while (!(gameController.getEnemies().isEmpty())) {
+      assertEquals("The GameController should be in Idle State", new Idle(), gameController.getCurrentState());
+      gameController.updateDeathOfEnemy(gameController.getEnemies().get(0));
+    }
+    assertEquals("The GameController should be in EndState", new EndState(), gameController.getCurrentState());
   }
 }
