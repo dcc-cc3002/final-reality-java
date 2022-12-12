@@ -71,5 +71,7 @@ public class IdleTest {
     assertNotEquals("The turn is not the expected", gamestate, gameController.getCurrentState());
     assertEquals("The turn is not the expected",
         new PlayerCharacterTurn(gameController.getPlayerCharacters().get(3)), gameController.getCurrentState());
+    gamestate.nextTurn();
+    assertNotEquals("The turn is not the expected", gamestate, gameController.getCurrentState());
   }
 }
