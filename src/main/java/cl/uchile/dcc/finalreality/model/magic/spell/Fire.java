@@ -1,8 +1,9 @@
 package cl.uchile.dcc.finalreality.model.magic.spell;
 
+import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.BurnEffect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.CompositeEffect;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Effect;
-import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.Random20ToBurned;
+import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.RandomComposite;
 import cl.uchile.dcc.finalreality.model.magic.spell.composite.effects.ReduceHpWithMdEffect;
 import java.util.Objects;
 
@@ -17,7 +18,9 @@ public class Fire extends AbstractSpell {
    */
   public Fire() {
     super(15);
-    Effect[] arr = {new ReduceHpWithMdEffect(), new Random20ToBurned()};
+    Effect[] randomArr = {new BurnEffect()};
+    Effect randomEffect = new RandomComposite(randomArr, 0.2);
+    Effect[] arr = {new ReduceHpWithMdEffect(), randomEffect};
     this.spell = new CompositeEffect(arr);
   }
 

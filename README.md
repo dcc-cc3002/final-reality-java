@@ -50,9 +50,9 @@ es nulo.
 
 Luego, se implementó un GameController que maneja como los personajes se atacan entre sí, como usan hechizo entre sí y 
 toda la logistica detras de estas acciones. Algunos ejemplos de esto es dañar al objetivo, restar el costo de uso de 
-los hechizos, no utilizar un hechizo si no se tiene el Mp requerido, etc...  
+los hechizos, no utilizar un hechizo si no se tiene el Mp requerido, verificar un ganador, etc...  
 
-También se implementó un patron de diseño observer para observar cuando un personaje muere y reaccionar desde el 
+También se implementó un patron de diseño observer para observar cuando un personaje muere y asi reaccionar desde el 
 GameController a este cambio. Se reacciona quitando al personaje en cuestion de su respectivo arreglo y de la cola de 
 turnos, además de checkear si se terminó la batalla y transicionar a un estado de término si esto sucedió.  
 
@@ -71,6 +71,6 @@ estado de término llamado EndState que evita que un posible futuro cliente haga
 batalla.  
 
 Para finalizar también cabe mencionar que se testearon absolutamente todas las clases, metodos y líneas agregadas. 
-Se mantiene el mismo coverage del 99% a través de los 194 tests.  
+Se mantiene el mismo coverage del 99% a través de los 193 tests.  
 
 Para terminar, solo queria decirle a quien esté leyendo esto que tenga un buen dia <3

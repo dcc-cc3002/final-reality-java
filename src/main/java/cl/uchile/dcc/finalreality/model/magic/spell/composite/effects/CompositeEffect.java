@@ -10,7 +10,7 @@ import java.util.Arrays;
  * It contains a list of actual effects of the game.
  */
 public class CompositeEffect implements Effect {
-  private final Effect[] effects;
+  protected final Effect[] effects;
 
   /**
    * This class have a lists of effects.
