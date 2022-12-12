@@ -8,8 +8,10 @@ import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
 import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.game.states.Idle;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.Heal;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,6 +23,8 @@ public class EnemyTurnTest {
   GameState gamestate2;
   GameController gameController;
   Enemy character;
+  int seed;
+  Random rng;
 
   @Before
   public void setUp() throws InvalidStatValueException, InvalidWeaponTypeException {
@@ -30,6 +34,8 @@ public class EnemyTurnTest {
     gamestate1 = new EnemyTurn(character);
     gamestate2 = new Idle();
     gameController.setCurrentState(gamestate);
+    seed = 128342;
+    rng = new Random(seed);
   }
 
   @Test
@@ -39,6 +45,18 @@ public class EnemyTurnTest {
   }
 
   @Test
+  public void autoAttackTest() throws InvalidStatValueException {
+    gamestate.setRandom(new Random(12345));
+    assertEquals("The turn is not the expected", gamestate, gameController.getCurrentState());
+    PlayerCharacter player = gameController.getPlayerCharacters().get(1);
+    assertEquals("The Player should have 50 Hp", 50, player.getCurrentHp());
+    gamestate.autoAttack();
+    assertEquals("The turn is not the expected", new Idle(), gameController.getCurrentState());
+    assertEquals("The Player should have 50-22 = 28 Hp", 28, player.getCurrentHp());
+  }
+
+
+  @Test
   public void attackTest() throws InvalidStatValueException {
     assertEquals("The turn is not the expected", gamestate, gameController.getCurrentState());
     assertEquals("The Enemy should have 30 Hp", 30, gamestate.getEnemy().getCurrentHp());
@@ -46,6 +64,14 @@ public class EnemyTurnTest {
     assertEquals("The turn is not the expected", new Idle(), gameController.getCurrentState());
     assertEquals("The Enemy should have 10 Hp", 10, gamestate.getEnemy().getCurrentHp());
   }
+
+  @Test
+  public void setGetRandomTest() {
+    gamestate.setRandom(rng);
+    assertEquals(new Random(128342).nextInt(4), gamestate.getRandom().nextInt(4));
+  }
+
+
 
   @Test
   public void testEquals() {
