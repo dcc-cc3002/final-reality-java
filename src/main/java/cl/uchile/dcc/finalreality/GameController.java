@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.game.states.EndState;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
 import cl.uchile.dcc.finalreality.game.states.GameState;
 import cl.uchile.dcc.finalreality.game.states.Idle;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
@@ -21,6 +22,7 @@ import cl.uchile.dcc.finalreality.model.weapon.Knife;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -207,7 +209,7 @@ public class GameController implements Subscriber {
   }
 
   /**
-   * Getter for the currentState
+   * Getter for the currentState.
    */
   public GameState getCurrentState() {
     return currentState;

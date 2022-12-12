@@ -8,6 +8,11 @@ import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class represents the turn of a PlayerCharacter. In this turn a character can equip Weapons
+ * or attack with them.
+ * Attacking with the equipped weapon ends this turn.
+ */
 public class PlayerCharacterTurn extends AbstractGameState {
   protected PlayerCharacter playerCharacter;
 

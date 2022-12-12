@@ -56,12 +56,12 @@ public class Enemy extends AbstractCharacter {
   }
 
   @Override
-  public void beginTurn(GameState s) throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException {
+  public void beginTurn(GameState s)
+      throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException {
     if (s.getContext().getEnemies().contains(this)) {
       s.changeState(new EnemyTurn(this));
       this.getAdverseEffect().applyEffect(this, s);
-    }
-    else {
+    } else {
       s.nextTurn();
     }
   }

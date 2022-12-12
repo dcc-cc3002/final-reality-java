@@ -87,8 +87,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     if (s.getContext().getPlayerCharacters().contains(this)) {
       s.changeState(new PlayerCharacterTurn(this));
       this.getAdverseEffect().applyEffect(this, s);
-    }
-    else {
+    } else {
       s.nextTurn();
     }
   }

@@ -8,6 +8,11 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
+/**
+ * This interface represents the states of the battle. A state cycles between the turns of the
+ * PlayerCharacter and the turns of the enemies. This cycles ocurrs in a neutral state called Idle.
+ * When the battle ends, the EndState is reached.
+ */
 public interface GameState {
 
   /**
@@ -34,7 +39,8 @@ public interface GameState {
    *
    * @param target The GameCharacter that recives the attack.
    */
-  void attack(GameCharacter target) throws InvalidStateTransitionException, InvalidStatValueException;
+  void attack(GameCharacter target)
+      throws InvalidStateTransitionException, InvalidStatValueException;
 
   /**
    * This method represents equipping a Weapon in a turn, it only can be used in the Players turn.
@@ -57,12 +63,14 @@ public interface GameState {
    * Similar to equipping a Weapon, a MageCharacter can equip a Spell in his turn.
    * Equipping a Spell does not end the turn.
    *
-   * @param s The Spell that is going to get equipped to the MageCharacter.
+   * @param s
+   *     The Spell that is going to get equipped to the MageCharacter.
    */
   void equipSpell(Spell s) throws InvalidStateTransitionException;
 
   /**
    * This method decides who's turn is next and goes to that turn.
    */
-  void nextTurn() throws InvalidStateTransitionException, InterruptedException, InvalidStatValueException;
+  void nextTurn()
+      throws InvalidStateTransitionException, InterruptedException, InvalidStatValueException;
 }

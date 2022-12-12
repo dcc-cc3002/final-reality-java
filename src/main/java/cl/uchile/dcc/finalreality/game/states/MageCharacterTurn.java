@@ -1,12 +1,16 @@
 package cl.uchile.dcc.finalreality.game.states;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.MageCharacter;
 import cl.uchile.dcc.finalreality.model.magic.spell.Spell;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class represents the turn of a Mage. A Mage can do everything that  PlayerCharacter does,
+ * but also it can equip spells and use them.
+ * Using a spell or attacking with the equipped weapon ends this turn.
+ */
 public class MageCharacterTurn extends PlayerCharacterTurn {
 
   private MageCharacter mageCharacter;

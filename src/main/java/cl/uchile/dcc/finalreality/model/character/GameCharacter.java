@@ -91,7 +91,8 @@ public interface GameCharacter {
    * Begining a turn means that a GameCharacter now is allowed to do certain actions.
    *
    * @param s
-   * The state from where this method is called.
+   *     The state from where this method is called.
    */
-  void beginTurn(GameState s) throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException;
+  void beginTurn(GameState s)
+      throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException;
 }

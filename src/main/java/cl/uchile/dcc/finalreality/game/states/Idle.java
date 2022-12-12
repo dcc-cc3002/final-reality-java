@@ -4,14 +4,19 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import java.util.Objects;
 
+/**
+ * This class represents a neutral state between one turn and another.
+ * The Idle state calculates which characters play next with the nextTurn method.
+ */
 public class Idle extends AbstractGameState {
 
   @Override
-  public void nextTurn() throws InterruptedException, InvalidStatValueException, InvalidStateTransitionException {
+  public void nextTurn()
+      throws InterruptedException, InvalidStatValueException, InvalidStateTransitionException {
     while (context.getTurnsQueue().isEmpty()) {
       Thread.sleep(100);
     }
-    context.getTurnsQueue().poll().beginTurn(this);
+    Objects.requireNonNull(context.getTurnsQueue().poll()).beginTurn(this);
   }
 
   @Override

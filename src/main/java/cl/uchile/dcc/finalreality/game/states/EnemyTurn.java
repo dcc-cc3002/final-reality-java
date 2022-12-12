@@ -5,6 +5,11 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 
+/**
+ * This class represents the turn of an Enemy.
+ * In this turn an enemy can only attack other GameCharacter.
+ * Attacking ends this turn.
+ */
 public class EnemyTurn extends AbstractGameState {
   private Enemy enemy;
 

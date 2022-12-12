@@ -27,12 +27,19 @@ public class AbstractGameState implements GameState {
   }
 
   @Override
-  public void attack(GameCharacter target) throws InvalidStateTransitionException, InvalidStatValueException {
+  public GameController getContext() {
+    return context;
+  }
+
+  @Override
+  public void attack(GameCharacter target)
+      throws InvalidStateTransitionException, InvalidStatValueException {
     throw new InvalidStateTransitionException("Cannot attack in the current GameState");
   }
 
   @Override
-  public void equipWeapon(Weapon w) throws InvalidStateTransitionException, InvalidWeaponTypeException {
+  public void equipWeapon(Weapon w)
+      throws InvalidStateTransitionException, InvalidWeaponTypeException {
     throw new InvalidStateTransitionException("Cannot equip a Weapon in the current GameState");
   }
 
@@ -47,12 +54,8 @@ public class AbstractGameState implements GameState {
   }
 
   @Override
-  public void nextTurn() throws InvalidStateTransitionException, InterruptedException, InvalidStatValueException {
-    throw new InvalidStateTransitionException("Cannot go to the next turn in the current GameState");
-  }
-
-  @Override
-  public GameController getContext() {
-    return context;
+  public void nextTurn()
+      throws InvalidStateTransitionException, InterruptedException, InvalidStatValueException {
+    throw new InvalidStateTransitionException("Cant use nextTurn method in this GameState");
   }
 }

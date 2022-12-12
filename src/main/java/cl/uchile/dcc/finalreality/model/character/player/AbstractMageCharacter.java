@@ -92,8 +92,7 @@ public abstract class AbstractMageCharacter extends
     if (s.getContext().getPlayerCharacters().contains(this)) {
       s.changeState(new MageCharacterTurn(this));
       this.getAdverseEffect().applyEffect(this, s);
-    }
-    else {
+    } else {
       s.nextTurn();
     }
   }
