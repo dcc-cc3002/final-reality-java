@@ -71,6 +71,6 @@ estado de término llamado EndState que evita que un posible futuro cliente haga
 batalla.  
 
 Para finalizar también cabe mencionar que se testearon absolutamente todas las clases, metodos y líneas agregadas. 
-Se mantiene el mismo coverage del 99% a través de los 193 tests.  
+Se mantiene el mismo coverage del 99% a través de los 195 tests.  
 
 Para terminar, solo queria decirle a quien esté leyendo esto que tenga un buen dia <3
