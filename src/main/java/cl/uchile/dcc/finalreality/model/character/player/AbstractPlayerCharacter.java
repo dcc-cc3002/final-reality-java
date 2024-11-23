@@ -1,5 +1,5 @@
 /*
- * "Final Reality" (c) by R8V and ~Your name~
+ * "Final Reality" (c) by R8V and ~Arturo Kullmer~
  * "Final Reality" is licensed under a
  * Creative Commons Attribution 4.0 International License.
  * You should have received a copy of the license along with this
@@ -8,7 +8,15 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
+import static cl.uchile.dcc.finalreality.exceptions.Require.equippedWeaponNull;
+
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.game.states.PlayerCharacterTurn;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
@@ -23,12 +31,12 @@ import org.jetbrains.annotations.NotNull;
  * waiting for their turn ({@code turnsQueue}), and can equip a {@link Weapon}.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {
 
-  private Weapon equippedWeapon = null;
+  protected Weapon equippedWeapon = null;
 
   /**
    * Creates a new character.
@@ -49,13 +57,38 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     super(name, maxHp, defense, turnsQueue);
   }
 
+  public abstract void equip(Weapon weapon) throws InvalidWeaponTypeException;
+
   @Override
-  public void equip(Weapon weapon) {
-    this.equippedWeapon = weapon;
+  public void notifySubscribersDeath() {
+    for (Subscriber s : this.getSubscribers()) {
+      s.updateDeathOfPlayerCharacter(this);
+    }
   }
 
   @Override
   public Weapon getEquippedWeapon() {
     return equippedWeapon;
+  }
+
+  public int getWeight() throws InvalidStatValueException {
+    equippedWeaponNull(getEquippedWeapon());
+    return getEquippedWeapon().getWeight();
+  }
+
+  public int getAttack() throws InvalidStatValueException {
+    equippedWeaponNull(getEquippedWeapon());
+    return getEquippedWeapon().getDamage();
+  }
+
+  @Override
+  public void beginTurn(GameState s) throws InvalidStatValueException,
+      InvalidStateTransitionException, InterruptedException {
+    if (s.getContext().getPlayerCharacters().contains(this)) {
+      s.changeState(new PlayerCharacterTurn(this));
+      this.getAdverseEffect().applyEffect(this, s);
+    } else {
+      s.nextTurn();
+    }
   }
 }

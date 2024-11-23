@@ -8,6 +8,8 @@
 
 package cl.uchile.dcc.finalreality.exceptions;
 
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+
 /**
  * Class containing a series of methods to check if a condition is met.
  * If the condition is not met, an exception is thrown.
@@ -64,6 +66,20 @@ public final class Require {
     if (most < actualStat) {
       throw new InvalidStatValueException(
           "'%s'(%d) must be at most %d".formatted(statName, actualStat, most));
+    }
+  }
+
+  /**
+   * Checks if a given <i>EquippedWeapon</i> object is null.
+   *
+   * @param equipped
+   *     The Weapon that a <i>PlayerCharacter</i> have equipped.
+   * @throws InvalidStatValueException
+   *     If the {@code EquippedWeapon} is null.
+   */
+  public static void equippedWeaponNull(final Weapon equipped) throws InvalidStatValueException {
+    if (equipped == null) {
+      throw new InvalidStatValueException("EquippedWeapon should not be null");
     }
   }
 }

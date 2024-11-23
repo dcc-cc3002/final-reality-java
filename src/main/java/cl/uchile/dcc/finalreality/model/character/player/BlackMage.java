@@ -9,26 +9,25 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A Black Mage is a type of player character that can cast black magic.
+ * A Black MageCharacter is a type of {@link PlayerCharacter} that is also a {@link MageCharacter}
+ * and it can cast black magic. It can equip {@code Knife} and {@code Staff}.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Arturo Kullmer~
  * @version 2.0
  */
-public class BlackMage extends AbstractPlayerCharacter {
-
-  private int currentMp;
-  private final int maxMp;
+public class BlackMage extends AbstractMageCharacter {
 
   /**
-   * Creates a new Black Mage.
+   * Creates a new Black MageCharacter.
    *
    * @param name
    *     the character's name
@@ -38,41 +37,18 @@ public class BlackMage extends AbstractPlayerCharacter {
    *     the character's defense
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
+   * @param maxMp
+   *     the character's max mp
    */
-  protected BlackMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
-      throws InvalidStatValueException {
-    super(name, maxHp, defense, turnsQueue);
-    Require.statValueAtLeast(0, maxMp, "Max MP");
-    this.maxMp = maxMp;
-    this.currentMp = maxMp;
+  public BlackMage(final @NotNull String name, final int maxHp, final int defense,
+                      final int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+                                throws InvalidStatValueException {
+    super(name, maxHp, defense, turnsQueue, maxMp);
   }
 
-  // region : ACCESSORS
-
-  /**
-   * Returns the character's current MP.
-   */
-  private int getCurrentMp() {
-    return currentMp;
+  public void equip(Weapon weapon) throws InvalidWeaponTypeException {
+    this.equippedWeapon = weapon.equipToBlackMage(this);
   }
-
-  /**
-   * Sets the character's current MP.
-   */
-  private void setCurrentMp(final int currentMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, currentMp, "Current MP");
-    Require.statValueAtMost(maxMp, currentMp, "Current MP");
-    this.currentMp = currentMp;
-  }
-
-  /**
-   * Returns the character's max MP.
-   */
-  private int getMaxMp() {
-    return maxMp;
-  }
-  // endregion
 
   // region : UTILITY METHODS
   @Override
@@ -84,21 +60,25 @@ public class BlackMage extends AbstractPlayerCharacter {
       return false;
     }
     return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense
-        && maxMp == that.maxMp;
+        && this.getName().equals(that.getName())
+        && this.getMaxHp() == that.getMaxHp()
+        && this.getCurrentHp() == that.getCurrentHp()
+        && this.getDefense() == that.getDefense()
+        && this.getMaxMp() == that.getMaxMp()
+        && this.getCurrentMp() == that.getCurrentMp();
   }
 
   @Override
   public String toString() {
-    return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(currentMp, maxMp, maxHp, defense, name);
+    return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, currentHp=%d, defense=%d, name='%s'}"
+        .formatted(this.getCurrentMp(), this.getMaxMp(), this.getMaxHp(), this.getCurrentHp(),
+            this.getDefense(), this.getName());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(BlackMage.class, name, maxHp, defense, maxMp);
+    return Objects.hash(BlackMage.class, this.getName(), this.getMaxHp(),
+        this.getCurrentHp(), this.getDefense(), this.getMaxMp());
   }
   // endregion
 }

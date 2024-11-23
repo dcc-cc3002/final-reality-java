@@ -1,8 +1,13 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.game.states.GameState;
+import cl.uchile.dcc.finalreality.model.adverse.effects.AdverseEffect;
+import cl.uchile.dcc.finalreality.model.adverse.effects.NullAdverseEffect;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -18,14 +23,18 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractCharacter implements GameCharacter {
 
   private int currentHp;
-  protected int maxHp;
-  protected int defense;
+  private final int maxHp;
+  private final int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
-  protected final String name;
+  private final String name;
   private ScheduledExecutorService scheduledExecutor;
+  private ArrayList<Subscriber> subscribers = new ArrayList<>();
+  private AdverseEffect adverseEffect;
 
   /**
    * Creates a new character.
+   * Constructor is <b>protected</b> because it is only used by subclases,
+   * and it will be not instanciated.
    *
    * @param name
    *     the character's name
@@ -45,23 +54,16 @@ public abstract class AbstractCharacter implements GameCharacter {
     this.defense = defense;
     this.turnsQueue = turnsQueue;
     this.name = name;
+    this.adverseEffect = new NullAdverseEffect();
   }
 
   @Override
-  public void waitTurn() {
+  public void waitTurn() throws InvalidStatValueException {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter player) {
-      scheduledExecutor.schedule(
+    scheduledExecutor.schedule(
           /* command = */ this::addToQueue,
-          /* delay = */ player.getEquippedWeapon().getWeight() / 10,
+          /* delay = */ this.getWeight() / 10,
           /* unit = */ TimeUnit.SECONDS);
-    } else {
-      var enemy = (Enemy) this;
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ enemy.getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    }
   }
 
   /**
@@ -102,4 +104,42 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
   }
+
+  @Override
+  public void subscribe(Subscriber s) {
+    subscribers.add(s);
+  }
+
+  @Override
+  public ArrayList<Subscriber> getSubscribers() {
+    return subscribers;
+  }
+
+  @Override
+  public void setAdverseEffect(AdverseEffect ae) {
+    this.adverseEffect = ae;
+  }
+
+  @Override
+  public AdverseEffect getAdverseEffect() {
+    return adverseEffect;
+  }
+
+  public abstract void notifySubscribersDeath();
+
+  /**
+   * The responsability of the implementation of getWeight method will be passed to the subclasses.
+   */
+  public abstract int getWeight() throws InvalidStatValueException;
+
+  /**
+   * The responsability of the implementation of getAttack method will be passed to the subclasses.
+   */
+  public abstract int getAttack() throws InvalidStatValueException;
+
+  /**
+   * The responsabilty of the implementation of begining a turn will be inherited.
+   */
+  public abstract void beginTurn(GameState s) throws InvalidStatValueException,
+      InvalidStateTransitionException, InterruptedException;
 }

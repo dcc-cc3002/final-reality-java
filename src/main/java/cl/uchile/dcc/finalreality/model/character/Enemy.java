@@ -1,7 +1,11 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.Subscriber;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidStateTransitionException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.game.states.EnemyTurn;
+import cl.uchile.dcc.finalreality.game.states.GameState;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -15,17 +19,26 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   private final int weight;
+  private final int attack;
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    */
   public Enemy(@NotNull final String name, final int weight, int maxHp, int defense,
-      @NotNull final BlockingQueue<GameCharacter> turnsQueue)
+               final int attack, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(1, weight, "Weight");
     this.weight = weight;
+    this.attack = attack;
+  }
+
+  @Override
+  public void notifySubscribersDeath() {
+    for (Subscriber s : this.getSubscribers()) {
+      s.updateDeathOfEnemy(this);
+    }
   }
 
   /**
@@ -33,6 +46,24 @@ public class Enemy extends AbstractCharacter {
    */
   public int getWeight() {
     return weight;
+  }
+
+  /**
+   * Returns the attack of this enemy.
+   */
+  public int getAttack() {
+    return attack;
+  }
+
+  @Override
+  public void beginTurn(GameState s)
+      throws InvalidStatValueException, InvalidStateTransitionException, InterruptedException {
+    if (s.getContext().getEnemies().contains(this)) {
+      s.changeState(new EnemyTurn(this));
+      this.getAdverseEffect().applyEffect(this, s);
+    } else {
+      s.nextTurn();
+    }
   }
 
   @Override
@@ -44,14 +75,24 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     return hashCode() == enemy.hashCode()
-        && name.equals(enemy.name)
+        && this.getName().equals(enemy.getName())
         && weight == enemy.weight
-        && maxHp == enemy.maxHp
-        && defense == enemy.defense;
+        && this.getMaxHp() == enemy.getMaxHp()
+        && this.getDefense() == enemy.getDefense()
+        && attack == enemy.attack
+        && this.getCurrentHp() == enemy.getCurrentHp();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Enemy.class, name, weight, maxHp, defense);
+    return Objects.hash(Enemy.class, this.getName(), weight, this.getMaxHp(),
+        this.getDefense(), attack, this.getCurrentHp());
+  }
+
+  @Override
+  public String toString() {
+    return "Enemy{maxHp=%d, currentHp=%d, defense=%d, name='%s', weight=%d, attack=%d}"
+           .formatted(this.getMaxHp(), this.getCurrentHp(), this.getDefense(),
+               this.getName(), weight, attack);
   }
 }

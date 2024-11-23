@@ -1,73 +1,81 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import java.util.Objects;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponTypeException;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
+import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * A class that holds all the information of a weapon.
- *
- * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Arturo Kullmer~
+ * This represents a Weapon of the game. A Weapon is contained in the player's inventory.
+ * A Weapon can be equipped only by a PlayerCharacter.
  */
-public class Weapon {
+public interface Weapon {
+  /**
+   * Returns the Weapon's damage.
+   */
 
-  private final String name;
-  private final int damage;
-  private final int weight;
-  private final WeaponType type;
+  int getDamage();
 
   /**
-   * Creates a weapon with a name, a base damage, speed, and it's type.
+   * Returns the Weapon's name.
    */
-  public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
-    this.name = name;
-    this.damage = damage;
-    this.weight = weight;
-    this.type = type;
-  }
-
-  private String getName() {
-    return name;
-  }
-
-  private int getDamage() {
-    return damage;
-  }
+  String getName();
 
   /**
-   * Returns the weight of the weapon.
+   * Returns the Weapon´s weight.
    */
-  public int getWeight() {
-    return weight;
-  }
+  int getWeight();
 
-  private WeaponType getType() {
-    return type;
-  }
+  /**
+   * Returns the Weapons magicDamage, when it is not a magicWeapon it returns a default value of 0.
+   */
+  int getMagicDamage();
 
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof final Weapon weapon)) {
-      return false;
-    }
-    return hashCode() == weapon.hashCode()
-        && damage == weapon.damage
-        && weight == weapon.weight
-        && name.equals(weapon.name)
-        && type == weapon.type;
-  }
+  /**
+   * Returns the Weapon to be equipped by a BlackMage when it is possible.
+   * In case that a BlackMage cannot equip a specific Weapon, it throws an Exception.
+   *
+   * @param blackmage
+   *     The BlackMage to be equipped with a Weapon.
+   */
+  Weapon equipToBlackMage(@NotNull BlackMage blackmage) throws InvalidWeaponTypeException;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(Weapon.class, name, damage, weight, type);
-  }
+  /**
+   * Returns the Weapon to be equipped by an Engineer when it is possible.
+   * In case that an Engineer cannot equip a specific Weapon, it throws an Exception.
+   *
+   * @param engineer
+   *     The Engineer to be equipped with a Weapon.
+   */
+  Weapon equipToEngineer(@NotNull Engineer engineer) throws InvalidWeaponTypeException;
 
-  @Override
-  public String toString() {
-    return "Weapon{name='%s', damage=%d, weight=%d, type=%s}"
-        .formatted(name, damage, weight, type);
-  }
+  /**
+   * Returns the Weapon to be equipped by a Knight when it is possible.
+   * In case that a Knight cannot equip a specific Weapon, it throws an Exception.
+   *
+   * @param knight
+   *     The Knight to be equipped with a Weapon.
+   */
+  Weapon equipToKnight(@NotNull Knight knight) throws InvalidWeaponTypeException;
+
+  /**
+   * Returns the Weapon to be equipped by a Thief when it is possible.
+   * In case that a Thief cannot equip a specific Weapon, it throws an Exception.
+   *
+   * @param thief
+   *     The Thief to be equipped with a Weapon.
+   */
+  Weapon equipToThief(@NotNull Thief thief) throws InvalidWeaponTypeException;
+
+  /**
+   * Returns the Weapon to be equipped by a WhiteMage when it is possible.
+   * In case that a WhiteMage cannot equip a specific Weapon, it throws an Exception.
+   *
+   * @param whitemage
+   *     The WhiteMage to be equipped with a Weapon.
+   */
+  Weapon equipToWhiteMage(@NotNull WhiteMage whitemage) throws InvalidWeaponTypeException;
 }
